@@ -21,6 +21,12 @@ BACKGROUNDS = (
     "graph_paper", "pink_form", "photocopy", "uneven_light", "dark_sign",
 )
 DEGRADATIONS = ("clean", "defocus", "motion_blur", "low_resolution", "noisy_scan")
+TYPOGRAPHIES = (
+    ("heading", "uppercase", False, (48, 64), (16, 31)),
+    ("heading", "uppercase", True, (48, 64), (16, 31)),
+    ("body", "original", True, (26, 38), (25, 57)),
+    ("small", "original", False, (18, 22), (35, 72)),
+)
 # Real italic/oblique files, never simulated by tilting an upright font.
 FAMILIES = (
     ("DejaVu Sans", "DejaVuSans", ("", "-Bold", "-Oblique", "-BoldOblique"), "dejavu"),
@@ -94,10 +100,15 @@ def load_font_manifest(path):
     return fonts
 
 
-def sample_text(words, font, rng):
+def turkish_upper(text):
+    # Python's default casing maps i to I; Turkish requires i -> İ and ı -> I.
+    return unicodedata.normalize("NFC", text.translate(str.maketrans({"i": "İ", "ı": "I"})).upper())
+
+
+def sample_text(words, font, rng, text_case="original", length_range=(25, 57)):
     for _ in range(1000):
         start = int(rng.integers(len(words)))
-        target = int(rng.integers(25, 57))
+        target = int(rng.integers(*length_range))
         selected = []
         for word in words[start:start + 20]:
             if len(" ".join(selected + [word])) > target:
@@ -111,6 +122,9 @@ def sample_text(words, font, rng):
             continue
         if any(c.isalpha() and "LATIN" not in unicodedata.name(c, "") for c in text):
             continue
+        if text_case == "uppercase":
+            text = turkish_upper(text)
+        # Case conversion can introduce different glyphs; validate the final label.
         if set(map(ord, text)) <= font.codepoints:
             return text
     raise ValueError("Corpus has insufficient suitable Turkish text for the selected font")
@@ -155,34 +169,54 @@ def background(size, kind, rng):
     return image
 
 
-def render_line(text, font, size, kind, degradation, rng):
-    ink = (241, 236, 216) if kind == "dark_sign" else (
-        (24, 45, 80) if kind in ("blue_form", "pink_form") else (35, 32, 29)
-    )
+def text_patch(text, font, size, ink, underline=False):
     layer = TextLayer(text, path=str(font.path), size=size, color=ink)
     rgba = Image.fromarray(layer.image.astype("uint8"), "RGBA")
     bounds = rgba.getbbox()
     if bounds is None:
         raise ValueError(f"Empty rendered text: {text}")
     rgba = rgba.crop(bounds)
-    padding_x, padding_y = int(rng.integers(8, 18)), int(rng.integers(7, 16))
+    text_height = rgba.height
+    gap = max(2, round(size * 0.06)) if underline else 0
+    thickness = max(1, round(size * 0.04)) if underline else 0
+    if underline:
+        patch = Image.new("RGBA", (rgba.width, rgba.height + gap + thickness))
+        patch.paste(rgba, (0, 0))
+        # Place the line below the full glyph bounds, including ç/ğ descenders.
+        ImageDraw.Draw(patch).rectangle(
+            (0, rgba.height + gap, rgba.width - 1, patch.height - 1), fill=(*ink, 255)
+        )
+        rgba = patch
+    return rgba, {"underline": underline, "underline_gap_native": gap,
+                  "underline_thickness_native": thickness, "text_height_native": text_height}
+
+
+def render_line(text, font, size, kind, degradation, rng, underline=False, role="body"):
+    ink = (241, 236, 216) if kind == "dark_sign" else (
+        (24, 45, 80) if kind in ("blue_form", "pink_form") else (35, 32, 29)
+    )
+    rgba, decoration = text_patch(text, font, size, ink, underline)
+    padding_x = int(rng.integers(8, 18))
+    padding_y = int(rng.integers(4, 9) if role == "heading" else rng.integers(7, 16))
     # Larger padding on some lines deliberately varies relative text height.
     crop_size = (rgba.width + padding_x * 2, max(48, rgba.height + padding_y * 2))
     image = background(crop_size, kind, rng)
     image.paste(rgba, (padding_x, (image.height - rgba.height) // 2), rgba)
     angle = float(rng.uniform(-0.7, 0.7))
     image = image.rotate(angle, Image.Resampling.BICUBIC, expand=True, fillcolor=image.getpixel((0, 0)))
+    text_height_output = decoration["text_height_native"] * 48 / image.height
     image = image.resize((round(image.width * 48 / image.height), 48), Image.Resampling.LANCZOS)
     params = {"rotation_degrees": angle, "source_font_size": size,
-              "background": kind, "degradation": degradation}
+              "background": kind, "degradation": degradation,
+              "text_height_output": text_height_output, **decoration}
     if degradation == "defocus":
-        params["blur_radius"] = float(rng.uniform(0.75, 1.25))
+        params["blur_radius"] = float(rng.uniform(0.35, 0.65) if role == "small" else rng.uniform(0.75, 1.25))
         image = image.filter(ImageFilter.GaussianBlur(params["blur_radius"]))
     elif degradation == "motion_blur":
         image = image.filter(ImageFilter.Kernel((3, 3), (0, 0, 0, 1, 1, 1, 0, 0, 0), scale=3))
         params["motion_kernel_width"] = 3
     elif degradation == "low_resolution":
-        params["downsample_scale"] = float(rng.uniform(0.5, 0.68))
+        params["downsample_scale"] = float(rng.uniform(0.65, 0.8) if role == "small" else rng.uniform(0.5, 0.68))
         low_size = tuple(max(1, round(v * params["downsample_scale"])) for v in image.size)
         image = image.resize(low_size, Image.Resampling.BILINEAR).resize(image.size, Image.Resampling.BICUBIC)
     elif degradation == "noisy_scan":
@@ -205,7 +239,9 @@ def contact_sheet(root, samples, filename="contact-sheet.jpg", index_offset=0):
     ui_font = ImageFont.truetype(samples[0]["font_path"], 15)
     for idx, sample in enumerate(samples):
         x, y = (idx // rows) * cell_width + 12, (idx % rows) * cell_height + 8
-        title = f"{idx + index_offset + 1:03d}  {sample['family']} / {sample['style']} / {sample['background']} / {sample['degradation']}"
+        decoration = " / underline" if sample["underline"] else ""
+        title = (f"{idx + index_offset + 1:03d}  {sample['family']} / {sample['style']} / "
+                 f"{sample['role']} {sample['source_font_size']}px{decoration}")
         draw.text((x, y), title, font=ui_font, fill=(42, 47, 57))
         with Image.open(root / sample["file_name"]) as image:
             if image.width > cell_width - 28:
@@ -252,18 +288,21 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
             font = group[(idx // len(family_groups)) % len(group)]
         else:
             font = fonts[idx % len(fonts)]
-        label = sample_text(words, font, rng)
+        profile = (idx % len(family_groups) + idx // len(family_groups)) % len(TYPOGRAPHIES)
+        role, text_case, underline, sizes, lengths = TYPOGRAPHIES[profile]
+        label = sample_text(words, font, rng, text_case, lengths)
         # Balance the first 20; rotate assignments on later cycles so larger
         # datasets do not associate one font/style with just one background.
         cycle = idx // len(fonts)
         kind = BACKGROUNDS[(idx + cycle * 3) % len(BACKGROUNDS)]
         degradation = DEGRADATIONS[(idx + idx // 5 + cycle) % len(DEGRADATIONS)]
-        font_size = (22, 30, 34, 18, 28, 24, 36, 20)[idx % 8]
-        image, params = render_line(label, font, font_size, kind, degradation, rng)
+        font_size = int(rng.integers(sizes[0], sizes[1] + 1))
+        image, params = render_line(label, font, font_size, kind, degradation, rng, underline, role)
         relative = f"images/line_{idx:05d}.jpg"
         image.save(output / relative, quality=params["jpeg_quality"])
         labels.append(f"{relative}\t{label}")
-        samples.append({"file_name": relative, "text": label, "family": font.family,
+        samples.append({"file_name": relative, "text": label, "role": role, "text_case": text_case,
+                        "family": font.family,
                         "style": font.style, "font_path": str(font.path),
                         "font_sha256": font.sha256,
                         "font_license": font.license, "font_source": font.source,
@@ -277,6 +316,11 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
                 "styles": dict(Counter(s["style"] for s in samples)),
                 "backgrounds": dict(Counter(s["background"] for s in samples)),
                 "degradations": dict(Counter(s["degradation"] for s in samples)), "samples": samples}
+    metadata["typography"] = {
+        "roles": dict(Counter(s["role"] for s in samples)),
+        "text_cases": dict(Counter(s["text_case"] for s in samples)),
+        "underlined": sum(s["underline"] for s in samples),
+    }
     (output / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest = corpus.with_suffix(".sources.json")
     if manifest.exists():
@@ -300,6 +344,10 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
         "Use a compatible recognition head/dictionary when fine-tuning pretrained weights.\n"
         f"{len(families)} real font families, {len(fonts)} font files, ten procedural backgrounds "
         "and five degradation types. See metadata.json for all parameters and hashes.\n"
+        "Typography includes large uppercase headings (48-64px source fonts), body text (26-38px), "
+        "small text (18-22px), and underlines below glyph descenders. All crops are resized to height 48; "
+        "relative text size is preserved and recorded. Turkish casing maps i to İ and ı to I. "
+        "Labels include the rendered case but omit decorative underline strokes.\n"
         "Font families and styles come from actual font metadata. License notices: licenses/. "
         "Font binaries are not included. See licenses/ and system package copyright notices.\n"
         "For trwiki.txt: Turkish Wikipedia contributors, CC BY-SA 4.0, "
@@ -327,6 +375,8 @@ def validate(root):
             raise ValueError("Duplicate or mismatched image/label")
         if not label or "\ufffd" in label or not set(label) <= characters:
             raise ValueError("Invalid label or dictionary coverage")
+        if sample.get("text_case") == "uppercase" and label != turkish_upper(label):
+            raise ValueError("Uppercase label does not match heading typography")
         paths.add(path)
         if hashlib.sha256(path.read_bytes()).hexdigest() != sample["image_sha256"]:
             raise ValueError("Image checksum mismatch")
@@ -350,7 +400,7 @@ def main():
     args = parser.parse_args()
     result = generate(args.corpus, args.output, args.font_root, args.count, args.seed, args.font_manifest)
     print(f"Validated {result['count']} UTF-8 image/label pairs in {args.output}")
-    for key in ("families", "styles", "backgrounds", "degradations"):
+    for key in ("families", "styles", "backgrounds", "degradations", "typography"):
         print(key + ": " + json.dumps(result[key], ensure_ascii=False))
 
 

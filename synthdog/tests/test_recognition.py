@@ -3,11 +3,15 @@ import json
 import sys
 
 from PIL import ImageFont
+import numpy as np
 import pytest
 from synthtiger.layers import TextLayer
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from generate_tr_recognition import BACKGROUNDS, DEGRADATIONS, TURKISH, discover_fonts, generate, load_font_manifest, validate
+from generate_tr_recognition import (
+    BACKGROUNDS, DEGRADATIONS, TURKISH, discover_fonts, generate,
+    load_font_manifest, render_line, text_patch, turkish_upper, validate,
+)
 
 FONT_ROOT = Path("/usr/share/fonts/truetype")
 
@@ -127,3 +131,48 @@ def test_custom_catalog_balances_families_with_different_style_counts(batch, fon
     notices = list((output.parent / "custom/licenses").glob("*-notice.txt"))
     assert len(notices) == 1
     assert notices[0].read_text(encoding="utf-8") == "Test license notice"
+
+
+def test_turkish_uppercase():
+    assert turkish_upper("istanbul ısparta İZMİR ışık şeker çığ öykü üzüm") == (
+        "İSTANBUL ISPARTA İZMİR IŞIK ŞEKER ÇIĞ ÖYKÜ ÜZÜM"
+    )
+
+
+@pytest.mark.parametrize("style", ["regular", "bold", "italic", "bold_italic"])
+def test_underline_preserves_glyphs_and_clears_descenders(fonts, style):
+    font = next(font for font in fonts if font.style == style)
+    plain, _ = text_patch("İĞçğışöü", font, 48, (0, 0, 0))
+    underlined, params = text_patch("İĞçğışöü", font, 48, (0, 0, 0), underline=True)
+    pixels = np.asarray(underlined)
+    assert np.array_equal(pixels[:plain.height], np.asarray(plain))
+    assert not pixels[plain.height:plain.height + params["underline_gap_native"], :, 3].any()
+    assert (pixels[-params["underline_thickness_native"]:, :, 3] == 255).all()
+    assert underlined.height > plain.height
+
+
+def test_typography_batch_and_rendered_case(batch):
+    corpus, output, metadata = batch
+    assert metadata["typography"]["roles"] == {"heading": 10, "body": 5, "small": 5}
+    assert metadata["typography"]["underlined"] == 10
+    for sample in metadata["samples"]:
+        if sample["role"] == "heading":
+            assert sample["text"].isupper()
+            assert sample["text"] == turkish_upper(sample["text"])
+            assert 48 <= sample["source_font_size"] <= 64
+        elif sample["role"] == "body":
+            assert 26 <= sample["source_font_size"] <= 38
+        else:
+            assert 18 <= sample["source_font_size"] <= 22
+
+
+def test_heading_pixels_are_larger_than_small_text(fonts):
+    def ink_height(image):
+        pixels = np.asarray(image)
+        ys = np.where(pixels.mean(axis=2) < 96)[0]
+        assert len(ys)
+        return ys.max() - ys.min() + 1
+    heading, _ = render_line("İSTANBUL IŞIK ÇIĞ", fonts[0], 56, "white", "clean", np.random.default_rng(42), role="heading")
+    small, _ = render_line("İSTANBUL IŞIK ÇIĞ", fonts[0], 20, "white", "clean", np.random.default_rng(42), role="small")
+    assert heading.height == small.height == 48
+    assert ink_height(heading) >= ink_height(small) + 8

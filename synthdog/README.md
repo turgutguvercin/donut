@@ -139,6 +139,14 @@ blur, downsampled and noisy). Text size, rotation and JPEG quality also vary.
 Lines retain whole words and accents; the generator checks font coverage for
 the selected text. Backgrounds are generated locally without third-party images.
 
+Typography also includes large uppercase headings (48–64px source fonts),
+medium body text (26–38px) and small text (18–22px). Half of a balanced batch has
+underlines, drawn below the glyph bounds so Turkish descenders remain intact.
+Heading labels use Turkish uppercase rules: `i` → `İ` and `ı` → `I`. Underline
+strokes are decoration and are omitted from the transcription. Font sizes vary
+relative to the crop even though every output image is normalized to height 48.
+Profiles rotate across font families to avoid tying one family to one size or case.
+
 `labels.txt` contains `images/line_00000.jpg<TAB>exact transcription`, as required
 by PaddleOCR recognition datasets. Set `data_dir` to the output directory,
 `label_file_list` to `labels.txt`, and `use_space_char: true`. Crops are 48 pixels
@@ -147,7 +155,8 @@ covers the sample labels plus all Turkish letters. For a larger training corpus,
 use one stable, complete character dictionary compatible with the recognizer's
 output head and pretrained weights. No model training is performed by this command.
 
-`metadata.json` records font and image hashes, style, background, degradation,
+`metadata.json` records font and image hashes, style, text role and case,
+underline geometry, source font size, background, degradation,
 dimensions and the seed. Small batches have one contact sheet; larger batches
 preview up to 100 samples in numbered 20-image contact sheets.
 Every image/label pair is validated before completion. A fixed seed and identical
