@@ -136,7 +136,7 @@ A 20-image batch covers all 20 font variants, ten procedural backgrounds
 (plain, textured/aged, colored forms, receipt, ruled/grid paper, uneven lighting,
 photocopy and dark signage), and five difficulty types (clean, defocus, motion
 blur, downsampled and noisy). Text size, rotation and JPEG quality also vary.
-Lines retain whole words and accents; the generator checks font coverage for
+Default crops retain whole words and accents; the generator checks font coverage for
 the selected text. Backgrounds are generated locally without third-party images.
 
 Typography also includes large uppercase headings (48–64px source fonts),
@@ -218,6 +218,44 @@ opacity, rotation and perspective mapping parameters. All three category
 exports are checked against each other and the labels. Progress is printed
 every 250 images; use `--progress-every 0` to disable it.
 
+To simulate imperfect text-detector crops, add `--crop-profile mixed`:
+
+```bash
+python scripts/generate_tr_recognition.py \
+  --font-manifest /path/to/fonts.json \
+  --output outputs/PaddleOCR_tr_detector_crops_100 --count 100 --seed 123 \
+  --curve-mode mixed --blur-profile balanced \
+  --capture-profile mixed --content-profile mixed --crop-profile mixed
+```
+
+The crop schedule is 60% intact, 5% neighboring text above, 5% below, 10% on
+both sides, 5% tight at the top, 5% tight at the bottom, 5% tight at both edges,
+and 5% vertically shifted (a tight edge opposite a neighboring fragment).
+These totals are exact for multiples of 20. Neighboring lines are rendered in
+the same scene before rotation and cropping; the wider crop makes the target
+text smaller after height normalization, as can happen with detector outputs.
+With balanced blur and mixed capture, crop errors are assigned to normal-contrast
+samples without strong blur, while preserving the other profile totals.
+
+**The transcription always refers only to the target line.** Neighboring text
+appears only in `metadata.json` under `neighbor_lines`, with its side and measured
+visible ink fraction. It must not be appended to PaddleOCR's label. Crop metadata
+also records the scene dimensions, crop rectangle, target bounds, top/bottom
+trimming and retained target ink. Categories include `crop_error`, `clipping`
+(actual applied cuts) and `neighbor_context`. Tight profiles may remove padding
+without clipping ink when a requested trim would erase a small mark.
+
+Trimming is bounded to retain at least 97% of target glyph ink and half of every
+connected component, including detached dots/accents; underline strokes are
+excluded from these measurements. Measurements use an alpha threshold of 64
+**before resizing, blur and JPEG encoding**, so they do not guarantee that every
+final glyph remains legible. The goal is mild crop tolerance, not teaching a
+recognizer to guess completely missing Turkish marks. In a real pipeline, add
+vertical padding around detector boxes before cropping/rectification and check
+recognition on actual detector-produced crops. Prefer rejecting severely cut
+lines to pairing ambiguous images with complete labels. `--crop-profile none`
+is the default and preserves the previous rendering behavior.
+
 `labels.txt` contains `images/line_00000.jpg<TAB>exact transcription`, as required
 by PaddleOCR recognition datasets. Set `data_dir` to the output directory,
 `label_file_list` to `labels.txt`, and `use_space_char: true`. Crops are 48 pixels
@@ -228,7 +266,7 @@ output head and pretrained weights. No model training is performed by this comma
 
 `metadata.json` records font and image hashes, style, text role and case,
 underline geometry, source font size, curve type/amplitude, capture geometry,
-contrast, content category, text length, background, degradation,
+contrast, content category, text length, detector crop errors, background, degradation,
 dimensions and the seed. Small batches have one contact sheet; larger batches
 preview up to 100 samples in numbered 20-image contact sheets.
 Every image/label pair is validated before completion. A fixed seed and identical

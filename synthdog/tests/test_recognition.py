@@ -12,7 +12,8 @@ from synthtiger.layers import TextLayer
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from generate_tr_recognition import (
-    BACKGROUNDS, CURVES, DEGRADATIONS, TURKISH, curve_patch, discover_fonts, generate,
+    BACKGROUNDS, CROP_ERRORS, CURVES, DEGRADATIONS, TURKISH, bounded_vertical_crop,
+    curve_patch, discover_fonts, generate,
     load_font_manifest, perspective_patch, render_line, structured_text, text_patch, turkish_upper, validate,
 )
 
@@ -320,4 +321,74 @@ def test_full_category_batch_and_reproducible_labels(batch):
     csv_path = root / "categories.csv"
     csv_path.write_text(csv_path.read_text(encoding="utf-8").replace("wikipedia", "incorrect", 1), encoding="utf-8")
     with pytest.raises(ValueError, match="CSV categories"):
+        validate(root)
+
+
+def test_crop_bounds_protect_small_disconnected_marks():
+    mask = Image.new("L", (100, 40))
+    draw = ImageDraw.Draw(mask)
+    draw.rectangle((5, 10, 94, 35), fill=255)
+    draw.rectangle((20, 2, 21, 3), fill=255)  # Tiny dot above a much larger body.
+    first, last, metrics = bounded_vertical_crop(mask, top=6, bottom=0)
+    assert first == 3 and last == 36
+    assert metrics["minimum_component_retention"] == 0.5
+    assert metrics["target_ink_retention"] >= 0.97
+    # A one-pixel detached mark must not disappear even under the global limit.
+    draw.point((40, 2), fill=255)
+    first, _, metrics = bounded_vertical_crop(mask, top=6, bottom=0)
+    assert first == 2 and metrics["minimum_component_retention"] == 1
+
+
+@pytest.mark.parametrize("error", ["tight_top", "tight_bottom", "tight_both"])
+def test_tight_crop_keeps_turkish_marks_and_limits_lost_ink(fonts, error):
+    clipped = 0
+    for font in fonts:
+        image, params = render_line("İĞÜÖ çğşüö iı", font, 52, "white", "clean",
+                                    np.random.default_rng(42), underline=True, crop_error=error)
+        assert image.height == 48
+        assert params["target_ink_retention"] >= 0.97
+        assert params["minimum_component_retention"] >= 0.5
+        assert params["label_scope"] == "target_line_only"
+        assert params["neighbor_lines"] == []
+        clipped += params["target_ink_retention"] < 1
+    assert clipped > 0
+
+
+@pytest.mark.parametrize("error", ["neighbor_above", "neighbor_below", "neighbors_both", "vertical_shift"])
+def test_neighbor_fragments_are_visible_and_target_remains(fonts, error):
+    target = "İstanbul'da güçlü yağış"
+    context = ("Önceki satır başka bir şey söylüyor", "Sonraki satır çiçeklerden söz ediyor")
+    image, params = render_line(target, fonts[0], 28, "aged_paper", "clean",
+                                np.random.default_rng(7), role="small", curve="wave",
+                                geometry="perspective", crop_error=error, context_texts=context)
+    assert image.height == 48
+    assert params["target_ink_retention"] >= 0.97
+    assert params["minimum_component_retention"] >= 0.5
+    assert len(params["neighbor_lines"]) == (2 if error == "neighbors_both" else 1)
+    for record in params["neighbor_lines"]:
+        assert record["text"] in context and record["text"] != target
+        assert record["visible_ink_pixels"] > 0
+        assert 0 < record["visible_ink_fraction"] < 0.5
+
+
+def test_detector_crop_batch_labels_coverage_replay_and_validation(batch):
+    corpus, output, _ = batch
+    root = output.parent / "detector-crops"
+    options = dict(count=40, crop_profile="mixed", capture_profile="mixed",
+                   content_profile="mixed", blur_profile="balanced")
+    metadata = generate(corpus, root, FONT_ROOT, **options)
+    assert validate(root) == metadata
+    assert set(metadata["categories"]["crop_error"]) == set(CROP_ERRORS)
+    assert metadata["categories"]["crop_error"]["none"] == 24
+    records = (root / "labels.txt").read_text(encoding="utf-8").splitlines()
+    for row, sample in zip(records, metadata["samples"]):
+        assert row == sample["file_name"] + "\t" + sample["text"]
+        if sample["crop_error"] != "none":
+            assert sample["contrast"] == "normal"
+            assert sample["categories"]["blur_strength"] != "strong"
+    replay = generate(corpus, output.parent / "detector-replay", FONT_ROOT, **options)
+    assert metadata == replay
+    metadata["samples"][0]["target_ink_retention"] = 0.5
+    (root / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False), encoding="utf-8")
+    with pytest.raises(ValueError, match="excessive target clipping"):
         validate(root)

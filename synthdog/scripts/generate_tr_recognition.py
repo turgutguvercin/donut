@@ -15,6 +15,7 @@ import unicodedata
 from fontTools.ttLib import TTFont
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from scipy import ndimage
 from synthtiger.layers import TextLayer
 
 TURKISH = "çğışöüÇĞİŞÖÜıI"
@@ -39,6 +40,10 @@ CAPTURE_GEOMETRIES = ("none", "none", "skew", "perspective")
 CONTRASTS = (*("normal",) * 6, *("low_contrast",) * 3, "faint_print")
 CONTENT_TYPES = (*("wikipedia",) * 12, *("date",) * 3, *("price",) * 3,
                  *("synthetic_id",) * 2)
+CROP_ERRORS = (*("none",) * 12, "neighbor_above", "neighbor_below",
+               "neighbors_both", "neighbors_both", "tight_top", "tight_bottom",
+               "tight_both", "vertical_shift")
+STRONG_BLURS = ("strong_defocus", "strong_motion", "defocus_motion")
 TEXT_LENGTHS = {"single_word": (3, 17), "short_line": (15, 31),
                 "medium_line": (31, 56), "long_line": (56, 91)}
 TYPOGRAPHIES = (
@@ -315,16 +320,119 @@ def motion_blur(image, width, direction="horizontal"):
     return image.filter(ImageFilter.Kernel((width, width), tuple(kernel.ravel()), scale=width))
 
 
+def bounded_vertical_crop(mask, top, bottom):
+    """Limit lost glyph ink and retain at least half of each connected mark.
+
+    Measurements use alpha >= 64 before blur/resizing. Underline pixels must
+    already be excluded from the mask. Even a one-pixel isolated mark survives.
+    """
+    pixels = np.asarray(mask) >= 64
+    components, count = ndimage.label(pixels, structure=np.ones((3, 3), dtype=int))
+    areas = np.bincount(components.ravel(), minlength=count + 1)[1:]
+    if not len(areas):
+        raise ValueError("Empty target glyph mask")
+    bounds = Image.fromarray(pixels.astype("uint8")).getbbox()
+    while True:
+        first, last = bounds[1] + top, bounds[3] - bottom
+        kept = np.bincount(components[first:last].ravel(), minlength=count + 1)[1:]
+        retention = float(kept.sum() / areas.sum())
+        component_retention = float((kept / areas).min())
+        if retention >= 0.97 and component_retention >= 0.5:
+            return first, last, {"target_ink_retention": retention,
+                                 "minimum_component_retention": component_retention,
+                                 "clipped_top_native": top, "clipped_bottom_native": bottom}
+        if top >= bottom and top:
+            top -= 1
+        elif bottom:
+            bottom -= 1
+
+
+def detector_crop(patch, glyph_mask, neighbors, kind, rng, padding_x, padding_y,
+                  angle, error, text_height):
+    """Render neighboring lines in one scene, then crop after camera rotation."""
+    extent = max([patch.height, *(item[1].height for item in neighbors)])
+    scene_width = patch.width + padding_x * 2
+    # Keep bounding boxes separated even after rotation, so a large padding
+    # choice cannot accidentally admit most of an adjacent line.
+    gap = max(padding_y + 2, round(text_height * float(rng.uniform(0.08, 0.18))))
+    gap += int(np.ceil(scene_width * abs(np.tan(np.radians(angle)))))
+    size = (scene_width, patch.height + 2 * (extent + gap + 8))
+    image = background(size, kind, rng)
+    target_y = (size[1] - patch.height) // 2
+    target_mask = Image.new("L", size)
+    target_mask.paste(glyph_mask, (padding_x, target_y))
+    decorated_mask = Image.new("L", size)
+    decorated_mask.paste(patch.getchannel("A"), (padding_x, target_y))
+    image.paste(patch, (padding_x, target_y), patch)
+    neighbor_masks, neighbor_records = {}, []
+    for side, neighbor, transcription in neighbors:
+        y = target_y - gap - neighbor.height if side == "above" else target_y + patch.height + gap
+        x = padding_x + int(rng.integers(-max(1, text_height // 3), max(2, text_height // 3)))
+        mask = Image.new("L", size)
+        mask.paste(neighbor.getchannel("A"), (x, y))
+        neighbor_masks[side] = mask.rotate(angle, Image.Resampling.BICUBIC, expand=True)
+        neighbor_records.append({"side": side, "text": transcription})
+        image.paste(neighbor, (x, y), neighbor)
+    image = image.rotate(angle, Image.Resampling.BICUBIC, expand=True, fillcolor=image.getpixel((0, 0)))
+    target_mask = target_mask.rotate(angle, Image.Resampling.BICUBIC, expand=True)
+    decorated_mask = decorated_mask.rotate(angle, Image.Resampling.BICUBIC, expand=True)
+    bounds = target_mask.point(lambda value: 255 if value >= 64 else 0).getbbox()
+    top_cut = max(1, round(text_height * float(rng.uniform(0.02, 0.07)))) if error in ("tight_top", "tight_both") else 0
+    bottom_cut = max(1, round(text_height * float(rng.uniform(0.02, 0.07)))) if error in ("tight_bottom", "tight_both") else 0
+    if error == "vertical_shift":
+        # One edge enters the target while the opposite edge admits context.
+        top_cut = max(1, round(text_height * 0.05)) if "below" in neighbor_masks else 0
+        bottom_cut = max(1, round(text_height * 0.05)) if "above" in neighbor_masks else 0
+    first, last, metrics = bounded_vertical_crop(target_mask, top_cut, bottom_cut)
+    top = first if top_cut else bounds[1] - padding_y
+    # Account for underline extent when retaining the bottom edge.
+    bottom = last if bottom_cut else decorated_mask.getbbox()[3] + padding_y
+    left, right = max(0, bounds[0] - padding_x), min(image.width, bounds[2] + padding_x)
+    for side, mask in neighbor_masks.items():
+        row_ink = (np.asarray(mask)[:, left:right] >= 64).sum(axis=1)
+        # Target a measured ink fraction rather than an arbitrary height: a
+        # single row can contain much of a condensed font's neighboring line.
+        desired = max(1, row_ink.sum() * float(rng.uniform(0.08, 0.22)))
+        cumulative = np.cumsum(row_ink[::-1] if side == "above" else row_ink)
+        edge = int(np.searchsorted(cumulative, desired))
+        if side == "above":
+            top = min(bounds[1] - padding_y, image.height - edge - 1)
+        else:
+            bottom = max(decorated_mask.getbbox()[3] + padding_y, edge + 1)
+    box = (left, max(0, top), right, min(image.height, bottom))
+    for record in neighbor_records:
+        mask = neighbor_masks[record["side"]]
+        pixels = np.asarray(mask) >= 64
+        visible = np.asarray(mask.crop(box)) >= 64
+        record["visible_ink_pixels"] = int(visible.sum())
+        record["visible_ink_fraction"] = float(visible.sum() / max(1, pixels.sum()))
+    # Measurements are from this final rectangle, excluding decorative strokes.
+    visible_target = np.asarray(target_mask.crop(box)) >= 64
+    metrics["target_ink_retention"] = float(visible_target.sum() / (np.asarray(target_mask) >= 64).sum())
+    metrics.update({"crop_box_native": list(box), "scene_size_native": list(image.size),
+                    "target_bounds_native": list(bounds), "neighbor_lines": neighbor_records,
+                    "label_scope": "target_line_only", "mask_alpha_threshold": 64})
+    return image.crop(box), metrics
+
+
 def render_line(text, font, size, kind, degradation, rng, underline=False, role="body",
-                curve="straight", curve_strength=0.5, geometry="none", contrast="normal"):
+                curve="straight", curve_strength=0.5, geometry="none", contrast="normal",
+                crop_error="none", context_texts=()):
     if geometry not in CAPTURE_GEOMETRIES or contrast not in CONTRASTS:
         raise ValueError("Unknown capture geometry or contrast")
+    if crop_error not in CROP_ERRORS:
+        raise ValueError("Unknown detector crop error")
     ink = (241, 236, 216) if kind == "dark_sign" else (
         (24, 45, 80) if kind in ("blue_form", "pink_form") else (35, 32, 29)
     )
     rgba, decoration = text_patch(text, font, size, ink, underline)
+    glyph_patch = rgba.copy() if crop_error != "none" else None
+    if glyph_patch is not None and underline:
+        glyph_patch.paste((0, 0, 0, 0), (0, decoration["text_height_native"], rgba.width, rgba.height))
     amplitude = round(decoration["text_height_native"] * curve_strength) if curve != "straight" else 0
     rgba = curve_patch(rgba, curve, amplitude)
+    if glyph_patch is not None:
+        glyph_patch = curve_patch(glyph_patch, curve, amplitude)
     geometry_params = {}
     perspective_scale = 1.0
     if geometry == "perspective":
@@ -338,6 +446,8 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
                        (width - 1, height - 1 if left else height - 1 - inset),
                        (0, height - 1 - inset if left else height - 1))
         rgba, geometry_params = perspective_patch(rgba, destination)
+        if glyph_patch is not None:
+            glyph_patch, _ = perspective_patch(glyph_patch, destination)
         perspective_scale = 1 - 2 * inset / (height - 1)
     opacity_limits = (0.50, 0.68) if contrast == "low_contrast" else (0.28, 0.42)
     opacity = 1.0 if contrast == "normal" else float(rng.uniform(*opacity_limits))
@@ -352,8 +462,9 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
     # Larger padding on some lines deliberately varies relative text height.
     minimum_height = 0 if geometry == "perspective" and role == "small" else 48
     crop_size = (rgba.width + padding_x * 2, max(minimum_height, rgba.height + padding_y * 2))
-    image = background(crop_size, kind, rng)
-    image.paste(rgba, (padding_x, (image.height - rgba.height) // 2), rgba)
+    if crop_error == "none":
+        image = background(crop_size, kind, rng)
+        image.paste(rgba, (padding_x, (image.height - rgba.height) // 2), rgba)
     if geometry == "skew":
         # A fixed angle on a long line can shrink every character to a few
         # pixels after height normalization. Bound the added vertical extent.
@@ -364,7 +475,31 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
         angle = float(rng.uniform(-maximum, maximum))
     else:
         angle = float(rng.uniform(-0.7, 0.7))
-    image = image.rotate(angle, Image.Resampling.BICUBIC, expand=True, fillcolor=image.getpixel((0, 0)))
+    crop_params = {"crop_error": crop_error, "label_scope": "target_line_only",
+                   "target_ink_retention": 1.0, "minimum_component_retention": 1.0,
+                   "clipped_top_native": 0, "clipped_bottom_native": 0, "neighbor_lines": []}
+    if crop_error == "none":
+        image = image.rotate(angle, Image.Resampling.BICUBIC, expand=True, fillcolor=image.getpixel((0, 0)))
+    else:
+        sides = {"neighbor_above": ("above",), "neighbor_below": ("below",),
+                 "neighbors_both": ("above", "below"),
+                 "vertical_shift": (str(rng.choice(("above", "below"))),)}.get(crop_error, ())
+        if len(context_texts) < len(sides):
+            raise ValueError("Neighbor crop requires context transcriptions")
+        neighbors = []
+        for side, context in zip(sides, context_texts):
+            neighbor, _ = text_patch(context, font, size, ink)
+            neighbor = curve_patch(neighbor, curve, amplitude)
+            if geometry == "perspective":
+                # Apply the same normalized mapping to each adjacent line.
+                factors = np.array((neighbor.width - 1, neighbor.height - 1)) / np.array((width - 1, height - 1))
+                neighbor, _ = perspective_patch(neighbor, np.asarray(destination) * factors)
+            if opacity < 1:
+                neighbor.putalpha(neighbor.getchannel("A").point(lambda value: round(value * opacity)))
+            neighbors.append((side, neighbor, context))
+        image, metrics = detector_crop(rgba, glyph_patch.getchannel("A"), neighbors, kind, rng,
+                                      padding_x, padding_y, angle, crop_error, decoration["text_height_native"])
+        crop_params.update(metrics)
     text_height_output = decoration["text_height_native"] * perspective_scale * 48 / image.height
     curve_amplitude_output = amplitude * 48 / image.height
     image = image.resize((round(image.width * 48 / image.height), 48), Image.Resampling.LANCZOS)
@@ -375,7 +510,7 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
               "curve_amplitude_output": curve_amplitude_output,
               "text_height_output": text_height_output,
               "geometry": geometry, "contrast": contrast, "ink_opacity": opacity,
-              **geometry_params, **decoration}
+              **geometry_params, **decoration, **crop_params}
     if degradation == "defocus":
         params["blur_radius"] = float(rng.uniform(0.35, 0.65) if role == "small" else rng.uniform(0.75, 1.25))
         image = image.filter(ImageFilter.GaussianBlur(params["blur_radius"]))
@@ -416,7 +551,7 @@ def categorize(sample):
     blur = ("combined" if effect == "defocus_motion" else "defocus" if "defocus" in effect
             else "motion" if "motion" in effect else "none")
     has_digits, has_letters = any(c.isdigit() for c in text), any(c.isalpha() for c in text)
-    return {
+    categories = {
         "font_family": sample["family"], "font_style": sample["style"],
         "text_size": {"heading": "large", "body": "medium", "small": "small"}[sample["role"]],
         "text_role": sample["role"], "capitalization": sample["text_case"],
@@ -430,6 +565,14 @@ def categorize(sample):
         "degradation": effect, "content_type": sample["content_type"], "text_length": length,
         "character_content": "mixed" if has_digits and has_letters else "numeric" if has_digits else "letters",
     }
+    if "crop_error" in sample:
+        # Keep validation compatible with datasets made before this profile.
+        clipped = (sample["clipped_top_native"] > 0, sample["clipped_bottom_native"] > 0)
+        categories.update({"crop_error": sample["crop_error"],
+                           "clipping": {(False, False): "none", (True, False): "top",
+                                        (False, True): "bottom", (True, True): "both"}[clipped],
+                           "neighbor_context": "+".join(item["side"] for item in sample["neighbor_lines"]) or "none"})
+    return categories
 
 
 def category_counts(samples):
@@ -466,6 +609,8 @@ def contact_sheet(root, samples, filename="contact-sheet.jpg", index_offset=0):
         effects = f"{sample['curve']} / {sample['degradation'].replace('_', ' ')} / {sample['background'].replace('_', ' ')}"
         draw.text((x, y + 20), effects, font=ui_font, fill=(75, 80, 90))
         capture = f"{sample['geometry']} / {sample['contrast']} / {sample['content_type']} / {sample['categories']['text_length']}"
+        if sample.get("crop_error", "none") != "none":
+            capture += " / " + sample["crop_error"]
         draw.text((x, y + 39), capture, font=ui_font, fill=(75, 80, 90))
         with Image.open(root / sample["file_name"]) as image:
             if image.width > cell_width - 28:
@@ -488,13 +633,14 @@ def previews(root, samples):
 
 def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None,
              curve_mode="mixed", blur_profile="standard", capture_profile="none",
-             content_profile="wikipedia", progress_every=0):
+             content_profile="wikipedia", progress_every=0, crop_profile="none"):
     if count < 1:
         raise ValueError("count must be positive")
     if output.exists():
         raise FileExistsError(f"Use a fresh output directory: {output}")
     if (curve_mode not in ("mixed", "straight") or blur_profile not in ("standard", "strong", "balanced")
-            or capture_profile not in ("none", "mixed") or content_profile not in ("wikipedia", "mixed")):
+            or capture_profile not in ("none", "mixed") or content_profile not in ("wikipedia", "mixed")
+            or crop_profile not in ("none", "mixed")):
         raise ValueError("Unknown generation profile")
     text = unicodedata.normalize("NFC", corpus.read_text(encoding="utf-8"))
     words = text.split()
@@ -523,6 +669,18 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None,
         # Independent assignment lets every actual font style appear with each
         # size/case, instead of a fixed association between two cyclic schedules.
         typography_profiles = balanced_choices(tuple(range(len(TYPOGRAPHIES))), count, rng)
+    crop_errors = ["none"] * count
+    if crop_profile == "mixed":
+        crop_errors = balanced_choices(CROP_ERRORS, count, rng)
+        if blur_profile == "balanced" and capture_profile == "mixed":
+            eligible = [contrast == "normal" and effect not in STRONG_BLURS
+                        for contrast, effect in zip(contrasts, effects)]
+            # Swap crop assignments only, preserving all category totals.
+            donors = iter(idx for idx in range(count) if eligible[idx] and crop_errors[idx] == "none")
+            for idx in range(count):
+                if not eligible[idx] and crop_errors[idx] != "none":
+                    donor = next(donors)
+                    crop_errors[idx], crop_errors[donor] = crop_errors[donor], crop_errors[idx]
     output.mkdir(parents=True)
     (output / "images").mkdir()
     samples, labels = [], []
@@ -558,8 +716,14 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None,
         font_size = int(rng.integers(sizes[0], sizes[1] + 1))
         curve = str(curves[idx])
         strength = float(rng.uniform(0.35, 0.7)) if curve != "straight" else 0
+        crop_error = str(crop_errors[idx])
+        context = []
+        if crop_error in ("neighbor_above", "neighbor_below", "neighbors_both", "vertical_shift"):
+            for _ in range(2 if crop_error == "neighbors_both" else 1):
+                context.append(sample_text(words, font, rng, "original",
+                                           (max(3, len(label) // 2), max(18, len(label) + 1)), minimum_length=3))
         image, params = render_line(label, font, font_size, kind, degradation, rng, underline, role, curve, strength,
-                                    str(geometries[idx]), str(contrasts[idx]))
+                                    str(geometries[idx]), str(contrasts[idx]), crop_error, context)
         relative = f"images/line_{idx:05d}.jpg"
         image.save(output / relative, quality=params["jpeg_quality"])
         labels.append(f"{relative}\t{label}")
@@ -579,10 +743,11 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None,
     (output / "labels.txt").write_text("\n".join(labels) + "\n", encoding="utf-8")
     characters = sorted((set("".join(s["text"] for s in samples)) | set(TURKISH)) - {" "})
     (output / "turkish_dict.txt").write_text("\n".join(characters) + "\n", encoding="utf-8")
-    metadata = {"schema_version": 2, "seed": seed, "count": count,
+    metadata = {"schema_version": 3, "seed": seed, "count": count,
                 "corpus_sha256": hashlib.sha256(corpus.read_bytes()).hexdigest(),
                 "curve_mode": curve_mode, "blur_profile": blur_profile,
                 "capture_profile": capture_profile, "content_profile": content_profile,
+                "crop_profile": crop_profile,
                 "categories": category_counts(samples),
                 "curves": dict(Counter(s["curve"] for s in samples)),
                 "families": dict(Counter(s["family"] for s in samples)),
@@ -626,6 +791,11 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None,
         "of different lengths, invented dates/prices and synthetic document IDs (not personal IDs).\n"
         "The balanced blur preset reserves 20% for strong effects. With mixed capture, faint printing "
         "uses clean rendering and low-contrast text avoids strong blur; preset counts stay unchanged.\n"
+        f"Detector crop profile: {crop_profile}. Mixed crops add neighboring-line fragments, tight top/bottom "
+        "boundaries and vertical shifts. Labels transcribe ONLY the target line; context text is in metadata. "
+        "Clipping retains >=97% of target glyph ink and >=50% of each connected mark, excluding underlines, "
+        "measured at alpha >=64 before resizing and degradation. These bounds do not guarantee readability. "
+        "With balanced blur and mixed capture, crop errors use normal contrast and avoid strong blur.\n"
         "categories.csv provides one row per image with its transcription and category labels; "
         "category-counts.json summarizes coverage. Geometry parameters and ink opacity are in metadata.json.\n"
         "Typography includes large uppercase headings (48-64px source fonts), body text (26-38px), "
@@ -637,7 +807,7 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None,
         "For trwiki.txt: Turkish Wikipedia contributors, CC BY-SA 4.0, "
         "https://creativecommons.org/licenses/by-sa/4.0/. Revision attribution: trwiki.sources.json.\n"
         "Transformations: whole-word selection or authored field templates, text rendering, procedural backgrounds, "
-        "curved baselines, perspective, skew, opacity, rotation, scaling, "
+        "curved baselines, perspective, skew, opacity, rotation, detector cropping/context, scaling, "
         "blur/downsampling/noise and JPEG compression. This sample set is not evidence of OCR accuracy.\n",
         encoding="utf-8",
     )
@@ -670,6 +840,24 @@ def validate(root):
                 if ((sample["contrast"] == "faint_print" and sample["degradation"] != "clean")
                         or (sample["contrast"] == "low_contrast" and sample["categories"]["blur_strength"] == "strong")):
                     raise ValueError("Unreadable capture/degradation combination")
+        if metadata.get("schema_version", 1) >= 3:
+            if (sample["crop_error"] not in CROP_ERRORS or sample["label_scope"] != "target_line_only"
+                    or not 0.97 <= sample["target_ink_retention"] <= 1
+                    or not 0.5 <= sample["minimum_component_retention"] <= 1
+                    or min(sample["clipped_top_native"], sample["clipped_bottom_native"]) < 0):
+                raise ValueError("Invalid detector crop metadata or excessive target clipping")
+            for neighbor in sample["neighbor_lines"]:
+                if (neighbor["side"] not in ("above", "below") or not neighbor["text"]
+                        or neighbor["visible_ink_pixels"] <= 0 or not 0 < neighbor["visible_ink_fraction"] <= 1):
+                    raise ValueError("Invalid neighboring-line context")
+            if sample["crop_error"] != "none":
+                x0, y0, x1, y1 = sample["crop_box_native"]
+                width, height = sample["scene_size_native"]
+                if not (0 <= x0 < x1 <= width and 0 <= y0 < y1 <= height):
+                    raise ValueError("Invalid detector crop rectangle")
+                if metadata["blur_profile"] == "balanced" and metadata["capture_profile"] == "mixed":
+                    if sample["contrast"] != "normal" or sample["degradation"] in STRONG_BLURS:
+                        raise ValueError("Unsafe crop/contrast/blur combination")
         paths.add(path)
         if hashlib.sha256(path.read_bytes()).hexdigest() != sample["image_sha256"]:
             raise ValueError("Image checksum mismatch")
@@ -706,14 +894,17 @@ def main():
     parser.add_argument("--blur-profile", choices=("standard", "strong", "balanced"), default="standard")
     parser.add_argument("--capture-profile", choices=("none", "mixed"), default="none")
     parser.add_argument("--content-profile", choices=("wikipedia", "mixed"), default="wikipedia")
+    parser.add_argument("--crop-profile", choices=("none", "mixed"), default="none",
+                        help="Simulate detector padding errors, neighboring lines and bounded glyph clipping")
     parser.add_argument("--progress-every", type=int, default=250, help="Log progress every N images; 0 disables it")
     args = parser.parse_args()
     result = generate(args.corpus, args.output, args.font_root, args.count, args.seed, args.font_manifest,
-                      args.curve_mode, args.blur_profile, args.capture_profile, args.content_profile, args.progress_every)
+                      args.curve_mode, args.blur_profile, args.capture_profile, args.content_profile,
+                      args.progress_every, args.crop_profile)
     print(f"Validated {result['count']} UTF-8 image/label pairs in {args.output}")
     for key in ("families", "styles", "backgrounds", "degradations", "curves", "typography"):
         print(key + ": " + json.dumps(result[key], ensure_ascii=False))
-    for key in ("geometry", "contrast", "content_type", "text_length"):
+    for key in ("geometry", "contrast", "content_type", "text_length", "crop_error", "clipping", "neighbor_context"):
         print(key + ": " + json.dumps(result["categories"][key], ensure_ascii=False))
 
 
