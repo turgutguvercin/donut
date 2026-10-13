@@ -1,0 +1,118 @@
+{
+  "font_family": {
+    "Times New Roman": 500,
+    "Arial": 500,
+    "Georgia": 500,
+    "Verdana": 500,
+    "Courier New": 500,
+    "Trebuchet MS": 500,
+    "Comic Sans MS": 500,
+    "Impact": 500,
+    "Arial Black": 500,
+    "Andale Mono": 500,
+    "Open Sans": 500,
+    "Noto Sans": 500,
+    "Noto Serif": 500,
+    "DejaVu Sans": 500,
+    "DejaVu Serif": 500,
+    "DejaVu Sans Mono": 500,
+    "URW Bookman": 500,
+    "P052": 500,
+    "URW Gothic": 500,
+    "Z003": 500
+  },
+  "font_style": {
+    "regular": 3875,
+    "italic": 2125,
+    "bold": 2375,
+    "bold_italic": 1625
+  },
+  "text_size": {
+    "small": 2500,
+    "large": 5000,
+    "medium": 2500
+  },
+  "text_role": {
+    "small": 2500,
+    "heading": 5000,
+    "body": 2500
+  },
+  "capitalization": {
+    "original": 5000,
+    "uppercase": 5000
+  },
+  "decoration": {
+    "plain": 5000,
+    "underlined": 5000
+  },
+  "baseline": {
+    "straight": 2500,
+    "wave": 2500,
+    "arch": 2500,
+    "bowl": 2500
+  },
+  "geometry": {
+    "none": 5000,
+    "perspective": 2500,
+    "skew": 2500
+  },
+  "background": {
+    "white": 1049,
+    "aged_paper": 1049,
+    "blue_form": 968,
+    "receipt": 967,
+    "ruled_paper": 967,
+    "graph_paper": 1048,
+    "pink_form": 1048,
+    "photocopy": 968,
+    "uneven_light": 968,
+    "dark_sign": 968
+  },
+  "lighting": {
+    "even": 8064,
+    "uneven": 1936
+  },
+  "contrast": {
+    "normal": 6000,
+    "faint_print": 1000,
+    "low_contrast": 3000
+  },
+  "blur": {
+    "combined": 500,
+    "defocus": 3000,
+    "none": 5000,
+    "motion": 1500
+  },
+  "blur_strength": {
+    "strong": 2000,
+    "none": 5000,
+    "standard": 3000
+  },
+  "degradation": {
+    "defocus_motion": 500,
+    "strong_defocus": 1000,
+    "clean": 3000,
+    "defocus": 2000,
+    "strong_motion": 500,
+    "low_resolution": 1000,
+    "motion_blur": 1000,
+    "noisy_scan": 1000
+  },
+  "content_type": {
+    "wikipedia": 6000,
+    "date": 1500,
+    "price": 1500,
+    "synthetic_id": 1000
+  },
+  "text_length": {
+    "long_line": 1500,
+    "short_line": 5086,
+    "single_word": 1914,
+    "medium_line": 1500
+  },
+  "character_content": {
+    "mixed": 4409,
+    "letters": 5154,
+    "numeric": 437
+  }
+}
