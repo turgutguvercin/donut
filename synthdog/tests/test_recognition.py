@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import sys
 
 from PIL import ImageFont
@@ -6,7 +7,7 @@ import pytest
 from synthtiger.layers import TextLayer
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from generate_tr_recognition import BACKGROUNDS, DEGRADATIONS, TURKISH, discover_fonts, generate, validate
+from generate_tr_recognition import BACKGROUNDS, DEGRADATIONS, TURKISH, discover_fonts, generate, load_font_manifest, validate
 
 FONT_ROOT = Path("/usr/share/fonts/truetype")
 
@@ -87,3 +88,42 @@ def test_validator_rejects_incorrect_labels(batch):
             validate(output)
     finally:
         labels.write_bytes(before)
+
+
+def test_custom_fonts_use_actual_names_and_check_hashes(tmp_path, fonts):
+    font = fonts[0]
+    notice = tmp_path / "notice.txt"
+    notice.write_text("Test license notice", encoding="utf-8")
+    catalog = tmp_path / "fonts.json"
+    entry = {"path": str(font.path), "license": font.license,
+             "license_file": str(notice), "sha256": font.sha256}
+    catalog.write_text(json.dumps({"fonts": [entry]}), encoding="utf-8")
+    loaded = load_font_manifest(catalog)[0]
+    assert loaded.family == ImageFont.truetype(str(font.path), 32).getname()[0]
+    assert loaded.style == "regular"
+    catalog.write_text(json.dumps({"fonts": [{**entry, "sha256": "wrong"}]}), encoding="utf-8")
+    with pytest.raises(ValueError, match="checksum"):
+        load_font_manifest(catalog)
+    notice.unlink()
+    with pytest.raises(ValueError, match="license"):
+        load_font_manifest(catalog)
+
+
+def test_custom_catalog_balances_families_with_different_style_counts(batch, fonts):
+    corpus, output, metadata = batch
+    catalog = output.parent / "fonts.json"
+    # Four Sans variants, four Serif variants, but just one Mono variant.
+    chosen = [font for font in fonts if font.family != "DejaVu Sans Mono" or font.style == "regular"]
+    chosen = [font for font in chosen if font.family.startswith("DejaVu")]
+    notice = output.parent / "notice.txt"
+    notice.write_text("Test license notice", encoding="utf-8")
+    catalog.write_text(json.dumps({"fonts": [
+        {"path": str(font.path), "license": font.license, "license_file": str(notice), "sha256": font.sha256}
+        for font in chosen
+    ]}), encoding="utf-8")
+    result = generate(corpus, output.parent / "custom", FONT_ROOT, count=24, font_manifest=catalog)
+    assert len(result["families"]) == 3
+    assert set(result["families"].values()) == {8}
+    notices = list((output.parent / "custom/licenses").glob("*-notice.txt"))
+    assert len(notices) == 1
+    assert notices[0].read_text(encoding="utf-8") == "Test license notice"

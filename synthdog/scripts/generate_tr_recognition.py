@@ -39,6 +39,8 @@ class Font:
     license: str
     codepoints: set
     sha256: str
+    notice: Path = None
+    source: str = None
 
 
 def discover_fonts(root):
@@ -59,6 +61,36 @@ def discover_fonts(root):
                 raise ValueError(f"Incomplete Turkish glyph coverage: {filename}")
             fonts.append(Font(paths[filename], family, style, license_name, codepoints,
                               hashlib.sha256(paths[filename].read_bytes()).hexdigest()))
+    return fonts
+
+
+def load_font_manifest(path):
+    """Load additional licensed fonts without requiring or copying binaries."""
+    fonts, seen = [], set()
+    for entry in json.loads(path.read_text(encoding="utf-8"))["fonts"]:
+        font_path = (path.parent / entry["path"]).resolve()
+        notice = (path.parent / entry["license_file"]).resolve()
+        if not notice.is_file() or not entry.get("license"):
+            raise ValueError(f"Missing font license notice: {font_path}")
+        with TTFont(font_path) as face:
+            family = face["name"].getBestFamilyName()
+            subfamily = face["name"].getBestSubFamilyName().lower()
+            italic = "italic" in subfamily or "oblique" in subfamily
+            bold = "bold" in subfamily or "demi" in subfamily
+            style = "bold_italic" if bold and italic else "italic" if italic else "bold" if bold else "regular"
+            codepoints = {key for key, value in face.getBestCmap().items() if value != ".notdef"}
+        if not set(map(ord, TURKISH)) <= codepoints:
+            raise ValueError(f"Incomplete Turkish glyph coverage: {font_path}")
+        digest = hashlib.sha256(font_path.read_bytes()).hexdigest()
+        if entry.get("sha256", digest) != digest:
+            raise ValueError(f"Font checksum mismatch: {font_path}")
+        if digest in seen:
+            raise ValueError(f"Duplicate font in manifest: {font_path}")
+        seen.add(digest)
+        fonts.append(Font(font_path, family, style, entry["license"], codepoints,
+                          digest, notice, entry.get("source")))
+    if not fonts:
+        raise ValueError("Font manifest is empty")
     return fonts
 
 
@@ -163,7 +195,7 @@ def render_line(text, font, size, kind, degradation, rng):
     return image, params
 
 
-def contact_sheet(root, samples):
+def contact_sheet(root, samples, filename="contact-sheet.jpg", index_offset=0):
     # Keep preview memory bounded when generating thousands of training lines.
     samples = samples[:40]
     rows = (len(samples) + 1) // 2
@@ -173,16 +205,28 @@ def contact_sheet(root, samples):
     ui_font = ImageFont.truetype(samples[0]["font_path"], 15)
     for idx, sample in enumerate(samples):
         x, y = (idx // rows) * cell_width + 12, (idx % rows) * cell_height + 8
-        title = f"{idx + 1:02d}  {sample['family']} / {sample['style']} / {sample['background']} / {sample['degradation']}"
+        title = f"{idx + index_offset + 1:03d}  {sample['family']} / {sample['style']} / {sample['background']} / {sample['degradation']}"
         draw.text((x, y), title, font=ui_font, fill=(42, 47, 57))
         with Image.open(root / sample["file_name"]) as image:
             if image.width > cell_width - 28:
                 image = image.resize((cell_width - 28, round(image.height * (cell_width - 28) / image.width)))
             sheet.paste(image, (x, y + 29))
-    sheet.save(root / "contact-sheet.jpg", quality=95)
+    sheet.save(root / filename, quality=95)
 
 
-def generate(corpus, output, font_root, count=20, seed=42):
+def previews(root, samples):
+    if len(samples) <= 40:
+        contact_sheet(root, samples)
+    else:
+        # Show up to 100 examples in readable 20-image pages; stay bounded for
+        # full training datasets with tens of thousands of images.
+        for start in range(0, min(len(samples), 100), 20):
+            filename = f"contact-sheet-{start // 20 + 1:02d}.jpg"
+            contact_sheet(root, samples[start:start + 20], filename, start)
+        shutil.copy2(root / "contact-sheet-01.jpg", root / "contact-sheet.jpg")
+
+
+def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
     if count < 1:
         raise ValueError("count must be positive")
     if output.exists():
@@ -191,13 +235,23 @@ def generate(corpus, output, font_root, count=20, seed=42):
     words = text.split()
     if not words:
         raise ValueError("Corpus is empty")
-    fonts = discover_fonts(font_root)
+    fonts = load_font_manifest(font_manifest) if font_manifest else discover_fonts(font_root)
+    families = {}
+    for font in fonts:
+        families.setdefault(font.family, []).append(font)
+    family_groups = list(families.values())
     rng = np.random.default_rng(seed)
     output.mkdir(parents=True)
     (output / "images").mkdir()
     samples, labels = [], []
     for idx in range(count):
-        font = fonts[idx % len(fonts)]
+        if font_manifest:
+            # Equal family representation; a four-style family must not swamp
+            # distinctive families such as Impact or Comic Sans with fewer files.
+            group = family_groups[idx % len(family_groups)]
+            font = group[(idx // len(family_groups)) % len(group)]
+        else:
+            font = fonts[idx % len(fonts)]
         label = sample_text(words, font, rng)
         # Balance the first 20; rotate assignments on later cycles so larger
         # datasets do not associate one font/style with just one background.
@@ -212,7 +266,8 @@ def generate(corpus, output, font_root, count=20, seed=42):
         samples.append({"file_name": relative, "text": label, "family": font.family,
                         "style": font.style, "font_path": str(font.path),
                         "font_sha256": font.sha256,
-                        "font_license": font.license, "width": image.width, "height": image.height,
+                        "font_license": font.license, "font_source": font.source,
+                        "width": image.width, "height": image.height,
                         "image_sha256": hashlib.sha256((output / relative).read_bytes()).hexdigest(), **params})
     (output / "labels.txt").write_text("\n".join(labels) + "\n", encoding="utf-8")
     characters = sorted((set("".join(s["text"] for s in samples)) | set(TURKISH)) - {" "})
@@ -232,14 +287,20 @@ def generate(corpus, output, font_root, count=20, seed=42):
         notice = Path("/usr/share/doc") / package / "copyright"
         if notice.exists():
             shutil.copy2(notice, license_dir / (family + ".txt"))
+    for notice in {font.notice for font in fonts if font.notice}:
+        # Preserve notices even when different packages use the same basename.
+        digest = hashlib.sha256(notice.read_bytes()).hexdigest()[:12]
+        shutil.copy2(notice, license_dir / (digest + "-" + notice.name))
+    if font_manifest:
+        shutil.copy2(font_manifest, output / "font-manifest.json")
     (output / "README.txt").write_text(
         "PaddleOCR recognition line crops, height 48, variable width.\n"
         "labels.txt has relative image path, TAB, exact UTF-8 text. Set data_dir to this directory.\n"
         "Use turkish_dict.txt with use_space_char: true; this dictionary covers the samples, not all future corpora.\n"
         "Use a compatible recognition head/dictionary when fine-tuning pretrained weights.\n"
-        "Five real font families with regular, bold, italic/oblique and bold italic styles; "
-        "ten procedural backgrounds and five degradation types. See metadata.json for all parameters and hashes.\n"
-        "Fonts are system DejaVu (Bitstream Vera license; DejaVu changes public domain) and Liberation (SIL OFL 1.1). "
+        f"{len(families)} real font families, {len(fonts)} font files, ten procedural backgrounds "
+        "and five degradation types. See metadata.json for all parameters and hashes.\n"
+        "Font families and styles come from actual font metadata. License notices: licenses/. "
         "Font binaries are not included. See licenses/ and system package copyright notices.\n"
         "For trwiki.txt: Turkish Wikipedia contributors, CC BY-SA 4.0, "
         "https://creativecommons.org/licenses/by-sa/4.0/. Revision attribution: trwiki.sources.json.\n"
@@ -247,7 +308,7 @@ def generate(corpus, output, font_root, count=20, seed=42):
         "blur/downsampling/noise and JPEG compression. This sample set is not evidence of OCR accuracy.\n",
         encoding="utf-8",
     )
-    contact_sheet(output, samples)
+    previews(output, samples)
     validate(output)
     return metadata
 
@@ -283,10 +344,11 @@ def main():
     parser.add_argument("--corpus", type=Path, default=Path("resources/corpus/trwiki.txt"))
     parser.add_argument("--output", type=Path, default=Path("outputs/PaddleOCR_tr_recognition"))
     parser.add_argument("--font-root", type=Path, default=Path("/usr/share/fonts/truetype"))
+    parser.add_argument("--font-manifest", type=Path, help="JSON catalog of additional licensed fonts and notices")
     parser.add_argument("--count", type=int, default=20)
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
-    result = generate(args.corpus, args.output, args.font_root, args.count, args.seed)
+    result = generate(args.corpus, args.output, args.font_root, args.count, args.seed, args.font_manifest)
     print(f"Validated {result['count']} UTF-8 image/label pairs in {args.output}")
     for key in ("families", "styles", "backgrounds", "degradations"):
         print(key + ": " + json.dumps(result[key], ensure_ascii=False))

@@ -148,8 +148,30 @@ use one stable, complete character dictionary compatible with the recognizer's
 output head and pretrained weights. No model training is performed by this command.
 
 `metadata.json` records font and image hashes, style, background, degradation,
-dimensions and the seed. `contact-sheet.jpg` previews up to the first 40 samples.
+dimensions and the seed. Small batches have one contact sheet; larger batches
+preview up to 100 samples in numbered 20-image contact sheets.
 Every image/label pair is validated before completion. A fixed seed and identical
 corpus, fonts and dependencies reproduce the same samples. Use a fresh output
 directory; existing files are never overwritten. Retain Wikipedia attribution
 and the accompanying revision manifest when sharing the text-bearing samples.
+
+To use Times New Roman, Arial, Georgia, Verdana or other additional fonts, provide
+a JSON catalog of licensed local font files. Family and style names are read
+from each font itself; fonts with missing Turkish glyphs or incorrect checksums
+are rejected. For a custom catalog, families are sampled equally, even if some
+have fewer style variants.
+
+```json
+{"fonts": [{"path": "/path/to/times.ttf", "license": "Microsoft Core Fonts EULA",
+            "license_file": "/path/to/EULA.txt", "sha256": "actual_font_sha256"}]}
+```
+
+```bash
+python scripts/generate_tr_recognition.py --font-manifest /path/to/fonts.json --output outputs/PaddleOCR_tr_100 --count 100 --seed 42
+```
+
+Paths can also be relative to the catalog. Use the SHA-256 of each actual font;
+omit that field only when verification against a pre-existing catalog is not
+needed. License notices are required and copied into the output; font binaries
+are never copied. Microsoft Core Fonts have a proprietary EULA and must be
+obtained through an authorized source. They are not supplied by this repository.
