@@ -211,8 +211,9 @@ the exact transcription, character/word counts and category labels for font,
 style, size, role, case, decoration, baseline, capture geometry, background,
 lighting, contrast, blur/severity, degradation, content and length.
 `category-counts.json` summarizes the actual coverage. Text-length categories
-describe the final label: one token, or a line of up to 30, 31–55, or 56+
-characters; structured fields may belong to any applicable length category.
+describe the final label: one token, or a line of up to 30, 31–55, or 56–90
+characters. The long-sentence profile adds 91–160 and 161–240 character categories;
+structured fields may belong to any applicable length category.
 Each image also has its categories in `metadata.json`, alongside the ink
 opacity, rotation and perspective mapping parameters. All three category
 exports are checked against each other and the labels. Progress is printed
@@ -245,16 +246,55 @@ trimming and retained target ink. Categories include `crop_error`, `clipping`
 (actual applied cuts) and `neighbor_context`. Tight profiles may remove padding
 without clipping ink when a requested trim would erase a small mark.
 
-Trimming is bounded to retain at least 97% of target glyph ink and half of every
+The default `--clipping-severity mild` retains at least 97% of target glyph ink and half of every
 connected component, including detached dots/accents; underline strokes are
 excluded from these measurements. Measurements use an alpha threshold of 64
 **before resizing, blur and JPEG encoding**, so they do not guarantee that every
-final glyph remains legible. The goal is mild crop tolerance, not teaching a
-recognizer to guess completely missing Turkish marks. In a real pipeline, add
+final glyph remains legible. In a real pipeline, add
 vertical padding around detector boxes before cropping/rectification and check
-recognition on actual detector-produced crops. Prefer rejecting severely cut
-lines to pairing ambiguous images with complete labels. `--crop-profile none`
+recognition on actual detector-produced crops. `--crop-profile none`
 is the default and preserves the previous rendering behavior.
+
+For tighter crops that can **completely remove dots, accents or cedillas**, use
+`--crop-profile mixed --clipping-severity severe`. This upgrades the tight and
+vertically shifted crops (20% of a balanced batch). Top cuts request 22–32% of
+the native text height and bottom cuts 20–30%; cuts are reduced only as needed
+to retain at least 70% of total glyph ink. Detached marks may disappear entirely.
+Use `--clipping-severity mixed` to apply severe clipping to half of those crops,
+giving 10% severe examples in a balanced batch. Other crop categories keep their
+existing behavior and proportions.
+
+The original Turkish transcription is retained even when a letter becomes
+ambiguous, such as `ü` resembling `u` or `ç` resembling `c`. These samples have
+`potentially_ambiguous: true` and `clipping_severity: severe` in metadata.
+`removed_components` and `partial_components` count disconnected glyph shapes
+lost or cut at the measurement stage; they are not a count of identified accents
+or letters. Category exports include severity and component loss. Use these
+flags to control the proportion of difficult examples or build a crop-failure
+evaluation set; missing information may make exact recognition impossible.
+
+For **longer complete sentences**, use `--length-profile long`. Wikipedia text
+is balanced between 91–160 and 161–240 characters. Sentence selection uses
+punctuation boundaries with common abbreviation guards, retains the ending
+punctuation and checks the final font/case coverage. Dates, prices and IDs keep
+their usual formats with `--content-profile mixed`. To make every sample a long
+sentence, select `--content-profile wikipedia`. The corpus must contain suitable
+sentences in both length ranges; insufficient corpora produce a clear error.
+
+```bash
+python scripts/generate_tr_recognition.py \
+  --font-manifest /path/to/fonts.json \
+  --output outputs/PaddleOCR_tr_severe_long_100 --count 100 --seed 123 \
+  --curve-mode mixed --blur-profile balanced --capture-profile mixed \
+  --content-profile mixed --length-profile long \
+  --crop-profile mixed --clipping-severity severe
+```
+
+Long sentences retain their full aspect ratio and width at height 48; rotation
+is bounded to avoid excessive shrinkage. Configure the recognition pipeline's
+maximum label length and image width for these samples, using width buckets or
+dynamic width as appropriate. Resizing a 200-character line to a narrow fixed
+width can erase detail. Labels must not be truncated to fit the model.
 
 `labels.txt` contains `images/line_00000.jpg<TAB>exact transcription`, as required
 by PaddleOCR recognition datasets. Set `data_dir` to the output directory,
@@ -266,7 +306,8 @@ output head and pretrained weights. No model training is performed by this comma
 
 `metadata.json` records font and image hashes, style, text role and case,
 underline geometry, source font size, curve type/amplitude, capture geometry,
-contrast, content category, text length, detector crop errors, background, degradation,
+contrast, content category, text length/profile, detector crop errors/severity,
+component loss, ambiguity flags, background, degradation,
 dimensions and the seed. Small batches have one contact sheet; larger batches
 preview up to 100 samples in numbered 20-image contact sheets.
 Every image/label pair is validated before completion. A fixed seed and identical

@@ -14,7 +14,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from generate_tr_recognition import (
     BACKGROUNDS, CROP_ERRORS, CURVES, DEGRADATIONS, TURKISH, bounded_vertical_crop,
     curve_patch, discover_fonts, generate,
-    load_font_manifest, perspective_patch, render_line, structured_text, text_patch, turkish_upper, validate,
+    load_font_manifest, perspective_patch, render_line, sentence_pools,
+    structured_text, text_patch, turkish_upper, validate,
 )
 
 FONT_ROOT = Path("/usr/share/fonts/truetype")
@@ -392,3 +393,74 @@ def test_detector_crop_batch_labels_coverage_replay_and_validation(batch):
     (root / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False), encoding="utf-8")
     with pytest.raises(ValueError, match="excessive target clipping"):
         validate(root)
+
+
+def test_severe_crop_can_remove_complete_detached_marks():
+    mask = Image.new("L", (100, 40))
+    draw = ImageDraw.Draw(mask)
+    draw.rectangle((5, 10, 94, 30), fill=255)
+    draw.rectangle((20, 2, 22, 4), fill=255)
+    draw.rectangle((70, 2, 72, 4), fill=255)  # Umlaut dots.
+    draw.rectangle((40, 35, 44, 39), fill=255)  # Detached cedilla.
+    first, last, severe = bounded_vertical_crop(mask, 6, 7, severity="severe")
+    assert first > 4 and last <= 35
+    assert severe["removed_components"] == 3
+    assert severe["minimum_component_retention"] == 0
+    assert severe["target_ink_retention"] >= 0.70
+    _, _, mild = bounded_vertical_crop(mask, 6, 7)
+    assert mild["removed_components"] == 0
+
+
+def test_severe_top_crop_erases_actual_umlaut_dots(fonts):
+    font = next(f for f in fonts if f.family == "DejaVu Sans" and f.style == "regular")
+    _, severe = render_line("ü", font, 52, "white", "clean", np.random.default_rng(42),
+                             crop_error="tight_top", clipping_severity="severe")
+    _, mild = render_line("ü", font, 52, "white", "clean", np.random.default_rng(42),
+                           crop_error="tight_top")
+    assert severe["removed_components"] == 2
+    assert severe["minimum_component_retention"] == 0
+    assert severe["potentially_ambiguous"]
+    assert mild["removed_components"] == 0 and not mild["potentially_ambiguous"]
+
+
+def test_long_sentences_and_mixed_severity_replay(tmp_path, fonts):
+    sentences = [
+        "İstanbul'daki öğrenciler bugün kütüphanede buluşarak Türkçe kitapları inceledi ve öğretmenleriyle birlikte yeni öğrendikleri sözcükleri tartıştı.",
+        "Çocuklar öğleden sonra güneşli bahçede toplandı, arkadaşlarıyla birlikte küçük çiçekleri suladı ve güzel havanın tadını çıkarırken öğretmenlerinin anlattığı uzun öyküyü büyük bir ilgiyle dinledi.",
+    ]
+    corpus = tmp_path / "long-corpus.txt"
+    corpus.write_text(" ".join(sentences), encoding="utf-8")
+    pools = sentence_pools(corpus.read_text(encoding="utf-8"))
+    assert sorted(s for pool in pools.values() for s in pool) == sorted(sentences)
+    options = dict(count=40, length_profile="long", crop_profile="mixed", clipping_severity="mixed",
+                   curve_mode="straight", blur_profile="balanced", capture_profile="mixed")
+    root = tmp_path / "long"
+    metadata = generate(corpus, root, FONT_ROOT, **options)
+    assert validate(root) == metadata
+    assert metadata["categories"]["text_length"] == {"long_sentence": 20, "extra_long_sentence": 20}
+    assert metadata["categories"]["clipping_severity"] == {"none": 32, "mild": 4, "severe": 4}
+    allowed = set(sentences + [turkish_upper(s) for s in sentences])
+    for sample in metadata["samples"]:
+        assert sample["text"] in allowed and sample["text_unit"] == "sentence"
+        assert sample["width"] > 500 and sample["height"] == 48
+    assert generate(corpus, tmp_path / "long-replay", FONT_ROOT, **options) == metadata
+    severe = next(s for s in metadata["samples"] if s["clipping_severity"] == "severe")
+    severe["potentially_ambiguous"] = False
+    (root / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False), encoding="utf-8")
+    with pytest.raises(ValueError, match="severity"):
+        validate(root)
+
+
+def test_long_profile_rejects_inadequate_corpus_before_creating_output(batch):
+    corpus, output, _ = batch
+    destination = output.parent / "no-long-sentences"
+    with pytest.raises(ValueError, match="complete sentences"):
+        generate(corpus, destination, FONT_ROOT, length_profile="long")
+    assert not destination.exists()
+
+
+def test_long_line_rotation_keeps_character_height(fonts):
+    sentence = "Üsküdar'da çocuklar güneşli bir günde çiçekleri inceledi ve öğretmenleriyle görüştü. " * 3
+    image, params = render_line(sentence, fonts[0], 52, "white", "clean", np.random.default_rng(42))
+    assert image.width > 1500 and image.height == 48
+    assert params["text_height_output"] >= 25
