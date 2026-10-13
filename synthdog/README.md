@@ -84,8 +84,10 @@ The output contains JPEG documents and `metadata.jsonl` in the existing
 train/validation/test splits. Each row identifies its image and stores OCR text
 in `ground_truth` → `gt_parse` → `text_sequence`; both JSON layers use UTF-8.
 The validation command checks image/label correspondence, JSON decoding, font
-coverage and actual SynthTiger rendering of `çğışöüÇĞİŞÖÜıI`, and sample coverage.
-A small random sample may omit a rare character; use more samples in that case.
+coverage and actual SynthTiger rendering of `çğışöüÇĞİŞÖÜıI`, and reports sample coverage.
+Sample labels must contain distinctive Turkish characters. Rare uppercase letters
+may be absent from a small random sample; every glyph is rendered separately
+during font validation regardless of its frequency in Wikipedia text.
 
 The corpus script downloads paragraphs from eight Turkish Wikipedia articles
 through `tr.wikipedia.org` (HTTPS access required). It removes reference markers,
