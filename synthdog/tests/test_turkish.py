@@ -22,6 +22,7 @@ def test_config_preserves_english_settings():
 def test_wikipedia_normalization():
     assert extract('<p>Tu\u0308rkçe <b>İĞŞ</b><sup>[1]</sup>  ıöçü</p>') == 'Türkçe İĞŞ ıöçü'
     assert extract('<div>No paragraphs</div>') == ''
+    assert extract('<p>Türkçe</p><p>metin</p>').replace('\n', '') == 'Türkçe metin'
 
 
 def test_fonts():

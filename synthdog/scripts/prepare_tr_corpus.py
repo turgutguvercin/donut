@@ -44,7 +44,8 @@ class Paragraphs(HTMLParser):
 def extract(html):
     parser = Paragraphs()
     parser.feed(html)
-    return "\n".join(parser.lines)
+    # TextReader skips newlines; retain a space between paragraphs.
+    return " \n".join(parser.lines)
 
 
 def fetch(page):
@@ -79,7 +80,7 @@ def main():
         text, source = fetch(page)
         texts.append(text)
         sources.append(source)
-    corpus = "\n".join(texts) + "\n"
+    corpus = " \n".join(texts) + " \n"
     manifest = {"language": "tr", "source": API, "pages": sources,
                 "license": "CC-BY-SA-4.0", "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
                 "attribution": "Turkish Wikipedia contributors; see each revision URL and its page history.",
