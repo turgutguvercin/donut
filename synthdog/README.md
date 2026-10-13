@@ -112,3 +112,44 @@ third-party text. Downloaded Turkish corpora and generated outputs are ignored.
 They are licensed under SIL OFL 1.1, with copyright and license in `../NOTICE`.
 No new font binaries are needed. English, Chinese, Japanese, and Korean
 configurations remain available with their original resources.
+
+### PaddleOCR recognition crops
+
+For recognition training, generate single-line images with UTF-8 transcriptions.
+The generator uses five system font families (DejaVu Sans, Serif and Sans Mono;
+Liberation Sans and Serif) with real regular, bold, italic/oblique and bold italic
+files. On Debian/Ubuntu, these are provided by `fonts-dejavu-core`,
+`fonts-dejavu-extra` and `fonts-liberation`; install those packages if missing.
+No new font binaries are committed. DejaVu uses the Bitstream Vera license
+(DejaVu changes are public domain); Liberation uses SIL OFL 1.1. System copyright
+notices are copied into generated output when available.
+
+From `synthdog/`, with the Turkish environment activated and corpus prepared:
+
+```bash
+python scripts/generate_tr_recognition.py --output outputs/PaddleOCR_tr_recognition --count 20 --seed 42
+# Scale up using a fresh directory:
+python scripts/generate_tr_recognition.py --output outputs/PaddleOCR_tr_recognition_10k --count 10000 --seed 42
+```
+
+A 20-image batch covers all 20 font variants, ten procedural backgrounds
+(plain, textured/aged, colored forms, receipt, ruled/grid paper, uneven lighting,
+photocopy and dark signage), and five difficulty types (clean, defocus, motion
+blur, downsampled and noisy). Text size, rotation and JPEG quality also vary.
+Lines retain whole words and accents; the generator checks font coverage for
+the selected text. Backgrounds are generated locally without third-party images.
+
+`labels.txt` contains `images/line_00000.jpg<TAB>exact transcription`, as required
+by PaddleOCR recognition datasets. Set `data_dir` to the output directory,
+`label_file_list` to `labels.txt`, and `use_space_char: true`. Crops are 48 pixels
+high with variable width; use suitable recognition resizing. `turkish_dict.txt`
+covers the sample labels plus all Turkish letters. For a larger training corpus,
+use one stable, complete character dictionary compatible with the recognizer's
+output head and pretrained weights. No model training is performed by this command.
+
+`metadata.json` records font and image hashes, style, background, degradation,
+dimensions and the seed. `contact-sheet.jpg` previews up to the first 40 samples.
+Every image/label pair is validated before completion. A fixed seed and identical
+corpus, fonts and dependencies reproduce the same samples. Use a fresh output
+directory; existing files are never overwritten. Retain Wikipedia attribution
+and the accompanying revision manifest when sharing the text-bearing samples.
