@@ -1,8 +1,11 @@
 from pathlib import Path
+from dataclasses import replace
+from datetime import datetime
 import json
+import re
 import sys
 
-from PIL import ImageFont
+from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import pytest
 from synthtiger.layers import TextLayer
@@ -10,7 +13,7 @@ from synthtiger.layers import TextLayer
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from generate_tr_recognition import (
     BACKGROUNDS, CURVES, DEGRADATIONS, TURKISH, curve_patch, discover_fonts, generate,
-    load_font_manifest, render_line, text_patch, turkish_upper, validate,
+    load_font_manifest, perspective_patch, render_line, structured_text, text_patch, turkish_upper, validate,
 )
 
 FONT_ROOT = Path("/usr/share/fonts/truetype")
@@ -220,3 +223,101 @@ def test_curved_strong_batch_and_straight_option(batch):
             assert sample["blur_radius"] > 0 and sample["motion_kernel_width"] in (3, 5)
     straight = generate(corpus, output.parent / "straight", FONT_ROOT, curve_mode="straight")
     assert straight["curves"] == {"straight": 20}
+
+
+def test_perspective_keeps_all_corners_inside_canvas():
+    patch = Image.new("RGBA", (180, 52))
+    draw = ImageDraw.Draw(patch)
+    colors = ((255, 0, 0, 255), (0, 255, 0, 255), (0, 0, 255, 255), (255, 255, 0, 255))
+    for (x, y), color in zip(((0, 0), (171, 0), (171, 43), (0, 43)), colors):
+        draw.rectangle((x, y, x + 8, y + 8), fill=color)
+    warped, params = perspective_patch(patch, ((-7, 10), (172, 0), (179, 51), (0, 41)))
+    pixels = np.asarray(warped)
+    for color in colors:
+        assert np.count_nonzero(np.all(pixels == color, axis=2)) >= 5
+    assert not pixels[[0, -1], :, 3].any()
+    assert not pixels[:, [0, -1], 3].any()
+    inverse = np.append(params["perspective_inverse_coefficients"], 1).reshape(3, 3)
+    for source, target in zip(params["perspective_source_corners"], params["perspective_target_corners"]):
+        mapped = inverse @ np.array([*target, 1])
+        assert np.allclose(mapped[:2] / mapped[2], source)
+
+
+@pytest.mark.parametrize("background_kind", ["white", "dark_sign"])
+def test_contrast_reduces_ink_visibility_in_both_polarities(fonts, background_kind):
+    levels = []
+    for contrast in ("normal", "low_contrast", "faint_print"):
+        image, params = render_line("İĞçğışöü", fonts[0], 52, background_kind, "clean",
+                                    np.random.default_rng(42), contrast=contrast)
+        pixels = np.asarray(image, dtype=float).mean(axis=2)
+        paper = np.median(pixels)
+        levels.append(np.abs(pixels - paper).max())
+    assert levels[0] > levels[1] > levels[2] > 10
+
+
+def test_skew_is_bounded_for_long_lines(fonts):
+    image, params = render_line("İSTANBUL ÇIĞ GÜZEL " * 5, fonts[0], 52, "white", "clean",
+                                np.random.default_rng(42), geometry="skew")
+    assert 0 < abs(params["rotation_degrees"]) <= 4
+    assert params["text_height_output"] >= 15
+    assert image.height == 48
+
+
+@pytest.mark.parametrize("text", ["güçlü", "güçlü bir görüş " * 5])
+def test_small_text_survives_combined_perspective_and_curvature(fonts, text):
+    for font in fonts:
+        image, params = render_line(text, font, 18, "white", "clean", np.random.default_rng(42),
+                                    role="small", curve="wave", curve_strength=0.7,
+                                    geometry="perspective", contrast="faint_print")
+        assert params["text_height_output"] >= 9
+        assert image.height == 48
+
+
+def test_structured_fields_are_valid_and_use_supported_glyphs(fonts):
+    rng = np.random.default_rng(9)
+    font = replace(fonts[0], codepoints=fonts[0].codepoints - {ord("₺")})
+    months = "Ocak Şubat Mart Nisan Mayıs Haziran Temmuz Ağustos Eylül Ekim Kasım Aralık".split()
+    for _ in range(50):
+        value = structured_text("date", font, rng).split(": ")[-1]
+        if re.fullmatch(r"\d{2}\.\d{2}\.\d{4}", value):
+            datetime.strptime(value, "%d.%m.%Y")
+        elif re.fullmatch(r"\d{2}/\d{2}/\d{4}", value):
+            datetime.strptime(value, "%d/%m/%Y")
+        elif re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+            datetime.strptime(value, "%Y-%m-%d")
+        else:
+            day, month, year = value.split()
+            datetime(int(year), months.index(month) + 1, int(day))
+        price = structured_text("price", font, rng, "uppercase")
+        assert re.search(r"(?:^|: )\d{1,3}(?:\.\d{3})*,\d{2} TL$", price)
+        identifier = structured_text("synthetic_id", font, rng, "uppercase")
+        assert re.search(r"TR-20\d{2}-\d{6}$", identifier)
+        assert identifier == turkish_upper(identifier)
+        assert set(map(ord, price + identifier)) <= font.codepoints
+
+
+def test_full_category_batch_and_reproducible_labels(batch):
+    corpus, output, _ = batch
+    options = dict(count=40, capture_profile="mixed", content_profile="mixed", blur_profile="balanced")
+    root = output.parent / "categories"
+    metadata = generate(corpus, root, FONT_ROOT, **options)
+    assert validate(root) == metadata
+    categories = metadata["categories"]
+    assert categories["geometry"] == {"none": 20, "skew": 10, "perspective": 10}
+    assert categories["contrast"] == {"normal": 24, "low_contrast": 12, "faint_print": 4}
+    assert categories["content_type"] == {"wikipedia": 24, "date": 6, "price": 6, "synthetic_id": 4}
+    assert set(categories["text_length"]) == {"single_word", "short_line", "medium_line", "long_line"}
+    assert categories["blur_strength"]["strong"] == 8
+    for sample in metadata["samples"]:
+        if sample["contrast"] == "faint_print":
+            assert sample["degradation"] == "clean"
+        elif sample["contrast"] == "low_contrast":
+            assert sample["categories"]["blur_strength"] != "strong"
+        if sample["geometry"] == "perspective":
+            assert len(sample["perspective_target_corners"]) == 4
+    replay = generate(corpus, output.parent / "categories-replay", FONT_ROOT, **options)
+    assert metadata == replay
+    csv_path = root / "categories.csv"
+    csv_path.write_text(csv_path.read_text(encoding="utf-8").replace("wikipedia", "incorrect", 1), encoding="utf-8")
+    with pytest.raises(ValueError, match="CSV categories"):
+        validate(root)

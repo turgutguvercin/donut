@@ -169,6 +169,55 @@ degradation types. Curve and blur assignments are shuffled independently of
 font and typography profiles. Image/label checks validate the generated dataset;
 OCR accuracy still needs evaluation on real documents.
 
+For 10,000 crops spanning capture conditions and document fields as well as
+the existing fonts, typography, backgrounds and curves:
+
+```bash
+python scripts/generate_tr_recognition.py \
+  --font-manifest /path/to/fonts.json \
+  --output outputs/PaddleOCR_tr_categories_10k --count 10000 --seed 42 \
+  --curve-mode mixed --blur-profile balanced \
+  --capture-profile mixed --content-profile mixed
+```
+
+Omit `--font-manifest` to use the five default font families. The new profiles
+are opt-in; existing document language configurations and default recognition
+content/capture settings are unchanged.
+
+* `--capture-profile mixed`: 50% have no additional capture geometry, 25% have
+  skew and 25% perspective. Curvature is applied independently. Perspective
+  transforms the entire glyph/underline patch onto a padded canvas. Skew is
+  bounded for long lines to keep characters visible after height normalization.
+  Small text uses gentler perspective and less padding to preserve detail.
+  Contrast is 60% normal, 30% low contrast and 10% faint printing, applied through
+  ink opacity against the actual background (including dark backgrounds).
+* `--content-profile mixed`: 60% Wikipedia text, 15% dates, 15% prices and 10%
+  invented document/order/product IDs. Wikipedia selections are balanced across
+  single words (3–16 characters), short lines (15–30), medium lines (31–55) and
+  long lines (56–90). Dates include valid numeric and Turkish month-name formats;
+  prices use Turkish decimal commas and thousands separators, with `TL` or `₺`
+  when supported by the font. IDs are synthetic document codes, not personal
+  identity numbers. Turkish casing and final font coverage checks apply to all
+  content. Typography is shuffled independently of font style in this profile.
+* `--blur-profile balanced`: 30% clean, 20% standard defocus, 10% motion blur,
+  10% low resolution, 10% noise, 10% strong defocus, 5% strong motion and 5%
+  combined defocus/motion. With mixed capture, faint printing uses clean rendering
+  and low-contrast text avoids strong blur. Assignments are swapped to preserve
+  the preset totals. The `standard` and `strong` presets remain available.
+
+These percentages are exact for the 10,000-image command. Smaller batches use
+truncated balanced schedules. `categories.csv` contains one row per image with
+the exact transcription, character/word counts and category labels for font,
+style, size, role, case, decoration, baseline, capture geometry, background,
+lighting, contrast, blur/severity, degradation, content and length.
+`category-counts.json` summarizes the actual coverage. Text-length categories
+describe the final label: one token, or a line of up to 30, 31–55, or 56+
+characters; structured fields may belong to any applicable length category.
+Each image also has its categories in `metadata.json`, alongside the ink
+opacity, rotation and perspective mapping parameters. All three category
+exports are checked against each other and the labels. Progress is printed
+every 250 images; use `--progress-every 0` to disable it.
+
 `labels.txt` contains `images/line_00000.jpg<TAB>exact transcription`, as required
 by PaddleOCR recognition datasets. Set `data_dir` to the output directory,
 `label_file_list` to `labels.txt`, and `use_space_char: true`. Crops are 48 pixels
@@ -178,7 +227,8 @@ use one stable, complete character dictionary compatible with the recognizer's
 output head and pretrained weights. No model training is performed by this command.
 
 `metadata.json` records font and image hashes, style, text role and case,
-underline geometry, source font size, curve type/amplitude, background, degradation,
+underline geometry, source font size, curve type/amplitude, capture geometry,
+contrast, content category, text length, background, degradation,
 dimensions and the seed. Small batches have one contact sheet; larger batches
 preview up to 100 samples in numbered 20-image contact sheets.
 Every image/label pair is validated before completion. A fixed seed and identical
