@@ -1,0 +1,140 @@
+{
+  "font_family": {
+    "Times New Roman": 5,
+    "Arial": 5,
+    "Georgia": 5,
+    "Verdana": 5,
+    "Courier New": 5,
+    "Trebuchet MS": 5,
+    "Comic Sans MS": 5,
+    "Impact": 5,
+    "Arial Black": 5,
+    "Andale Mono": 5,
+    "Open Sans": 5,
+    "Noto Sans": 5,
+    "Noto Serif": 5,
+    "DejaVu Sans": 5,
+    "DejaVu Serif": 5,
+    "DejaVu Sans Mono": 5,
+    "URW Bookman": 5,
+    "P052": 5,
+    "URW Gothic": 5,
+    "Z003": 5
+  },
+  "font_style": {
+    "regular": 50,
+    "italic": 18,
+    "bold": 19,
+    "bold_italic": 13
+  },
+  "text_size": {
+    "large": 50,
+    "small": 25,
+    "medium": 25
+  },
+  "text_role": {
+    "heading": 50,
+    "small": 25,
+    "body": 25
+  },
+  "capitalization": {
+    "uppercase": 50,
+    "original": 50
+  },
+  "decoration": {
+    "underlined": 50,
+    "plain": 50
+  },
+  "baseline": {
+    "arch": 25,
+    "wave": 25,
+    "straight": 25,
+    "bowl": 25
+  },
+  "geometry": {
+    "perspective": 25,
+    "none": 50,
+    "skew": 25
+  },
+  "background": {
+    "white": 11,
+    "aged_paper": 11,
+    "blue_form": 10,
+    "receipt": 9,
+    "ruled_paper": 9,
+    "graph_paper": 10,
+    "pink_form": 10,
+    "photocopy": 10,
+    "uneven_light": 10,
+    "dark_sign": 10
+  },
+  "lighting": {
+    "even": 80,
+    "uneven": 20
+  },
+  "contrast": {
+    "low_contrast": 30,
+    "normal": 60,
+    "faint_print": 10
+  },
+  "blur": {
+    "none": 50,
+    "defocus": 30,
+    "motion": 15,
+    "combined": 5
+  },
+  "blur_strength": {
+    "none": 50,
+    "standard": 30,
+    "strong": 20
+  },
+  "degradation": {
+    "low_resolution": 10,
+    "clean": 30,
+    "defocus": 20,
+    "motion_blur": 10,
+    "strong_defocus": 10,
+    "defocus_motion": 5,
+    "strong_motion": 5,
+    "noisy_scan": 10
+  },
+  "content_type": {
+    "wikipedia": 60,
+    "synthetic_id": 10,
+    "date": 15,
+    "price": 15
+  },
+  "text_length": {
+    "short_line": 50,
+    "single_word": 20,
+    "long_line": 15,
+    "medium_line": 15
+  },
+  "character_content": {
+    "letters": 48,
+    "mixed": 47,
+    "numeric": 5
+  },
+  "crop_error": {
+    "none": 60,
+    "neighbors_both": 10,
+    "neighbor_below": 5,
+    "vertical_shift": 5,
+    "neighbor_above": 5,
+    "tight_both": 5,
+    "tight_top": 5,
+    "tight_bottom": 5
+  },
+  "clipping": {
+    "none": 80,
+    "bottom": 10,
+    "both": 5,
+    "top": 5
+  },
+  "neighbor_context": {
+    "none": 75,
+    "above+below": 10,
+    "below": 5,
+    "above": 10
+  }
+}
