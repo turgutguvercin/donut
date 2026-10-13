@@ -9,7 +9,7 @@ from synthtiger.layers import TextLayer
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from generate_tr_recognition import (
-    BACKGROUNDS, DEGRADATIONS, TURKISH, discover_fonts, generate,
+    BACKGROUNDS, CURVES, DEGRADATIONS, TURKISH, curve_patch, discover_fonts, generate,
     load_font_manifest, render_line, text_patch, turkish_upper, validate,
 )
 
@@ -176,3 +176,47 @@ def test_heading_pixels_are_larger_than_small_text(fonts):
     small, _ = render_line("İSTANBUL IŞIK ÇIĞ", fonts[0], 20, "white", "clean", np.random.default_rng(42), role="small")
     assert heading.height == small.height == 48
     assert ink_height(heading) >= ink_height(small) + 8
+
+
+@pytest.mark.parametrize("curve", ["arch", "bowl", "wave"])
+def test_curves_keep_every_glyph_and_underline_pixel(fonts, curve):
+    patch, _ = text_patch("İĞçğışöü", fonts[0], 48, (12, 45, 67), underline=True)
+    warped = curve_patch(patch, curve, 20)
+    source, result = np.asarray(patch), np.asarray(warped)
+    assert warped.width == patch.width
+    assert warped.height > patch.height
+    # Every colored/antialiased pixel survives in its original reading column,
+    # including Turkish dots, accents, descenders and the underline.
+    for x in range(patch.width):
+        before = source[:, x][source[:, x, 3] > 0]
+        after = result[:, x][result[:, x, 3] > 0]
+        assert np.array_equal(before, after)
+    bottom = ((result[..., 3] > 0) * np.arange(result.shape[0])[:, None]).max(axis=0)
+    assert bottom.max() - bottom.min() == 20
+
+
+def test_strong_defocus_reduces_edges_more_than_standard(fonts):
+    args = ("ÇĞİŞÖÜ İSTANBUL", fonts[0], 56, "white")
+    standard, standard_params = render_line(*args, "defocus", np.random.default_rng(42), role="heading", curve="arch")
+    strong, strong_params = render_line(*args, "strong_defocus", np.random.default_rng(42), role="heading", curve="arch")
+    def edge_energy(image):
+        gray = np.asarray(image, dtype=float).mean(axis=2)
+        return np.abs(np.diff(gray, axis=1)).mean() + np.abs(np.diff(gray, axis=0)).mean()
+    assert standard.size == strong.size
+    assert strong_params["blur_radius"] > standard_params["blur_radius"]
+    assert edge_energy(strong) < edge_energy(standard)
+
+
+def test_curved_strong_batch_and_straight_option(batch):
+    corpus, output, _ = batch
+    strong = generate(corpus, output.parent / "strong", FONT_ROOT, curve_mode="mixed", blur_profile="strong")
+    assert validate(output.parent / "strong") == strong
+    assert set(strong["curves"]) == set(CURVES)
+    assert set(strong["curves"].values()) == {5}
+    assert sum(strong["degradations"][key] for key in ("strong_defocus", "strong_motion", "defocus_motion")) == 12
+    for sample in strong["samples"]:
+        assert (sample["curve_amplitude_native"] > 0) == (sample["curve"] != "straight")
+        if sample["degradation"] == "defocus_motion":
+            assert sample["blur_radius"] > 0 and sample["motion_kernel_width"] in (3, 5)
+    straight = generate(corpus, output.parent / "straight", FONT_ROOT, curve_mode="straight")
+    assert straight["curves"] == {"straight": 20}

@@ -21,6 +21,12 @@ BACKGROUNDS = (
     "graph_paper", "pink_form", "photocopy", "uneven_light", "dark_sign",
 )
 DEGRADATIONS = ("clean", "defocus", "motion_blur", "low_resolution", "noisy_scan")
+CURVES = ("straight", "arch", "bowl", "wave")
+STRONG_DEGRADATIONS = (
+    "strong_defocus", "strong_motion", "defocus_motion",
+    "strong_defocus", "strong_motion", "defocus_motion",
+    "defocus", "low_resolution", "noisy_scan", "clean",
+)
 TYPOGRAPHIES = (
     ("heading", "uppercase", False, (48, 64), (16, 31)),
     ("heading", "uppercase", True, (48, 64), (16, 31)),
@@ -191,11 +197,46 @@ def text_patch(text, font, size, ink, underline=False):
                   "underline_thickness_native": thickness, "text_height_native": text_height}
 
 
-def render_line(text, font, size, kind, degradation, rng, underline=False, role="body"):
+def curve_patch(patch, curve, amplitude):
+    """Shift complete RGBA columns onto a curved baseline, without clipping."""
+    if curve not in CURVES:
+        raise ValueError(f"Unknown curve: {curve}")
+    if not np.isfinite(amplitude) or amplitude < 0:
+        raise ValueError("Curve amplitude must be finite and nonnegative")
+    if curve == "straight" or amplitude == 0:
+        return patch
+    pixels = np.asarray(patch)
+    height, width = pixels.shape[:2]
+    x = np.linspace(-1, 1, width)
+    profile = x ** 2 if curve == "arch" else 1 - x ** 2 if curve == "bowl" else (
+        1 + np.sin(x * np.pi)
+    ) / 2
+    offsets = np.rint(amplitude * profile).astype(int)
+    output = np.zeros((height + int(offsets.max()), width, 4), dtype="uint8")
+    # Preserve character order, accents and underline pixels column by column.
+    output[np.arange(height)[:, None] + offsets[None, :], np.arange(width)[None, :]] = pixels
+    return Image.fromarray(output, "RGBA")
+
+
+def motion_blur(image, width, direction="horizontal"):
+    kernel = np.zeros((width, width), dtype=float)
+    if direction == "horizontal":
+        kernel[width // 2, :] = 1
+    elif direction == "vertical":
+        kernel[:, width // 2] = 1
+    else:
+        np.fill_diagonal(kernel, 1)
+    return image.filter(ImageFilter.Kernel((width, width), tuple(kernel.ravel()), scale=width))
+
+
+def render_line(text, font, size, kind, degradation, rng, underline=False, role="body",
+                curve="straight", curve_strength=0.5):
     ink = (241, 236, 216) if kind == "dark_sign" else (
         (24, 45, 80) if kind in ("blue_form", "pink_form") else (35, 32, 29)
     )
     rgba, decoration = text_patch(text, font, size, ink, underline)
+    amplitude = round(decoration["text_height_native"] * curve_strength) if curve != "straight" else 0
+    rgba = curve_patch(rgba, curve, amplitude)
     padding_x = int(rng.integers(8, 18))
     padding_y = int(rng.integers(4, 9) if role == "heading" else rng.integers(7, 16))
     # Larger padding on some lines deliberately varies relative text height.
@@ -205,16 +246,32 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
     angle = float(rng.uniform(-0.7, 0.7))
     image = image.rotate(angle, Image.Resampling.BICUBIC, expand=True, fillcolor=image.getpixel((0, 0)))
     text_height_output = decoration["text_height_native"] * 48 / image.height
+    curve_amplitude_output = amplitude * 48 / image.height
     image = image.resize((round(image.width * 48 / image.height), 48), Image.Resampling.LANCZOS)
     params = {"rotation_degrees": angle, "source_font_size": size,
               "background": kind, "degradation": degradation,
+              "curve": curve, "curve_strength": curve_strength if curve != "straight" else 0,
+              "curve_amplitude_native": amplitude,
+              "curve_amplitude_output": curve_amplitude_output,
               "text_height_output": text_height_output, **decoration}
     if degradation == "defocus":
         params["blur_radius"] = float(rng.uniform(0.35, 0.65) if role == "small" else rng.uniform(0.75, 1.25))
         image = image.filter(ImageFilter.GaussianBlur(params["blur_radius"]))
     elif degradation == "motion_blur":
-        image = image.filter(ImageFilter.Kernel((3, 3), (0, 0, 0, 1, 1, 1, 0, 0, 0), scale=3))
+        image = motion_blur(image, 3)
         params["motion_kernel_width"] = 3
+        params["motion_direction"] = "horizontal"
+    elif degradation in ("strong_defocus", "strong_motion", "defocus_motion"):
+        # Keep tiny glyphs from disappearing completely under a fixed-size blur.
+        scale = float(np.clip(text_height_output / 30, 0.35, 1.0))
+        if degradation in ("strong_defocus", "defocus_motion"):
+            limits = (1.3, 2.3) if degradation == "strong_defocus" else (0.9, 1.6)
+            params["blur_radius"] = float(rng.uniform(*limits) * scale)
+            image = image.filter(ImageFilter.GaussianBlur(params["blur_radius"]))
+        if degradation in ("strong_motion", "defocus_motion"):
+            params["motion_kernel_width"] = 5 if text_height_output >= 18 else 3
+            params["motion_direction"] = str(rng.choice(("horizontal", "vertical", "diagonal")))
+            image = motion_blur(image, params["motion_kernel_width"], params["motion_direction"])
     elif degradation == "low_resolution":
         params["downsample_scale"] = float(rng.uniform(0.65, 0.8) if role == "small" else rng.uniform(0.5, 0.68))
         low_size = tuple(max(1, round(v * params["downsample_scale"])) for v in image.size)
@@ -233,7 +290,7 @@ def contact_sheet(root, samples, filename="contact-sheet.jpg", index_offset=0):
     # Keep preview memory bounded when generating thousands of training lines.
     samples = samples[:40]
     rows = (len(samples) + 1) // 2
-    cell_width, cell_height = 880, 116
+    cell_width, cell_height = 880, 132
     sheet = Image.new("RGB", (cell_width * 2, rows * cell_height), (239, 242, 246))
     draw = ImageDraw.Draw(sheet)
     ui_font = ImageFont.truetype(samples[0]["font_path"], 15)
@@ -243,10 +300,12 @@ def contact_sheet(root, samples, filename="contact-sheet.jpg", index_offset=0):
         title = (f"{idx + index_offset + 1:03d}  {sample['family']} / {sample['style']} / "
                  f"{sample['role']} {sample['source_font_size']}px{decoration}")
         draw.text((x, y), title, font=ui_font, fill=(42, 47, 57))
+        effects = f"{sample['curve']} / {sample['degradation'].replace('_', ' ')} / {sample['background'].replace('_', ' ')}"
+        draw.text((x, y + 20), effects, font=ui_font, fill=(75, 80, 90))
         with Image.open(root / sample["file_name"]) as image:
             if image.width > cell_width - 28:
                 image = image.resize((cell_width - 28, round(image.height * (cell_width - 28) / image.width)))
-            sheet.paste(image, (x, y + 29))
+            sheet.paste(image, (x, y + 43))
     sheet.save(root / filename, quality=95)
 
 
@@ -262,11 +321,14 @@ def previews(root, samples):
         shutil.copy2(root / "contact-sheet-01.jpg", root / "contact-sheet.jpg")
 
 
-def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
+def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None,
+             curve_mode="mixed", blur_profile="standard"):
     if count < 1:
         raise ValueError("count must be positive")
     if output.exists():
         raise FileExistsError(f"Use a fresh output directory: {output}")
+    if curve_mode not in ("mixed", "straight") or blur_profile not in ("standard", "strong"):
+        raise ValueError("Unknown curve mode or blur profile")
     text = unicodedata.normalize("NFC", corpus.read_text(encoding="utf-8"))
     words = text.split()
     if not words:
@@ -277,6 +339,12 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
         families.setdefault(font.family, []).append(font)
     family_groups = list(families.values())
     rng = np.random.default_rng(seed)
+    curve_types = CURVES if curve_mode == "mixed" else ("straight",)
+    curves = np.tile(curve_types, (count + len(curve_types) - 1) // len(curve_types))[:count]
+    rng.shuffle(curves)
+    if blur_profile == "strong":
+        strong_effects = np.tile(STRONG_DEGRADATIONS, (count + 9) // 10)[:count]
+        rng.shuffle(strong_effects)
     output.mkdir(parents=True)
     (output / "images").mkdir()
     samples, labels = [], []
@@ -296,8 +364,12 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
         cycle = idx // len(fonts)
         kind = BACKGROUNDS[(idx + cycle * 3) % len(BACKGROUNDS)]
         degradation = DEGRADATIONS[(idx + idx // 5 + cycle) % len(DEGRADATIONS)]
+        if blur_profile == "strong":
+            degradation = str(strong_effects[idx])
         font_size = int(rng.integers(sizes[0], sizes[1] + 1))
-        image, params = render_line(label, font, font_size, kind, degradation, rng, underline, role)
+        curve = str(curves[idx])
+        strength = float(rng.uniform(0.35, 0.7)) if curve != "straight" else 0
+        image, params = render_line(label, font, font_size, kind, degradation, rng, underline, role, curve, strength)
         relative = f"images/line_{idx:05d}.jpg"
         image.save(output / relative, quality=params["jpeg_quality"])
         labels.append(f"{relative}\t{label}")
@@ -312,6 +384,8 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
     characters = sorted((set("".join(s["text"] for s in samples)) | set(TURKISH)) - {" "})
     (output / "turkish_dict.txt").write_text("\n".join(characters) + "\n", encoding="utf-8")
     metadata = {"seed": seed, "count": count, "corpus_sha256": hashlib.sha256(corpus.read_bytes()).hexdigest(),
+                "curve_mode": curve_mode, "blur_profile": blur_profile,
+                "curves": dict(Counter(s["curve"] for s in samples)),
                 "families": dict(Counter(s["family"] for s in samples)),
                 "styles": dict(Counter(s["style"] for s in samples)),
                 "backgrounds": dict(Counter(s["background"] for s in samples)),
@@ -343,7 +417,10 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
         "Use turkish_dict.txt with use_space_char: true; this dictionary covers the samples, not all future corpora.\n"
         "Use a compatible recognition head/dictionary when fine-tuning pretrained weights.\n"
         f"{len(families)} real font families, {len(fonts)} font files, ten procedural backgrounds "
-        "and five degradation types. See metadata.json for all parameters and hashes.\n"
+        "and configurable degradation types. See metadata.json for all parameters and hashes.\n"
+        f"Curve mode: {curve_mode}; blur profile: {blur_profile}. Arches, bowls and waves warp the complete "
+        "text/underline patch on an expanded canvas. Strong blur adds defocus, directional motion and combined blur, "
+        "scaled to text height. All labels preserve the unwarped reading order.\n"
         "Typography includes large uppercase headings (48-64px source fonts), body text (26-38px), "
         "small text (18-22px), and underlines below glyph descenders. All crops are resized to height 48; "
         "relative text size is preserved and recorded. Turkish casing maps i to İ and ı to I. "
@@ -352,7 +429,7 @@ def generate(corpus, output, font_root, count=20, seed=42, font_manifest=None):
         "Font binaries are not included. See licenses/ and system package copyright notices.\n"
         "For trwiki.txt: Turkish Wikipedia contributors, CC BY-SA 4.0, "
         "https://creativecommons.org/licenses/by-sa/4.0/. Revision attribution: trwiki.sources.json.\n"
-        "Transformations: whole-word selection, text rendering, procedural backgrounds, rotation, scaling, "
+        "Transformations: whole-word selection, text rendering, procedural backgrounds, curved baselines, rotation, scaling, "
         "blur/downsampling/noise and JPEG compression. This sample set is not evidence of OCR accuracy.\n",
         encoding="utf-8",
     )
@@ -397,10 +474,13 @@ def main():
     parser.add_argument("--font-manifest", type=Path, help="JSON catalog of additional licensed fonts and notices")
     parser.add_argument("--count", type=int, default=20)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--curve-mode", choices=("mixed", "straight"), default="mixed")
+    parser.add_argument("--blur-profile", choices=("standard", "strong"), default="standard")
     args = parser.parse_args()
-    result = generate(args.corpus, args.output, args.font_root, args.count, args.seed, args.font_manifest)
+    result = generate(args.corpus, args.output, args.font_root, args.count, args.seed, args.font_manifest,
+                      args.curve_mode, args.blur_profile)
     print(f"Validated {result['count']} UTF-8 image/label pairs in {args.output}")
-    for key in ("families", "styles", "backgrounds", "degradations", "typography"):
+    for key in ("families", "styles", "backgrounds", "degradations", "curves", "typography"):
         print(key + ": " + json.dumps(result[key], ensure_ascii=False))
 
 

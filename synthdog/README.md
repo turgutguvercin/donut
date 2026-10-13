@@ -147,6 +147,28 @@ strokes are decoration and are omitted from the transcription. Font sizes vary
 relative to the crop even though every output image is normalized to height 48.
 Profiles rotate across font families to avoid tying one family to one size or case.
 
+Curved baselines include upward arches, downward bowls and S-shaped waves.
+The complete text patch, including underlines, is warped column by column on
+an expanded canvas so character order, accents and descenders remain intact.
+The default `--curve-mode mixed` gives equal representation to straight, arch,
+bowl and wave lines (75 curved samples in a 100-image batch). Use
+`--curve-mode straight` for entirely straight lines.
+
+For a batch with stronger and more frequent blur:
+
+```bash
+python scripts/generate_tr_recognition.py --font-manifest /path/to/fonts.json --output outputs/PaddleOCR_tr_curved_100 --count 100 --seed 42 --curve-mode mixed --blur-profile strong
+```
+
+`--blur-profile strong` allocates 60% of a balanced batch to stronger defocus,
+directional motion, or combined defocus/motion blur; the remaining samples use
+standard defocus, low resolution, noise or clean rendering. Blur strength adapts
+to the rendered text height so tiny glyphs do not receive the same blur radius
+as headings. The default `--blur-profile standard` keeps the original five
+degradation types. Curve and blur assignments are shuffled independently of
+font and typography profiles. Image/label checks validate the generated dataset;
+OCR accuracy still needs evaluation on real documents.
+
 `labels.txt` contains `images/line_00000.jpg<TAB>exact transcription`, as required
 by PaddleOCR recognition datasets. Set `data_dir` to the output directory,
 `label_file_list` to `labels.txt`, and `use_space_char: true`. Crops are 48 pixels
@@ -156,7 +178,7 @@ use one stable, complete character dictionary compatible with the recognizer's
 output head and pretrained weights. No model training is performed by this command.
 
 `metadata.json` records font and image hashes, style, text role and case,
-underline geometry, source font size, background, degradation,
+underline geometry, source font size, curve type/amplitude, background, degradation,
 dimensions and the seed. Small batches have one contact sheet; larger batches
 preview up to 100 samples in numbered 20-image contact sheets.
 Every image/label pair is validated before completion. A fixed seed and identical
