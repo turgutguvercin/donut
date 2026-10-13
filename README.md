@@ -240,3 +240,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
+
+### Turkish synthetic documents
+
+SynthDoG supports Turkish through `synthdog/config_tr.yaml`, using the existing
+SIL OFL Noto fonts. See [Turkish setup and generation](synthdog/README.md#turkish)
+for the reproducible Wikipedia corpus preparation, dependency installation,
+20-document generation, and UTF-8 OCR validation commands.
