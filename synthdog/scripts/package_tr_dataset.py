@@ -10,7 +10,7 @@ import zipfile
 from download_tr_dataset import checksum
 
 
-def package(root, output, max_bytes=45_000_000, base_url=""):
+def package(root, output, max_bytes=90_000_000, base_url=""):
     audit = json.loads((root / "audit.json").read_text(encoding="utf-8"))
     paddle = json.loads((root / "paddle-preprocessing-audit.json").read_text(encoding="utf-8"))
     if not audit["passed"] or not paddle["passed"] or audit["images_decoded_and_hashed"] != paddle["samples"]:
@@ -83,7 +83,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dataset", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--max-bytes", type=int, default=45_000_000)
+    parser.add_argument("--max-bytes", type=int, default=90_000_000)
     parser.add_argument("--base-url", default="")
     args = parser.parse_args()
     package(args.dataset, args.output, args.max_bytes, args.base_url)

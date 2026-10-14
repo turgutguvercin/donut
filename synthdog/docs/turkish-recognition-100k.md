@@ -145,7 +145,8 @@ measure recognition accuracy or certify the readability of every hard example.
 
 ## Downloading and packaging
 
-The distribution uses independent ZIP archives with a SHA-256 manifest. Extract
+The distribution uses independent ZIP archives (at most 90 MB each by default)
+with a SHA-256 manifest. Extract
 **all** parts into the same directory; they are not segments of a split ZIP
 stream. The standard-library downloader verifies each part and its ZIP CRCs,
 then checks the extracted image/label counts:
