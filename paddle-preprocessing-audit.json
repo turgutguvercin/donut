@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "samples": 100000,
+  "paddleocr_commit": "2172c14bf65ceacf37a839ebbe61117a6339a865",
+  "reference_sha256": {
+    "rec_img_aug.py": "62216925c7d74ec006e91d9c5c7f5993874460283ed911b97935aead19dd9082",
+    "label_ops.py": "e1ddcbb8e844d21682291ed6a37663f55159591b8871369efd923a7e1b19d622",
+    "en_PP-OCRv4_rec.yml": "aaa6d9e91f63bf80f1fbde4ab7e826c6b40a57f81d4e6a4c07b5b43208787cc6"
+  },
+  "operators": [
+    "resize_norm_img",
+    "MultiLabelEncode/CTCLabelEncode/NRTRLabelEncode"
+  ],
+  "height": 48,
+  "maximum_width": 4096,
+  "maximum_label_length_setting": 256,
+  "labels_truncated_or_characters_dropped": 0,
+  "images_horizontally_squeezed": 0,
+  "images_with_one_pixel_upstream_ceil_rounding": 0,
+  "model_training_or_accuracy_evaluated": false,
+  "scope": "Pinned upstream preprocessing/encoding operators compiled from checksum-verified source; Paddle neural-network runtime was not exercised."
+}

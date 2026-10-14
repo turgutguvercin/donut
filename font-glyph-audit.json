@@ -1,0 +1,7695 @@
+{
+  "passed": true,
+  "fonts": [
+    {
+      "family": "Times New Roman",
+      "style": "regular",
+      "font_sha256": "4e98adeff8ccc8ef4e3ece8d4547e288ff85fdc9c7ca711a4599c234874bbe86",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            10,
+            21
+          ],
+          "bitmap_sha256": "0e1d12844e81b6e51344b2694eec2b65a06a748012435c72c6b34706bc4838b2"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            21,
+            27
+          ],
+          "bitmap_sha256": "efd71f7a7a69e8873475d5687a5ee9a519071f0409a3b4f037a3d3dee7a39791"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            22,
+            26
+          ],
+          "bitmap_sha256": "78d97d273e72ec0dece58968895456906ed0e00f3954c8ec05d789433025b77f"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            23,
+            26
+          ],
+          "bitmap_sha256": "03eee0981b01c69f29e12da3d86eb2c332fde9fe87f0677c2dbd3dd7f73758d5"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            14,
+            20
+          ],
+          "bitmap_sha256": "c409a1d3d6ed9679eef74ea3a782e8a71bdf455c11aa26be2d9f944149e82fd2"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            15,
+            19
+          ],
+          "bitmap_sha256": "d48cbb4d5de0fa33503389727c72145278c8af46cebbbd052bc14c2c7c64b39b"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            16,
+            19
+          ],
+          "bitmap_sha256": "06ed7c19c2eeb14c3478a3317d90ff60ffb052250112528d1d6a8e6bf7657ddd"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            27
+          ],
+          "bitmap_sha256": "e07aa23c7beafa0f6c7a8c848a48a86256c6a3020546373997d783c5bfc11730"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            16,
+            27
+          ],
+          "bitmap_sha256": "0ee77a953af1cbd392e294e2e490c82708b0932fec3e4941d42d822935f46008"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            10,
+            26
+          ],
+          "bitmap_sha256": "706bf5ea0439ddc5289824e0807096f5f78311f07defa8767761845c6990bb2a"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            9,
+            14
+          ],
+          "bitmap_sha256": "a075481fcec92d704118b1fd9610968f877a534ee52f0c9b82ffc71c1a327332"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            17,
+            27
+          ],
+          "bitmap_sha256": "9f291f3d0f4489527f0defdca081d21456f043fcb99c0cb0741f46febf04f6ae"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            12,
+            20
+          ],
+          "bitmap_sha256": "005129555edfc93dcf9c0ff624802e2ae1fef1cfa4a867131b87fcb9a12ad078"
+        }
+      }
+    },
+    {
+      "family": "Times New Roman",
+      "style": "bold",
+      "font_sha256": "4357b63cef20c01661a53c5dae70ffd20cb4765503aaed6d38b17a57c5a90bff",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            12,
+            21
+          ],
+          "bitmap_sha256": "0d8372ae864e13d7288b019e704d966e45aafa2acec4f4ac8c106eb0f7cefd2a"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            22,
+            27
+          ],
+          "bitmap_sha256": "4199827c3f9bbfb47d3ff015c765efe0161400afcd41d98ea50c0e677edfee7d"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            28
+          ],
+          "bitmap_sha256": "256085f2b7c559c9255361dc4b60da6dfa0898719f1078433f27bc8772075cca"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            23,
+            28
+          ],
+          "bitmap_sha256": "ee5dbd86641dfd97146d6fd78c57bc6b710296671d97eda26e92f6389f40cd6e"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            14,
+            20
+          ],
+          "bitmap_sha256": "4e8543e2013aacf48c26a37b1a80a1371556ac0eba4180f2327b15c901e312ff"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            15,
+            21
+          ],
+          "bitmap_sha256": "030f57f26fe051459872ae051fd3a23426df98a5c5cca108dd4e88bec188f478"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            17,
+            21
+          ],
+          "bitmap_sha256": "4d5a3b99f97af8e9e40a6a8a61dced6205c208b100d7368de8639efea012849d"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            25,
+            27
+          ],
+          "bitmap_sha256": "6cbcd10edb43ef8691e206d869378a86c648901f123f06558e267e6e357bd2e7"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            16,
+            27
+          ],
+          "bitmap_sha256": "9504e597ae558bf3e2a834ede2edbb8869bb0d6a9f79ee7e9b18b7e8afb1aae2"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            12,
+            28
+          ],
+          "bitmap_sha256": "b9233593a359e8e01dabe61cc4ea9d6f247e13f96d9d7ade0b8410ea8fabc472"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            9,
+            14
+          ],
+          "bitmap_sha256": "164a2998771dcd9038aa69a27dfdf510f2b949a269467f789d29d91174840219"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            27
+          ],
+          "bitmap_sha256": "670aa0f4f1e03d1160746ec37310f52f9f79eec2564dc9786dc4f4cfa6a5d46b"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            12,
+            20
+          ],
+          "bitmap_sha256": "7a931405d25e3aaa2d417733b526595fc20d12c45d8b668c6a1ca120550f7e9a"
+        }
+      }
+    },
+    {
+      "family": "Times New Roman",
+      "style": "italic",
+      "font_sha256": "c25ae529b4cecdbca148b6ccb862ee0abad770af8b1fd29c8dba619d1b8da78a",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            15,
+            21
+          ],
+          "bitmap_sha256": "262f705c60d110af1a803ee3e7b4c723fd3b3bdb1dd0b0cbddd166c2903a42c8"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            23,
+            26
+          ],
+          "bitmap_sha256": "6ed0e66210bab84ec292798741a19a5b7add1d0f98fc0c5082bf19cf1be8011a"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            23,
+            27
+          ],
+          "bitmap_sha256": "67bb0c0f03b8e3e620099e2ec8b073c6baf32752e1f625d58a02bc13e8648cc9"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            27,
+            27
+          ],
+          "bitmap_sha256": "fb7077a62ef9d4c7765e5f98c8b83b7504f184852dc8ca05ff03b5b032204b81"
+        },
+        "ç": {
+          "bbox": [
+            0,
+            0,
+            14,
+            19
+          ],
+          "bitmap_sha256": "e8456aefe3ea87313eb5b1a331ede548311f353bf1ebdea6631317623d75639d"
+        },
+        "ö": {
+          "bbox": [
+            0,
+            0,
+            16,
+            19
+          ],
+          "bitmap_sha256": "49729b63a463be876133235a60474924aa04f7a46d2ebb94a0becbcb3d04cb78"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            16,
+            19
+          ],
+          "bitmap_sha256": "c3af4835ebc7ba539c7ed4dfa0dbecdbb54e085255375bb12f0bd52e6594fd28"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            24,
+            28
+          ],
+          "bitmap_sha256": "ee55284b156741671f9fcdf24252541d01826e31b25f03ee3a73b142a62c52e9"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            27
+          ],
+          "bitmap_sha256": "3197dda0099c5204b38ed330b46caabf8411a825d3104cde5957aa923e28f63d"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            15,
+            27
+          ],
+          "bitmap_sha256": "470adb144603950b5cceb030d37277afb8e6d63c7bbafaaff90d1591fa43a9d6"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            8,
+            14
+          ],
+          "bitmap_sha256": "f0122f182c7724672f2337c91a43e54d512f0f1e0d83f5bca7afb2e3accf464d"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            18,
+            26
+          ],
+          "bitmap_sha256": "f2e6ba44a4292dd9de66b5eb5a51301448f0b369c393b20b4e591f1d77e427c2"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            13,
+            19
+          ],
+          "bitmap_sha256": "0bef7d9fc3649756a3079a6a6d06364d3ebba046b5ce126f2819f644734c93a9"
+        }
+      }
+    },
+    {
+      "family": "Times New Roman",
+      "style": "bold_italic",
+      "font_sha256": "192e1b0d18e90334e999a99f8c32808d6a2e74b3698b8cd90c943c2249a46549",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            17,
+            21
+          ],
+          "bitmap_sha256": "e78ed743e0a5967de171d32b447f9ad4805f3d6cbdf4e01b8ce6d9892a452001"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            24,
+            27
+          ],
+          "bitmap_sha256": "be433a021e8e7314921ac9953427c03752e8218d8c9399843dc2d328336fbada"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            23,
+            28
+          ],
+          "bitmap_sha256": "a3593a764d76f443d90015cb39e7c4ab68c543e47b1904f8f1be4a7030f3d37d"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            26,
+            28
+          ],
+          "bitmap_sha256": "24e37ef5ecf35c50f4763c770ed7817df48ab15cfb87e3987cd184b8437909a9"
+        },
+        "ç": {
+          "bbox": [
+            0,
+            0,
+            14,
+            20
+          ],
+          "bitmap_sha256": "ec966db427bd41df15a801ab1c22ca36e0dcf224d4942ae54acf8782682143f8"
+        },
+        "ö": {
+          "bbox": [
+            0,
+            0,
+            16,
+            20
+          ],
+          "bitmap_sha256": "89a9526b3d3310e23eca491307a5f65e6dce1e90dd979749288fb38c12449b93"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            17,
+            20
+          ],
+          "bitmap_sha256": "52cfc2cdf847f82161adf663c4943efd437de94506fe777b310caa74ba6be01c"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "ae63cf905168ae110640cf09ebb19dc1edc5fa8aae4fdded8fea04ffc1d8697a"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            28
+          ],
+          "bitmap_sha256": "2cc8f6f03aa330250b369f1a754ffd5416de3e2d06a76142bf728150cc972198"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            17,
+            28
+          ],
+          "bitmap_sha256": "643e5470a4ccd96c217176b1ab806e9757952e682d6feece69cd7623473e2aff"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            9,
+            14
+          ],
+          "bitmap_sha256": "108e26c85b4cf47b7e5f8db9bd4495390b2ff6dd62888daf821bbea3209a30ea"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            20,
+            28
+          ],
+          "bitmap_sha256": "1d3e184fd86c5bcd1a6f7be09e59ee8f416e581433ee1d722cfd8117f80063aa"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            13,
+            20
+          ],
+          "bitmap_sha256": "54525ad326be4f6fd9092391e8ef999745e5e14d7809b295d3593c6945b42fb1"
+        }
+      }
+    },
+    {
+      "family": "Arial",
+      "style": "regular",
+      "font_sha256": "35c0f3559d8db569e36c31095b8a60d441643d95f59139de40e23fada819b833",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            7,
+            23
+          ],
+          "bitmap_sha256": "dcaf731c509eb861564baeff6cc865d39d1e29e70a178806c6c19fe665a67d43"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            22,
+            30
+          ],
+          "bitmap_sha256": "e0f9fb27efea632cad918ab4b2bbb57a6e0d29ab2ea0cd5b0e2e7d737893c67e"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            28
+          ],
+          "bitmap_sha256": "7d3087f7e367a76e909ebe4e668d41570f939d61be670e0fd93395456e1d3186"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            21,
+            28
+          ],
+          "bitmap_sha256": "430a61092ca32efdfb96e37e3c977fc7815dee4be856c9dd5b12dbc67f6ba8b5"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "209c09dfb2e348d7173f87a179c74a56e9d1df495d3b3d7bd7f45395054d66cd"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            22
+          ],
+          "bitmap_sha256": "2f7a6a1486233c6c2dd4af345a0ac24a9d843114f3555002b6ccd5a0677dd24e"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            16,
+            22
+          ],
+          "bitmap_sha256": "a329df7ecc34f186a6e176cac0d33b29c9fd122a280ed4cc59ff388114a0da81"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "98ae3f9466c40698b8929f87d742d0dfe5cd10fb7c630ab0b4986c100c44c14e"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            16,
+            29
+          ],
+          "bitmap_sha256": "0efe9315138596e73780d06d261100786e6021ab338b1a2cf35a61103b4d11fb"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            7,
+            28
+          ],
+          "bitmap_sha256": "5fdb5d4faae941d2bada1cdd1058aa00534dc799514c4dfb368cb34d517877a6"
+        },
+        "ı": {
+          "bbox": [
+            3,
+            0,
+            6,
+            17
+          ],
+          "bitmap_sha256": "2bf634580869c2ef27683bec7b0325444074eb57f62e580ed6797b387fbe0553"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            20,
+            30
+          ],
+          "bitmap_sha256": "89e03da562e96e72c8c2a9a160d0817dd526904fee6d939e261e936a6ff945f9"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            15,
+            24
+          ],
+          "bitmap_sha256": "b8043e8a632c9d2ad4d21d40a98a0dc039f0e80ab940401f37973264fa41ce47"
+        }
+      }
+    },
+    {
+      "family": "Arial",
+      "style": "bold",
+      "font_sha256": "4044aa6b5bebbc36980206b45b0aaaaa5681552a48bcadb41746d5d1d71fd7b4",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            7,
+            23
+          ],
+          "bitmap_sha256": "23ff3c94ecf475b00f08a386b87c2261655655c39e76ca9d9680bba28f14ce01"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "be83c0fb542fc1638d624e8640de4c858ddb9553e3da1f47c66b5432846256b4"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            28
+          ],
+          "bitmap_sha256": "1024ba8e22541a16f5639078efdfefb43c4b744628d82809870b975082b62561"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            21,
+            28
+          ],
+          "bitmap_sha256": "a041eb7d2344235ca108cc753390965afdfd081fd70ce04792c76b76aa18582c"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "19322169c91ca01c6b524249854253235542c1b77c7fff6acd0ef57c1237a06a"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            19,
+            22
+          ],
+          "bitmap_sha256": "59f78f00eb44701ee833f7e30d431d96e57b3b0fc8fe5a7c3e26dbada38955fe"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            18,
+            22
+          ],
+          "bitmap_sha256": "adedb29c68f8fb3b254a30dc8f2b7e9948a9f1a15334a0c89ea3cd60b34494ca"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "1c30e99a7e66fa0ec7f56f736424cef035272239b51d9b29e7ac4f11f0ca1eec"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            18,
+            29
+          ],
+          "bitmap_sha256": "a3e1880f674969521eae41a7f6bfad2df20be2a979268e6aa9a0d3188c90f39b"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            7,
+            29
+          ],
+          "bitmap_sha256": "e1a7b5ffe55f8aba32f1a680fe4820c4d69b2edee3e8d22e7a66fec1969912f6"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            7,
+            17
+          ],
+          "bitmap_sha256": "3e6d435fc1fc1d9f37136ef07b14b6c7fd9bb2fb16aa7716cfd475e84dcf21ae"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            20,
+            29
+          ],
+          "bitmap_sha256": "aa0ff0fa475253f1144e4dc885a157c5e385d87354b0f76a8e60b92dd7079cae"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "204ba757e84ec85bbc77ab3723aa41566d0dd7a2abbdfaf0f9d7e4992a1cb978"
+        }
+      }
+    },
+    {
+      "family": "Arial",
+      "style": "italic",
+      "font_sha256": "70ade233175a6a6675e4501461af9326e6f78b1ffdf787ca0da5ab0fc8c9cfd6",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            10,
+            23
+          ],
+          "bitmap_sha256": "76164e5dee05344e6738afb8409e047d760eee6ca65b1fb5b33e5edb170fe88e"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "05403059494b37b55aa1bb9c311e633c6e679a062ecc6f44040d66e6e6721440"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            25,
+            27
+          ],
+          "bitmap_sha256": "fb7c6160800c2f71ff38c0639fa3a5defc76ed77ca51b1f5c60bb22dbb401e98"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            25,
+            27
+          ],
+          "bitmap_sha256": "55b3de69c5e4fdf9e08e3052dbd38d737de34f1b9f56a45ae52905ddbe190181"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "4576fc185005eac9f0b8eec707db4e18c94b49364b4b01ac8d172e6a266ee020"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            22
+          ],
+          "bitmap_sha256": "20dba56c1e184b64a6b13221f9926513c852615debf4a8369e543790f2ea1809"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            18,
+            22
+          ],
+          "bitmap_sha256": "e5d90158cfd6f914de9557add38293d64e2d1ca347ffa8bc0d325015ffb11c6f"
+        },
+        "Ğ": {
+          "bbox": [
+            3,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "db7a6c78c57776813d43cdd1c43b2cb39d9414071802c8a92ddfdd32f9396177"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            30
+          ],
+          "bitmap_sha256": "8e809cf59fb0e74fc344bfeee9bd9e801ff61a1ddd8b89d7b7d3f373d31b908a"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            11,
+            27
+          ],
+          "bitmap_sha256": "f55bd65ff5fae04aeed3fe205cf5ce65c6d4ad0cae108ae1af1d3a4148685bbd"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            9,
+            17
+          ],
+          "bitmap_sha256": "adecd8f14589ee702d6ddff3db8293816e3ba586aee3a020b6f7d436d4f09d97"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "4e73a876960f56721eb69cae83317195cda75b8ea004a7df95324fd37c33b6a2"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "3bced4e0e90a2c661812b3cba30814656fa9fe10b72aeaa23ae05e551b1591ff"
+        }
+      }
+    },
+    {
+      "family": "Arial",
+      "style": "bold_italic",
+      "font_sha256": "2f371cd9d96b3ac544519d85c16dc43ceacdfcea35090ee8ddf3ec5857c50328",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            11,
+            23
+          ],
+          "bitmap_sha256": "f31f2a4885fb758702e70c5b6b263c9ca2f235ba54cbdadb78ed5e4b503919bf"
+        },
+        "Ç": {
+          "bbox": [
+            3,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "a6d9e668ea5a27f4742d5a57ffdae53b873f198825bf91cd4294e4540a36516a"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            26,
+            29
+          ],
+          "bitmap_sha256": "5dd4d73d6d06997b9fa1fb88e250b9a5bff9dd67f97df1a07daa095e555c23d2"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "56a0f91b33ecee0a33b33b5cd5b614cc6294a21a2e3db37dbfb027cab44d4ee3"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            19,
+            23
+          ],
+          "bitmap_sha256": "dbc33f5a9bd86830541b62221a8378735760d42b7e83f90f71237cb269ce8f69"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            20,
+            23
+          ],
+          "bitmap_sha256": "76b8ca0510fd3ed15054c5f6bbb4284162297d68c0fbef668393088ff9648111"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            20,
+            23
+          ],
+          "bitmap_sha256": "99acba0353d0f07d9017af1e759edc37585f26a21e6d9ceeab9bc6515af7e93e"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            26,
+            29
+          ],
+          "bitmap_sha256": "761af677726a1e84dcdf4112f62aa0566b3edaf1870ec1ad1fd7c36dfc5c9a07"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            29
+          ],
+          "bitmap_sha256": "a0dac6fe64e18fdf9614c79671f1646d72edb0ea58a567845cc1ebdc3b39d7c5"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            12,
+            29
+          ],
+          "bitmap_sha256": "c7fefd7ae08f5c21c38ee8a7b6de8bb2d83cd0fc7bff99b80b366af42f460f41"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            10,
+            17
+          ],
+          "bitmap_sha256": "b78c9f97a2c066a5f9898199ec1318df268cef4883d0a79dc9679fc1102ca6a6"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "02de1e88b5ed2ee2581073cfc3c3aefaf4550ea3686f703eff61b4bfd161ae59"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "7f15bfc9cdf2fdacd2b94b05da4a233eaa2a81829f70e37221ed7e28a0ba9287"
+        }
+      }
+    },
+    {
+      "family": "Georgia",
+      "style": "regular",
+      "font_sha256": "7d0bb20c632bb59e81a0885f573bd2173f71f73204de9058feb68ce032227072",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            12,
+            22
+          ],
+          "bitmap_sha256": "739ee8c93e1cd8e4dc70a6166decfe211663363c598168c47db20cc97a60e7c4"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            21,
+            29
+          ],
+          "bitmap_sha256": "387ddbad04407647a1153474c735e5204d2040ed3a0ff73d4cae5a0f8503c0b0"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "f1da2dc55441981c13db65b030bcea108918603370fafea10ce47de286cc4ebe"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "5f53c9bd5b025f0aac3f5210543e886081bf0aa67063933237d89f8a92b01b36"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            15,
+            23
+          ],
+          "bitmap_sha256": "153f58456866c8d8cc977e75cff74cc024cbc956ea2c25bf7143f230fb055f5d"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "26fc37a7606dc01ac1691e8369a40713124a9130ca65d278665ba538c621226d"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "1dc80339c52f30a4d23db36286c2c9e186ce680f34a6a9c6285fa4866d625e65"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "f5ca048189182994d7c0ca8eecd6d41a53ac0c0e8a31e9e1bceade4ee3a3b720"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            16,
+            31
+          ],
+          "bitmap_sha256": "3d0e0ec937af21bd338d24bd9acc8a27b997b23b7e164e6966fab9e74a31e479"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            12,
+            28
+          ],
+          "bitmap_sha256": "78246b5b88535051fb7874c4952ed6f4f00c9a7ebc107f65baf3f628be378aec"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            9,
+            16
+          ],
+          "bitmap_sha256": "1b65e2fdc64aecafd5a05a8f26683c3c89369100db2febc4fdccd811b34d718d"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            29
+          ],
+          "bitmap_sha256": "a6293d130547eeaa571443af97e4d7895c82940ada4c343ec944c9349c6f758b"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            13,
+            23
+          ],
+          "bitmap_sha256": "3b28ae411e202613b54241134a2260e3928022ed7b6d3700d99ce8d4ebe9e601"
+        }
+      }
+    },
+    {
+      "family": "Georgia",
+      "style": "bold",
+      "font_sha256": "82d2fbadb88a8632d7f2e8ad50420c9fd2e7d3cbc0e90b04890213a711b34b93",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            14,
+            22
+          ],
+          "bitmap_sha256": "682078ac636e80bc147e48e3b94eaac6941bb65f7da4b77696944e9ceca1657e"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "8e4040de43fdc020931751acd73e3a0624326aefb97e64e60c1778cda29da586"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            26,
+            29
+          ],
+          "bitmap_sha256": "13d6c1f12036f2a77ddda972af5fd0175409538001d73d367e01ba467982da66"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            27,
+            29
+          ],
+          "bitmap_sha256": "c1225285130ddf2f71577c904b0a19e1962acc27e6948299218bc4b98cc7b1d1"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "41bccef98b4c9ac45752df12ee5a04b4da7d31e1d109053a29af67563e65bafe"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            20,
+            23
+          ],
+          "bitmap_sha256": "86118da3ca9077579ce3397b32ac455ed3944d102924982011f7eb38ce468cb2"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            22,
+            23
+          ],
+          "bitmap_sha256": "a1d385ad4293ba040d8bf04954f096c0f30eb0319b7f1d1a29160bb701b6ef79"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            26,
+            29
+          ],
+          "bitmap_sha256": "b4d65a4dac3b5692ef582a1cca2d3f6c60657ce52c99fd5be68212de785afe6c"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            31
+          ],
+          "bitmap_sha256": "167aa0e38df60026a72b6cdf7611b91a19e94ff2c89b1a1838eef3026dfb1418"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            14,
+            29
+          ],
+          "bitmap_sha256": "e6977f59e9470b3dd3b5a4a4437b934c3ac125b8edab8d4303949ef876aa9bd0"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            11,
+            16
+          ],
+          "bitmap_sha256": "6d25a92e39a25e691297b7bb64f9e215c8904b9ebb0a34c628c4178ac36adb00"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            20,
+            29
+          ],
+          "bitmap_sha256": "ae4c4a25f61c7a1afde8c8f6e5902cf564184af82233d720b44e3df2c24182bd"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            16,
+            23
+          ],
+          "bitmap_sha256": "958fee0bbca2cb57d6addbdb8587e06ca92aac37cc58ae0ece5a630dd14cc79e"
+        }
+      }
+    },
+    {
+      "family": "Georgia",
+      "style": "italic",
+      "font_sha256": "1523f19bda6acca42c47c50da719a12dd34f85cc2606e6a5af15a7728b377b60",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            16,
+            22
+          ],
+          "bitmap_sha256": "bac6eb3f2955b86587c2f6bd93de3743757520332d3ff2cd3c179e7a9c1599da"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "2e900c8fb626572fa2466f5cdab63ee590c0a017da4d83f89620c24b1f7658d7"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "feed01a8ee17dd67a3c564b672405904c33a00ccf0b6f2799f7e133c59da3fb4"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            28,
+            29
+          ],
+          "bitmap_sha256": "fab5c2d66f5d9caba7dcf292e1a60eebbe900849c40b05bdf55a14c0fb27dad9"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            15,
+            23
+          ],
+          "bitmap_sha256": "d47cf79737db33d23351752ea694404370e00b1eab5f3f46be39408982d48426"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "c80c83388a035cbc644910eee8e214b34891cdbbf1e4fac6e14f14d0a615d272"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "d1be38a5bf928537f98d7f7635d354785ac589f9488e8e4dc8fa38cbfb80d137"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "89f2d196e4df459fa3b67a734506cb0e16dcd0afdc613a4e864f028b22fff965"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            17,
+            31
+          ],
+          "bitmap_sha256": "b2b790e54f6c2c704e0a08dca6858341cc5eee8a78017955a9931458cc0d5381"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            16,
+            28
+          ],
+          "bitmap_sha256": "55deb506a0119fe1eb4e613803e5d303cda8d2cfd284a5faeaf22c3b32ae1628"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            9,
+            16
+          ],
+          "bitmap_sha256": "78b13ba440ffa810dc77d6185fe1bdd09c1be9dc9b878ea6d7589d67921e724c"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            20,
+            29
+          ],
+          "bitmap_sha256": "69c93d8c677f83eba252692c0e9432dd8cdb15910ac66fe22e6c809fce829059"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            14,
+            23
+          ],
+          "bitmap_sha256": "fef4122abdb68347e39be81ce57f5bb870daef8b37b77d1aaee3f8303f053158"
+        }
+      }
+    },
+    {
+      "family": "Georgia",
+      "style": "bold_italic",
+      "font_sha256": "c983e037d8e4e694dd0fb0ba2e625bca317d67a41da2dc81e46a374e53d0ec8a",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            18,
+            22
+          ],
+          "bitmap_sha256": "5631a3b3465446d91fc029e97b90b214ec48d3f70851a173e5cf4b030c3e4a4d"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "9408f2f96770f47b8760a8ebfc1ca8f0c65acd5f73d36c07b69db848c99aa302"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            26,
+            29
+          ],
+          "bitmap_sha256": "cceb1bbac5a0d9ae3b0ef14bfac4506b22e538c64c4764dc45ef79c4c33783e8"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            30,
+            29
+          ],
+          "bitmap_sha256": "44ca27e0389480e289805acf81e8925088a7e9ad705ad9746e21a1060dd40b5c"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "3b4036a86bd1d9b6b48aaf0eb01a23f0a32107831872b03425d32c0cc1388925"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            20,
+            23
+          ],
+          "bitmap_sha256": "de1ce138fe6338296f006f9b39dd3a6db805b45fa2b4446cbb705495cb2aa068"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            22,
+            23
+          ],
+          "bitmap_sha256": "40f8aae9acd9f052f713dd1ca6eb8d8bc9818c9ae5f8753b0dbcd50cb398e2c6"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            27,
+            29
+          ],
+          "bitmap_sha256": "b27a6082a44f53db3d85351f9eecc0bbdfbd55ec89f4f1774995b32aa24da5c4"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            20,
+            31
+          ],
+          "bitmap_sha256": "2c101481915541e15aafb59ce0e49f45b0237c1258036310b169d9f8d8eae54e"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            29
+          ],
+          "bitmap_sha256": "9bda01cacaa29859d278075cf04e1279c1959468abb1e6dc5f463b1512526ccc"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            12,
+            16
+          ],
+          "bitmap_sha256": "dc9bfec1c39df86b1aab076e5405e35546a80520f1d2d21bc78adcb6aefdfb52"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "737a331fb73c85d7a2c96e412947f37d08f3b5ae0f9c8e8442419744015986a6"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            16,
+            23
+          ],
+          "bitmap_sha256": "cdfee179a09d5e0b5330de37aa9325299004e16ef0d7cdf3bfdc0621dab17c39"
+        }
+      }
+    },
+    {
+      "family": "Verdana",
+      "style": "regular",
+      "font_sha256": "96ed14949ca4b7392cff235b9c41d55c125382abbe0c0d3c2b9dd66897cae0cb",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            12,
+            24
+          ],
+          "bitmap_sha256": "e6bc7e153ff5f63de5917c0e1ed4c6ccb8af87eb84cc7f7b11e55c52937f6f08"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            22,
+            30
+          ],
+          "bitmap_sha256": "9bfdb29129ff412046a4b2d0fb546c4d74716afff6ab41c3213dc3f49de52b00"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "dfe522b688d4ebdc5d8e13286eee2b02ef705db76bfd320c856ba96751214fe7"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            21,
+            29
+          ],
+          "bitmap_sha256": "d850768382d44a124d75e4a675a48dd319276dce9ec298460a04a5114ddc3691"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "ab9e15cbd987b8391e32354976abbfc648fa883ff328991e1179ca962d5e0301"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "c3ccb19fff83cc6fe9d3d131e77f653496fde3b14b41eeb0b4afbf659a630a66"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "04b1aa7856d22831800a7c7f318408076184eda4f188cab94249f772644cadc7"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            32
+          ],
+          "bitmap_sha256": "6df6727ca0b1ff62f52b4cace87b037e317ee3ae0607058356a50a1f3a32fbd7"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            18,
+            32
+          ],
+          "bitmap_sha256": "046ed04face9d48023993e60b47a221cd5307356fefbd67be81be496aa38f7f7"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            12,
+            29
+          ],
+          "bitmap_sha256": "65c7fb72e5ffc86b393a35dad6915ea22dd6b3e30a37dac0b3edde62138aa54c"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            6,
+            18
+          ],
+          "bitmap_sha256": "c08e0810ce19f6e066ed710ce2c9e18c9e453cbc55426432aa11347230b2a376"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            21,
+            30
+          ],
+          "bitmap_sha256": "ca3737f44ce253c379e91ebbebbc55259719d21efa16ae06a869ee8867e88566"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "ea94d7be1d22ce942ab155e0b31204fe7cc5282ac3053772f5cd1f24b5d7888d"
+        }
+      }
+    },
+    {
+      "family": "Verdana",
+      "style": "bold",
+      "font_sha256": "c8f5065ba91680f596af3b0378e2c3e713b95a523be3d56ae185ca2b8f5f0b23",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "5a9c21ccd100ef7522732bf4e434ea53dcadcb3a4e5748e7105e3a0ec0ce2d84"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            22,
+            30
+          ],
+          "bitmap_sha256": "e0c8eddb3e37388514ba352887c9f899397b35a1cc20814a1773868b61e1a959"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            26,
+            30
+          ],
+          "bitmap_sha256": "2362736f19cb10a933df3f271a0f4f5ade9c56331009f37f84b1a2f0966f92cf"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "8958477e5b35de2a21ab8122164c16b18dc1e882b72d826edca6efc7a08ad58f"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "40d1135aec7ae86c1bcdc47d169099ff2f8783d487769db23264027dc8dcc6ef"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            21,
+            24
+          ],
+          "bitmap_sha256": "7351965e99392e71b12fec267ae31448b006c3f61f2fdf16d400379c922c6c13"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            21,
+            24
+          ],
+          "bitmap_sha256": "c7eb931b7e4a84b136b489e71f3de23cc76ba1d4441dac1bb08dabf549e02003"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            24,
+            32
+          ],
+          "bitmap_sha256": "a0b1b9d23691c80c6217daf342bddb9dc7ac3c3ff475dd71966ae4431d28be75"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            32
+          ],
+          "bitmap_sha256": "d4a878d3d3d6152da213260db762d2a7a740a9e23592a087c8bf1341f1dd60a7"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            16,
+            30
+          ],
+          "bitmap_sha256": "25aecdf3743282054c96b83c1803fd9f27637f3f83279d86fe0e9304396fb556"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            9,
+            18
+          ],
+          "bitmap_sha256": "ae42935fd8080f040100bc1b7fec5221b55ff3fb3aede2157401710268ebe4b3"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            22,
+            30
+          ],
+          "bitmap_sha256": "ff5106b89e61bb29fe4e6544ad90f4da2837d13a4732a4a806052dac5f60c63d"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "8e298fb629d904d789efafb7c02d1985d46db8df120cb92dc4e7e2b8bb699a2f"
+        }
+      }
+    },
+    {
+      "family": "Verdana",
+      "style": "italic",
+      "font_sha256": "91b59186656f52972531a11433c866fd56e62ec4e61e2621a2dba70c8f19a828",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            15,
+            24
+          ],
+          "bitmap_sha256": "ac6808c285fc3704c6a83a715584d200efc90d5e14e2f55badce8e9f2cbd69b4"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "a2e2c1fa1b12d7d8552b8eca4eb7d0bdcf0e4363e29c85b7265fa35192dac91a"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "f9d96620ad9c0cbfe6eae1e0d9165d86b0e7123bf74ecf5162d7735dca7b2aa1"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "cbd30ef6c9db6c68e0fdd50c82f534985871681e6ca6b3f7bfd2401e73c6ff74"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "bc88f33941539fb386a0497557f574132fb205c39471c4e8b6ea5de5588b3597"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            19,
+            23
+          ],
+          "bitmap_sha256": "89290da73046acfbaee1109263916032ad45c5cf0a7467247d5577a633fac5f5"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            20,
+            23
+          ],
+          "bitmap_sha256": "9f9ec7f4e6b90ef02a1140fa76a0a9dfefbb62c20028ae796333fdbaf5268ff8"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            25,
+            32
+          ],
+          "bitmap_sha256": "d79b6093ea43b20f1cd54fcae662bf0e9ae5b6d31b8cb8897b8b1874464c8a9e"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            32
+          ],
+          "bitmap_sha256": "0fbcc816622ff27e00a8e83df747a856760cf8201514cae44f63eb6dc366c368"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            15,
+            29
+          ],
+          "bitmap_sha256": "6990eef767ae6a85cda6c242c9cbb16315acc8dbe699a257b8566f849eedb636"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            8,
+            18
+          ],
+          "bitmap_sha256": "da3d328883a65775aae30fdf576bfd0aabed72e7d30bb1979df406338cdf8b04"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            22,
+            30
+          ],
+          "bitmap_sha256": "8bd855b09bfc35f7fa23194a6c0027e8d300c3b9d59ca9c5559c12657ec5c183"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "4013e5afb1760a621b8743ced0422f42d42ed4db84c5f846a4c6bf83fac57b82"
+        }
+      }
+    },
+    {
+      "family": "Verdana",
+      "style": "bold_italic",
+      "font_sha256": "698e220f48f4a40e77af7eb34958c8fd02f1e18c3ba3f365d93bfa2ed4474c80",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            20,
+            24
+          ],
+          "bitmap_sha256": "00b508267a4f24de6b352feb89186d77f32ac608229a8a672fd181c6214764d1"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            25,
+            30
+          ],
+          "bitmap_sha256": "343745b87f31e0399eb659d3bddfa3ca47c9ac441bd809609d95936006d47bd2"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            27,
+            30
+          ],
+          "bitmap_sha256": "a91b3c420e3765469b6931cc557a193cba8cc438eefea5b5b89885821cd5df80"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            27,
+            30
+          ],
+          "bitmap_sha256": "4b2aa5ccffec68f772c245cb69c38eeb2d4a414b158886a42533e88f8cb608c1"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            20,
+            24
+          ],
+          "bitmap_sha256": "1a2f80083af2a83ac23cf4376df5e93d7a0414a7bbde3460559d5bcb1c5f4eac"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            21,
+            24
+          ],
+          "bitmap_sha256": "2bb16e93e18d3b0b43709d60c74d63947c86c7afd9faa6765cd8bb1d155d75b3"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            23,
+            24
+          ],
+          "bitmap_sha256": "dcfd3931dd978b816c411d0d6445d59353f99b73c5923949d87cd8d4ddac7b29"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            27,
+            32
+          ],
+          "bitmap_sha256": "b5ef8e0640a0aadafec05de540b986d4f5a99b3e297220bd09b6ec7469ab03b0"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            32
+          ],
+          "bitmap_sha256": "1060a7b4c436caad5595f536837342fe5b76dd176b8329fbc4dac220bcea0136"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            20,
+            30
+          ],
+          "bitmap_sha256": "ec7657c3745d02f985121ab4c29473024bb9299c63b01bbffb4e3f1e9a8afe6e"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            11,
+            18
+          ],
+          "bitmap_sha256": "76380883f7bc85f153aa64337454bd6acfae301f8f37368a330b2145981d08da"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "f0437d7ea68202c678a39770d457b9c36d7444d05ff39fdda3f9cc76cb6f8aa4"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            20,
+            24
+          ],
+          "bitmap_sha256": "f467967661a6a3c8a7aea75b1df2a79208ae7f35b82d8add9cc6169c173fa1ba"
+        }
+      }
+    },
+    {
+      "family": "Courier New",
+      "style": "regular",
+      "font_sha256": "6715838c52f813f3821549d3f645db9a768bd6f3a43d8f85a89cb6875a546c61",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            3,
+            0,
+            16,
+            19
+          ],
+          "bitmap_sha256": "b385a2794e0bee347896ece802b86f178d546be9e35873c653a9f0dc9dcf1b91"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "22943228603db2d5641bdba27e96c174e8cfecedd68aae03f6330d96515fc77a"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "1e2836450c8c879e634b06b1889eeaf23e6801efdd81f6d90de2e27f51e9574d"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "0a7fca3e6e1e6e0b7285338ee79999b99fb5734008d7fc5e41d5d465ed8470e9"
+        },
+        "ç": {
+          "bbox": [
+            2,
+            0,
+            18,
+            19
+          ],
+          "bitmap_sha256": "74ccf3c9efe7e6158316fbc26a2a731dc933a8b0b249373169eee0d9559ac82d"
+        },
+        "ö": {
+          "bbox": [
+            2,
+            0,
+            17,
+            19
+          ],
+          "bitmap_sha256": "3b5132249b284e6fb2938436d7f38f16b103d1022cc815d4fdd26208ed68d992"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            18,
+            19
+          ],
+          "bitmap_sha256": "0317f42a5a5b132cd8877e8b570ac8f09d6c3a059340cd8735520d1e9c795eeb"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            19,
+            25
+          ],
+          "bitmap_sha256": "f9bff4fd81557057aae71382fbee445b4d0ac42a37e3547e6db03c7e491d023c"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            18,
+            26
+          ],
+          "bitmap_sha256": "3f5d565587c618d9bf32a05b036b2d021c4ce421d9cf8a55cfb6b4080163ed7c"
+        },
+        "İ": {
+          "bbox": [
+            3,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "34ee396ab259f28716910db893a734f6509ffa7757addda1a8e6bf9c109ca2bb"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            17,
+            14
+          ],
+          "bitmap_sha256": "89aee10521eaa53aa33c6abd487fcdaf8a1d380631bd14b22f10fa37729ebe1b"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "0eddf592a5628dec2b252b37a5f392165ea8a9d475e881cd3731f43253721903"
+        },
+        "ş": {
+          "bbox": [
+            3,
+            0,
+            16,
+            19
+          ],
+          "bitmap_sha256": "7f6ecd0654085f4ac1bf36b2aef32e08375b63fe2e0ce5bc07e01edf7f2e70f5"
+        }
+      }
+    },
+    {
+      "family": "Courier New",
+      "style": "bold",
+      "font_sha256": "edf8a7c5bfcac2e1fe507faab417137cbddc9071637ef4648238d0768c921e02",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            17,
+            19
+          ],
+          "bitmap_sha256": "c89763bdc4b669927b9b074d6af54bce823ba8f17533557db64bf426f4e4f115"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            19,
+            25
+          ],
+          "bitmap_sha256": "24646e91c25ac96a0af1fa3720e730b9fb8c44090d308ed1c2b095dedf744a5b"
+        },
+        "Ö": {
+          "bbox": [
+            0,
+            0,
+            19,
+            24
+          ],
+          "bitmap_sha256": "fe8e231ea0f3fa4748cf86ad4c5a5630513fc7e51ff51d4e86a7d3120276c618"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            19,
+            24
+          ],
+          "bitmap_sha256": "bcb0353fb690d470b7dc654121636bfd3f3f1a07279e5339cd177856a52187e9"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            19,
+            20
+          ],
+          "bitmap_sha256": "3a204f7b453f04b45c252f80e4136678881ceb6076927212e8aeb0ed25455772"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            19
+          ],
+          "bitmap_sha256": "954e3b05d81d4852ff2aebd28602224eff2e39b384f9c975019840e22587fb27"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            19,
+            19
+          ],
+          "bitmap_sha256": "020f982f4063f409f705cd6096b93eff69b03039d86572f2cae13aebeb407334"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            26
+          ],
+          "bitmap_sha256": "936f1a01d4a7414ea7012561f8506044e6b7aed424b59442e24b125fc1f0c2ab"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            27
+          ],
+          "bitmap_sha256": "96f315338dca900287b60b8152510f312dc2186f8b00f0f11dd29477d75a22f4"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            17,
+            25
+          ],
+          "bitmap_sha256": "f1e1af7f9e84d99475b8a722fbe99fd7d1ee8ffc96fd4886c78f7185868bbfc6"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            18,
+            14
+          ],
+          "bitmap_sha256": "fbb373b698e23967a7aecdfefc0bbb6f142d73431bf6bf919d3df0ca0f12fb1c"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            18,
+            25
+          ],
+          "bitmap_sha256": "5bae4a069bfe703f7dd159aa8a0bf6fe1cf15cfd0973eac7e53a8bd1aed57bb3"
+        },
+        "ş": {
+          "bbox": [
+            2,
+            0,
+            17,
+            20
+          ],
+          "bitmap_sha256": "a45ff03b3041c8bbede5aafad796cbd9e56c3b87c2a99715b02ca9ac14287ff0"
+        }
+      }
+    },
+    {
+      "family": "Courier New",
+      "style": "italic",
+      "font_sha256": "f3f6b09855b6700977e214aab5eb9e5be6813976a24f894bd7766e92c732fbe1",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            3,
+            0,
+            20,
+            19
+          ],
+          "bitmap_sha256": "3595ef7294783581cc320799d916a1d2be7796a3564b1ef3e5f7e78a2a5a1e9d"
+        },
+        "Ç": {
+          "bbox": [
+            3,
+            0,
+            21,
+            24
+          ],
+          "bitmap_sha256": "df2950cef991ac8ef0f077d2a4506e9d5c57a83cdc88425839b149ac8c0a6c8d"
+        },
+        "Ö": {
+          "bbox": [
+            3,
+            0,
+            20,
+            23
+          ],
+          "bitmap_sha256": "c227f31dd3dcb49892064a6267d88cd0053372c05b6f4e46eda11ebded73868c"
+        },
+        "Ü": {
+          "bbox": [
+            4,
+            0,
+            22,
+            23
+          ],
+          "bitmap_sha256": "573fb280da9082cfaa83e59402cccecea82951ce5ce75b6b336bd240978efaec"
+        },
+        "ç": {
+          "bbox": [
+            3,
+            0,
+            20,
+            19
+          ],
+          "bitmap_sha256": "eb981053a3bfc3d99882d6ee1a5dccb15b7f9e5f20ff91faaa3fbc6b7fd14896"
+        },
+        "ö": {
+          "bbox": [
+            3,
+            0,
+            19,
+            18
+          ],
+          "bitmap_sha256": "7d54ecbde004163da484eba40dc709eca27f7022bcbd70c5631b1a8686f52302"
+        },
+        "ü": {
+          "bbox": [
+            4,
+            0,
+            19,
+            18
+          ],
+          "bitmap_sha256": "3073b1dfaf2580f27c8fab225c3d23be489c23a69e002a548398eb25bb259b99"
+        },
+        "Ğ": {
+          "bbox": [
+            3,
+            0,
+            21,
+            25
+          ],
+          "bitmap_sha256": "cf26a7cf1f6e50635b00619021a7d864eef7001d9f88b0cef7f99e3dc058febc"
+        },
+        "ğ": {
+          "bbox": [
+            3,
+            0,
+            21,
+            26
+          ],
+          "bitmap_sha256": "aa4bea26b0d273ffd1e233fac093baa28dc41b3b5acfdd56754ac1be5fb61bf5"
+        },
+        "İ": {
+          "bbox": [
+            3,
+            0,
+            20,
+            24
+          ],
+          "bitmap_sha256": "33f9978f6d3b021324938b9cea56e88d7704bbbbb8d69ad4abca368e2fc83e7c"
+        },
+        "ı": {
+          "bbox": [
+            3,
+            0,
+            17,
+            14
+          ],
+          "bitmap_sha256": "cb419fbecc1e85695e267652e39a93495cae19ce32105e112dafce1e5c4060f7"
+        },
+        "Ş": {
+          "bbox": [
+            3,
+            0,
+            20,
+            24
+          ],
+          "bitmap_sha256": "e2dc953887fa9f47a0f9e3b861f868105c3c975507455e3730b5102ba32a64ba"
+        },
+        "ş": {
+          "bbox": [
+            3,
+            0,
+            18,
+            19
+          ],
+          "bitmap_sha256": "29a2889165c264d1a52e9274087d9140c3f32fadbe61b0a05096f024a5e5e51b"
+        }
+      }
+    },
+    {
+      "family": "Courier New",
+      "style": "bold_italic",
+      "font_sha256": "66dbfa20b534fba0e203da140fec7276a45a1069e424b1b9c35547538128bbe8",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            21,
+            19
+          ],
+          "bitmap_sha256": "b6efb5dd6bc9415860aab7d35ac7fa161c37864b3422f25c96563e4f2d44f7f7"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            22,
+            25
+          ],
+          "bitmap_sha256": "2c00f88ebb119c009d7a8c0b6a05cf7316901dd05eac19d9dc16c1f902053e19"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            21,
+            24
+          ],
+          "bitmap_sha256": "77a6bb60a0243045817f8d952b109b27fbb2d87ed06cc6fbfe136d2d3c83cc20"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            23,
+            24
+          ],
+          "bitmap_sha256": "e10e2d6b3165142965e6ea625a6d87bed882f4572c036969224b26db33de806e"
+        },
+        "ç": {
+          "bbox": [
+            3,
+            0,
+            21,
+            20
+          ],
+          "bitmap_sha256": "ae949ab0bc5225e523935f4372e4382279436bfb273ce865f0efd45f4fc954b3"
+        },
+        "ö": {
+          "bbox": [
+            2,
+            0,
+            20,
+            19
+          ],
+          "bitmap_sha256": "802449da75c88e509d49de1d515113fc20b407479137f806a9ff8d487850419e"
+        },
+        "ü": {
+          "bbox": [
+            3,
+            0,
+            20,
+            19
+          ],
+          "bitmap_sha256": "e1f6458708df6a378e57c02bacfd18edd086cd72f60e1be0256551a7ff7edb38"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            22,
+            26
+          ],
+          "bitmap_sha256": "3b977f7a1d9918f1cd2caa02ae6bc627764b1b03eb6dfe30d5741092812b4cb0"
+        },
+        "ğ": {
+          "bbox": [
+            2,
+            0,
+            22,
+            27
+          ],
+          "bitmap_sha256": "dd0dccf3e4f7be822873f1904317e20c744a712f1fee63ebed7c8cdb83aa11ee"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            21,
+            24
+          ],
+          "bitmap_sha256": "236bbc43033144a894a0ddde843a0ce1b5dc460bc39bec9b216d29c865c10220"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            18,
+            14
+          ],
+          "bitmap_sha256": "c9022cd80a4e447f7bef193ec3db033fceb32f457e26e248965f77418b3f7c40"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            21,
+            25
+          ],
+          "bitmap_sha256": "323c9f726ee055ac509b5c463865a301f551a9baec6ad08b04620948b0cebd35"
+        },
+        "ş": {
+          "bbox": [
+            2,
+            0,
+            19,
+            20
+          ],
+          "bitmap_sha256": "73ae08c2516a5cac52652bf8019910e54d492fc00693a6cfb67fd90ae5f7e087"
+        }
+      }
+    },
+    {
+      "family": "Trebuchet MS",
+      "style": "regular",
+      "font_sha256": "ec3ffb302488251e1b67fb09dd578b364c5339e27c1cfb26eb627666236453d0",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            7,
+            23
+          ],
+          "bitmap_sha256": "968a9446f1fd37cabd3f1119c4ff1853993f325459dea1063d9773432f0585bf"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            18,
+            31
+          ],
+          "bitmap_sha256": "45cb8a8633cc5868b25c6b8a14f8a45cc100db1785e1ad60cbf44c7cf8001f1b"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            21,
+            29
+          ],
+          "bitmap_sha256": "16b6d084a4aba7f9a0700fbd664e6ad614d0772009a03117346b5247415fc294"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            19,
+            29
+          ],
+          "bitmap_sha256": "dcb0f4af112f6a5385756f3792ff29df02099d5653bd7ebed98229f79f6a27a0"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            15,
+            25
+          ],
+          "bitmap_sha256": "00925b00f69a19d87ef6eea2823c4f4dd08ada40bc598f768cab8c86e200c1f4"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "25db1634f88bd9cbd6542c5a929c1bcd38b6372bdfb4b713d5110356dea629ac"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "b8844d556fc9c56db7081dca42a9bb5bb3eb578f38801fa80a34deb8830ef871"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            30
+          ],
+          "bitmap_sha256": "bcb5e087d708c39edced9f1503dcd4640df2dc1f6ce2e3bed8e8247a4434dd1b"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            16,
+            32
+          ],
+          "bitmap_sha256": "bb764f77fdb8fa72155c655a096ec592e10e78fdabaa4b975dd07c13f5e1e429"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            7,
+            29
+          ],
+          "bitmap_sha256": "9caa5b7a0e80b7537c99f91064a041393c847ee0ea9bbec6316d785601e30b45"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            7,
+            17
+          ],
+          "bitmap_sha256": "7526c000433a17bf6397d9b4ff254f584d15138e44ad9e6e8b657b14e6e63794"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            15,
+            31
+          ],
+          "bitmap_sha256": "d6369d1d945707c98b05960e927662037b8fe972e985f513e7fa820f771bb469"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            12,
+            25
+          ],
+          "bitmap_sha256": "94fd893a51f3a7f940799840a0c6d54284e20c82c7ab3f263015cc5f6e954b0b"
+        }
+      }
+    },
+    {
+      "family": "Trebuchet MS",
+      "style": "bold",
+      "font_sha256": "f65941f9487c0a0a3b7445996ecbbd24466d7ae76ea2a597ced55f438fa63838",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            7,
+            23
+          ],
+          "bitmap_sha256": "017242291423185974c913b3a2b4ec58de3150c9e549c98a92cf2df217d43eae"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            19,
+            29
+          ],
+          "bitmap_sha256": "5faa7232d33a4539f694fee902012958bf69fc9690befcb13d4f1cb6f8372dc1"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "88b69934e3a4460ad9a544e5b05c0a4219433c52201724fe100457fd804f7d9c"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            20,
+            29
+          ],
+          "bitmap_sha256": "57cff9832a36999c65ad957c99227acbddcb6b53945e3197c7a91da8d0fa4caf"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            23
+          ],
+          "bitmap_sha256": "d25456d903c79ffc834fbe609277c5c27a1e39ea09475ccfadef31ea0826cb88"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "836947d66ec6f4834409dbbc671f0147ec1e269cdb3e1a4f8efbb06381f5c9ea"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "4c10699efbc6865858f22ee6ffc429ae8570c93f4a3cfcd23fd86c329889bdb5"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            21,
+            30
+          ],
+          "bitmap_sha256": "db2b793e2126f337ae77c7bb5bb130dba90745880ea871931a5d89e6d6913b95"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            16,
+            31
+          ],
+          "bitmap_sha256": "1b196408bda90659ae7071dda362018a7f2199e738a5763cd2f532186fa4f659"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            7,
+            30
+          ],
+          "bitmap_sha256": "03641d376b51f906a5a790f83d2bcd02cfa7dd93388d5e140e5740816f5a88f8"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            8,
+            17
+          ],
+          "bitmap_sha256": "6e3287360bcd040e67aff893731190c695abad6aa80640fd947a4b0576f4f6d5"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            16,
+            29
+          ],
+          "bitmap_sha256": "d69022fba8cafbe76d34cb5aebd54a087836fd320666ff8c575098813e1516b6"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            13,
+            23
+          ],
+          "bitmap_sha256": "70399be63dbec8b7f72be56ecc3721c1c7c74a91c49e52358f3c714fc53e488f"
+        }
+      }
+    },
+    {
+      "family": "Trebuchet MS",
+      "style": "italic",
+      "font_sha256": "db56fdac7d3ba20b7aededcb6ee86c46687489d17b759e1708ea4e2d21e38410",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            9,
+            23
+          ],
+          "bitmap_sha256": "6f321f76407c2bb05b18eefba9e8d162b0165723c54f8a95e747452f6ad5babf"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            19,
+            31
+          ],
+          "bitmap_sha256": "fc2754e1006de88c45e350422e260be5f83b162b527d993b496fe248f8957610"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "6433b15272d236271b96eaf5aeca76e65d1921ecb74c0fa9744376174ca1011d"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "91310361923dad23bd970bcdbccdcd3753b2ffe06f4809c443e18e75f2f73490"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            15,
+            25
+          ],
+          "bitmap_sha256": "41e60f99ad89cf0ca6f64a757994a901756070d1b6df369629d5c9835b583e7c"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "6c2946bf9ec06ed015eb918607dde763edd63c3c472a5fcf1478a4bf629853d2"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "df0216f317b19d1122da7f3411d511b785dd411951285407441bb07d0493d776"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            21,
+            30
+          ],
+          "bitmap_sha256": "5635111b156c68b9cfa3b1b580fe316dead5cd994333954459c01c1882682e36"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            31
+          ],
+          "bitmap_sha256": "cfabcc027c8d919a3009d9e453028e57442122ad7306953020e089efed445045"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            9,
+            28
+          ],
+          "bitmap_sha256": "44628e1a612d67b3137976f3bcf8426c5de4ed286185f149063327cd99f44246"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            9,
+            17
+          ],
+          "bitmap_sha256": "6cad3a0dc3427ba22176809ed23195cba17d646fe940d2e42dc5bfaff993c485"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            15,
+            31
+          ],
+          "bitmap_sha256": "9938f2ea74b24fb931475fc35d2359ea335b495716fb08c1774620db836ec0a8"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            13,
+            25
+          ],
+          "bitmap_sha256": "99492c3fd948916d0e67d3785f79f670ba1dca1c0908bdd3b61157dbfe1e7411"
+        }
+      }
+    },
+    {
+      "family": "Trebuchet MS",
+      "style": "bold_italic",
+      "font_sha256": "c0a6bdf31f9f2953b2f08a0c1734c892bc825f0fb17c604d420f7acf203a213b",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            10,
+            23
+          ],
+          "bitmap_sha256": "6bf3ef8290e4e747836c1923f43af09a4d042705caa612ad1ebd31f21c8e337c"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            20,
+            30
+          ],
+          "bitmap_sha256": "708b01acfaa3cf93a77a191279636f2bfe68d237d4dc459ae3d4abdab1f97671"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            23,
+            30
+          ],
+          "bitmap_sha256": "96cfba24327129a54b1077c583fcc7aab64b2b64328225de25a6fceeb421d6a1"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            22,
+            30
+          ],
+          "bitmap_sha256": "eb2c2fb0f82b69d57d4cffe90b32616f9b6b58767652049690fcf54ae69b5248"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "c7ee3e532b5e1d3de28438b6d79920ba5e15e6ef22db2fc7afd9d828c3e7f147"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "0a88df13d829f2e16026dcbd0a1dc4aa678582fe41de330d3f09e7d3750c9166"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "5455a6736d7c1f00aa7bdf1e775c67f344d88fd14d822bd9090adfd999a28f6d"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            21,
+            30
+          ],
+          "bitmap_sha256": "680e57d26660ae19fccb5858b24e73a3ac6b0f432e9ada3e02412fcf9288bdf7"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            32
+          ],
+          "bitmap_sha256": "5011c1c953f30983f94a17ae293e0223621c377fde8252c679491af2f2958115"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            11,
+            30
+          ],
+          "bitmap_sha256": "6be366d9843ecc6cf9f994a10d7d388cae75b3e2ff7569aa9a8d7523df07aacd"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            10,
+            17
+          ],
+          "bitmap_sha256": "bdf9cba0dd1c4598b3875e1c53c07025800f97af5440b7fd8d129f8477136284"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            16,
+            30
+          ],
+          "bitmap_sha256": "57d684b58119123bff65a62781887e9d2f4d7b06a24bfdc29f058e5d30684452"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            15,
+            24
+          ],
+          "bitmap_sha256": "cc0980875ac7790874d6e82b363687f04aa0328d27010d4dd86d2952ef941788"
+        }
+      }
+    },
+    {
+      "family": "Comic Sans MS",
+      "style": "regular",
+      "font_sha256": "b82c53776058f291382ff7e008d4675839d2dc21eb295c66391f6fb0655d8fc0",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "f0558ee5923f9f18c127866fd761e4556d42beffa6a9ca3e7291fb8f66e23a8a"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            19,
+            30
+          ],
+          "bitmap_sha256": "d9d68675f33f200aea09f393f664d0ad3cec6ef1202a87343f4c4c80dfa18739"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "2e90ee8ae85db860bd9d975245621e179150b5c35dd554951d2b779a8cf05244"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "e739cd0bc8972290754724550476bff028f5a1b00fee8aefd96287c48e9afd0d"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            23
+          ],
+          "bitmap_sha256": "31ac13056e03092b8c0357039cce2f70e85d3e1c9f12d1ec7cdad205bc1516ef"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            16,
+            22
+          ],
+          "bitmap_sha256": "7e29f0fdc119aaa9267015cacaa9742dd88f9f6fee7ca9ca5230d68a94ec57af"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            16,
+            23
+          ],
+          "bitmap_sha256": "37ac84dedf3e5fc50e7dec531427c2f3ef322a1ac60c0021072a82615d1ed7ed"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            22,
+            31
+          ],
+          "bitmap_sha256": "a0d0920e36b6c7d3de4d65103d1b97e2ddff724071a3a0275f0d3a292f7fc28c"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            17,
+            33
+          ],
+          "bitmap_sha256": "1ef2d05dc3f711304438d590448b368bb514eddd244fab2c8c3db56841d79456"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            17,
+            28
+          ],
+          "bitmap_sha256": "09bf578ba94432ca9fc814be0a6ec55c8a845b484f4f3673489af5cca6158ad8"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            7,
+            16
+          ],
+          "bitmap_sha256": "91e7aa282f7e8b1f684479756b09796395b077555907859561bd7c3d16034efa"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            21,
+            31
+          ],
+          "bitmap_sha256": "e89c734a146d7e4e1becefd459cdf2c8ee861bb4867b4a60432ea5ffb1b9de08"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            15,
+            24
+          ],
+          "bitmap_sha256": "e297b8bb6ed6bf41e4ba18b24c8d3016bea8237204f534bf77e75d714fcf092d"
+        }
+      }
+    },
+    {
+      "family": "Comic Sans MS",
+      "style": "bold",
+      "font_sha256": "873361465d994994762d0b9845c99fc7baa2a600442ea8db713a7dd19f8b0172",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "f49577f98969321487a4cb6201681b835ae81e9ee809c6d04fa985fbfeae7836"
+        },
+        "Ç": {
+          "bbox": [
+            0,
+            0,
+            20,
+            31
+          ],
+          "bitmap_sha256": "801654ce7efe8d0f862bf42b457f53ea4709b62c811bdfa552d67e81a32bc16f"
+        },
+        "Ö": {
+          "bbox": [
+            0,
+            0,
+            25,
+            31
+          ],
+          "bitmap_sha256": "ac84ef4f2b635e40df85c1f895ae945bf8a7be5af7f1132ea625d5838eba18db"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            23,
+            31
+          ],
+          "bitmap_sha256": "78ffe8c2e4b073f4d7b3278cce8c784fb961bf1603a8b6e25f31319798b636aa"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            25
+          ],
+          "bitmap_sha256": "c4bcf7c5c3b4ee3c0d668aecb561eb339c7c22e30d19b052a177e99d9cdd2db2"
+        },
+        "ö": {
+          "bbox": [
+            0,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "dc47e21cb224ccda09ecf4b3eee63a7cce0545db8e7abddc49799cdea85c3d7e"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "9cda6075e4ec44717384423cdf24fa88b04c32b9120785e45b0a178bf8a3b769"
+        },
+        "Ğ": {
+          "bbox": [
+            0,
+            0,
+            22,
+            33
+          ],
+          "bitmap_sha256": "daddd5614a17d97bbcf2c8cbd30da3d02b831ab108fb5adb8cb889edc3d4b005"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            34
+          ],
+          "bitmap_sha256": "8361dcb4b7a57e5369037506d194a979e958f1787fa934ecce95b035f7a36e91"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            32
+          ],
+          "bitmap_sha256": "275aea73769014eaec0436ec34b4e1c934b58b69e6a605cc835e326bd9ebc793"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            7,
+            18
+          ],
+          "bitmap_sha256": "c3c7d8ec8c7acc53cddef5eefc5d0432a33641b787fd937c5dc7e873d187eacc"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            22,
+            31
+          ],
+          "bitmap_sha256": "7f4245d16cd36f76e3863dcbe59a88afde42ebbd2108a187dbcd86350e783e42"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            15,
+            24
+          ],
+          "bitmap_sha256": "4cbfd90ffb3ec1c30ff0df48f32dfa089b1f2f9f45dea1cd4bee5e2524a25250"
+        }
+      }
+    },
+    {
+      "family": "Impact",
+      "style": "regular",
+      "font_sha256": "00f1fc230ac99f9b97ba1a7c214eb5b909a78660cb3826fca7d64c3af5a14848",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            8,
+            25
+          ],
+          "bitmap_sha256": "6e18c5dca2f31fdd93f2d2ae6f4d62f5cf9c1a0f7146cfbc43689d697009179b"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            17,
+            31
+          ],
+          "bitmap_sha256": "bb9c1ede83033fec744c4d30e33cbad68f728435b7f1e64b23613640109163b9"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            30
+          ],
+          "bitmap_sha256": "c80fbe51b9caac96024f8a03f7873755f1569f85746b0585a5ade966f8854895"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            17,
+            30
+          ],
+          "bitmap_sha256": "e6f6b040c5694a0416da71dea95b4dc160ac572c78bc646e2c24078ce0c00de8"
+        },
+        "ç": {
+          "bbox": [
+            0,
+            0,
+            16,
+            27
+          ],
+          "bitmap_sha256": "cedb670408e8c0a2bd57877edc1b9498ca2c5424f0815a1005c610a1cdcd3799"
+        },
+        "ö": {
+          "bbox": [
+            0,
+            0,
+            16,
+            26
+          ],
+          "bitmap_sha256": "0d4c7265a974c34f6ffe24735f366cbbd77b5bc66c6a7aaf639b8a07bc7675d4"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            16,
+            26
+          ],
+          "bitmap_sha256": "72de5f7a0886f65f5dda78c2d7106e47c275a39d2e9af872f7860d47ffdcb8c9"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            17,
+            31
+          ],
+          "bitmap_sha256": "d32a2eeb629dcd55b070a6b32a6d0235a1216f028a758f5e9d1b57fb8813f40d"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            16,
+            30
+          ],
+          "bitmap_sha256": "b001ff9e563cd386a95defa5425223f26abbd28c480f2202234ceef9854a25e0"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            8,
+            30
+          ],
+          "bitmap_sha256": "327577a2573fac2fa5a14fa0e25ad37284f1e7ed542b3e70189e12c664d59c0d"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            8,
+            21
+          ],
+          "bitmap_sha256": "03a6760e5e6114675cc2d34b31d2ae384bc1dcb009ae78fb15d256c2cca3837d"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            16,
+            31
+          ],
+          "bitmap_sha256": "b6ebf12620eb700fca5ba7ac10e3de02bfcacff3db0c51f6d98cfc1921c438e3"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            15,
+            27
+          ],
+          "bitmap_sha256": "9b43f70aec1cb63b380c2270577ffd9a8ce309cb0463bc4ac94fd2efbe1e6eed"
+        }
+      }
+    },
+    {
+      "family": "Arial Black",
+      "style": "regular",
+      "font_sha256": "dad7c04acb26e23dfe4780e79375ca193ddaf68409317e81577a30674668830e",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            10,
+            23
+          ],
+          "bitmap_sha256": "e1c3572f70789f0d9d8fe1a15684463e64efb808de752a02afbff66818e69944"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "f96cf156c2ce942e3e5b937defddfeeddfc177ba65664a2bd7511575aef16a46"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            26,
+            29
+          ],
+          "bitmap_sha256": "47141e69c3a202af6d82aaff0f0ac4354029f9e220ccab0d4efcf408a901395b"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "af4c481e88cb33b3cdf16fc619b65dd414cfd3f365936aa412aee47a2d58f59b"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            21,
+            23
+          ],
+          "bitmap_sha256": "99bdc23e38ae3575851680390ec38e8a7268b3385fe211a7c644714a7d92432b"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            21,
+            23
+          ],
+          "bitmap_sha256": "52a598dd5d0b78ae5f6ae985ea0185e24bec3c2ac7a191c27291b5f20f55e515"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            20,
+            23
+          ],
+          "bitmap_sha256": "40c81f9abc22464e81eb732955810ce7930f02738049d43975f2ff9a4f67e2f2"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "43c64fbf3edecaa1b761ba93127d14fedd83b20e57accbd92e96a514492479d3"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            30
+          ],
+          "bitmap_sha256": "a814cf9d396a594534b74f739311234f85cafc08c6c93c8f6e141ff71bf51b68"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            10,
+            29
+          ],
+          "bitmap_sha256": "283ed31f0077d014b94b944aaab493ecd6651017e54564af6a78fc2a580ca3d7"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            9,
+            17
+          ],
+          "bitmap_sha256": "ae299c7483566bd55a3aab4e9073e65172bf0f8e98bd19e6dd7f4d7b57976482"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "2af039f8950a0109490de29202c805236ab557bd43101a8f5cbdf7386d3ce1bf"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            19,
+            23
+          ],
+          "bitmap_sha256": "b9681ef63043e726ece643a5827f27fe543447be49ccd1ae4863fd5e756b6ebf"
+        }
+      }
+    },
+    {
+      "family": "Andale Mono",
+      "style": "regular",
+      "font_sha256": "48d9bc613917709d3b0e0f4a6d4fe33a5c544c5035dffe9e90bc11e50e822071",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            4,
+            0,
+            15,
+            22
+          ],
+          "bitmap_sha256": "a0c4b40feb6546593b27bba70abc14236f100f451f16506084ef3084276a70a1"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            17,
+            28
+          ],
+          "bitmap_sha256": "92d3cb7dd59130e575db4151ebbbb69165655a40f6688d1f4040b0a2ca288e7a"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            18,
+            28
+          ],
+          "bitmap_sha256": "7ee3dbb7d59d82291abd792ca77c415c3bb567c37ca6ff4026995cb964670bfb"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            16,
+            28
+          ],
+          "bitmap_sha256": "68e3cffd8289fdd665212a3886c59219b2427de28c6fc84d336c8ff078c126a2"
+        },
+        "ç": {
+          "bbox": [
+            2,
+            0,
+            16,
+            23
+          ],
+          "bitmap_sha256": "effa3e4c87ecef20144d0451d59339761616c97b1e7ec1418a173165ca790ac4"
+        },
+        "ö": {
+          "bbox": [
+            2,
+            0,
+            17,
+            22
+          ],
+          "bitmap_sha256": "130e0e907e55506e80d13898a03eca8eb1753a488847cfb824dc0a8ebd2c1f06"
+        },
+        "ü": {
+          "bbox": [
+            3,
+            0,
+            16,
+            22
+          ],
+          "bitmap_sha256": "2b3d79eed9def032d3e6337c5fdf8122cd3b26a3102f874c4b2d8e7250a23ea0"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            17,
+            29
+          ],
+          "bitmap_sha256": "cbdc4ae83281863fc21219cde36c19d5988a032e243292c08cc9bcd0af624a8e"
+        },
+        "ğ": {
+          "bbox": [
+            2,
+            0,
+            18,
+            29
+          ],
+          "bitmap_sha256": "aede8f674f254f93c7eafe67b6e04696c00f98cf770308039dd7981ded159e4a"
+        },
+        "İ": {
+          "bbox": [
+            4,
+            0,
+            15,
+            27
+          ],
+          "bitmap_sha256": "c6f56f806f228059802ad41f065fbdff7cf88846359ab6e0df377a2b5dad5e19"
+        },
+        "ı": {
+          "bbox": [
+            4,
+            0,
+            12,
+            17
+          ],
+          "bitmap_sha256": "2e112e3c14121a3aea640c70469e87079c0aa93a91b90d79657b40a96b7e1e30"
+        },
+        "Ş": {
+          "bbox": [
+            3,
+            0,
+            16,
+            29
+          ],
+          "bitmap_sha256": "9ddea3d4c57e9cb17b38ac98d80ed5555398ad207f404b24e52c27aa388d0371"
+        },
+        "ş": {
+          "bbox": [
+            3,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "a2d93d90b61f3bfb55994ceb1b6cfd1c8e4c0386deed92d9a4d2834fae6604b4"
+        }
+      }
+    },
+    {
+      "family": "Open Sans",
+      "style": "regular",
+      "font_sha256": "e64e508b2aa2880f907e470c4550980ec4c0694d103a43f36150ac3f93189bee",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            3,
+            0,
+            6,
+            23
+          ],
+          "bitmap_sha256": "ae9a8ed12682d4f88daf16766cbec412b005b392029cba7929eb9d54e4357213"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            20,
+            31
+          ],
+          "bitmap_sha256": "30622821b5f9f3f469b9b6eb2f7d0cd61e24bd50672fe3a02b553aed706cf2c4"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            23,
+            28
+          ],
+          "bitmap_sha256": "0d254dec73e85045eeeb0b0c4025923bbb9c2a4cbb79791d2f55c75592896e07"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            21,
+            28
+          ],
+          "bitmap_sha256": "34032b688dc875cb32b4175fbb189daccf7f20538cf4eaccd8f2689df0a5aace"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            15,
+            25
+          ],
+          "bitmap_sha256": "5403ad3ad0eabea12dcff717fe9a8cef26925fa26b1608926a4fcdef7ed2f1af"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "9287ee8d6a08b49d123e8334d99e9cc909c4f8f8f3ed927dfc6ff37c0642e3fd"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "72f6acd1d659759e54f209350a0d454a5bb916f27dc9b71e1bb6dcb4d35f64de"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            21,
+            29
+          ],
+          "bitmap_sha256": "927cd211778ccaf64f4ac8e5123782a13a1347ec6586a955c5a1878e9c509cc0"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            17,
+            31
+          ],
+          "bitmap_sha256": "3b6e4582bf8fef6b8523da6f72bddca181396682e7325ba1fa2ab9db87777a15"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            6,
+            28
+          ],
+          "bitmap_sha256": "03f2204b892b0466231cb5c69da6981cbe10dc7692cced4c34e7e4784a916d22"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            6,
+            17
+          ],
+          "bitmap_sha256": "97b2c6fc77604d1d2f580b6228e77372da5d393be116e076a0084a4a89c85ad4"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            31
+          ],
+          "bitmap_sha256": "ac40b93f3053f57996ce1f2b52dc408814b11ad51bd644cefcb2dee09bf55121"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            14,
+            25
+          ],
+          "bitmap_sha256": "76418b90506e4591b47bce19063fd356a201207e06f97fe4115cb50bceb6b9a5"
+        }
+      }
+    },
+    {
+      "family": "Open Sans",
+      "style": "bold",
+      "font_sha256": "5894a3649b213cf5b2d673b6e7a871815fd1d120fa68a463592f27db14eae323",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            8,
+            23
+          ],
+          "bitmap_sha256": "21d64c4485fe7e649522862c92be27788f11749b5bfd2c267a49d303e363e12a"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            20,
+            31
+          ],
+          "bitmap_sha256": "726504af77aa44d154f591bb85c73c9b34ed24dba9b5a2ce1dfab74e858621b9"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "7e428e22bb4404486a2ccbfa5744a08e16d70b0d58ff94dd8da15bd3c0a1009f"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            22,
+            30
+          ],
+          "bitmap_sha256": "412f8c5eed550281401c6df3f2e8686e7b40d4ff5f8f954da7b4c6d94f2c59a3"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            25
+          ],
+          "bitmap_sha256": "906ad0e5612967c7d50bfac5b05524f4ae813a38f81e354e09a6680037929d67"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            19,
+            25
+          ],
+          "bitmap_sha256": "6ea3ff432a9426cdf41ae599a214f7a100ce5c52a5202bff9e11e0c1d93835c6"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            19,
+            25
+          ],
+          "bitmap_sha256": "fa641a2fde1a3fe28ed008309d11347664a7d3c676ac4ebfaf602ec45e5f89d9"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            21,
+            30
+          ],
+          "bitmap_sha256": "9fb988b82f2833438eb19dd9a5b4c01a532c4614ab3876a6ba6d1257ee187d30"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            32
+          ],
+          "bitmap_sha256": "c438aba6c9192c4ead39dab63d08d17f8b1a9a935b0b6621df64aa41e3a3bb8a"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            8,
+            30
+          ],
+          "bitmap_sha256": "04d9910e0b40af032355e94f01564eaee6dc3a037b8c0408f92a99b4bfd3477c"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            8,
+            17
+          ],
+          "bitmap_sha256": "f648c4a46762efbeb753eab0c8106fac25974d91eb461850ed1b45688f527976"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            31
+          ],
+          "bitmap_sha256": "af8413d577c612bb87e4a91ba7d2666df95eb537eea66a18012e0a36fc30592b"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            15,
+            25
+          ],
+          "bitmap_sha256": "486383ee6a3d9457e0ef3e74c814006aa91e6083b298eb1dd83682e10249b465"
+        }
+      }
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "font_sha256": "a54dc8488f8193bf30c3820cf6f261f911f9d328d699e1a1b8042641554cec70",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            9,
+            23
+          ],
+          "bitmap_sha256": "38933301751e5eb73ffabc40421dcf7bb8f889125a6889b3c09dccaea46e76bb"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            21,
+            31
+          ],
+          "bitmap_sha256": "c1165cf73744314bb6e766c8dbdedc1599444ff5eb41e17a495c4dad9cd43863"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            23,
+            28
+          ],
+          "bitmap_sha256": "49ba3a73e6ded6c806f11a9747f8585b37127502fa65a44b5c5804796d58ec8a"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            22,
+            28
+          ],
+          "bitmap_sha256": "f93973411f8411657f756e145a39ae3d68ff1fc745bc12c6c1e9e6ff71002428"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            15,
+            25
+          ],
+          "bitmap_sha256": "5af906361f33e21d4ae1a0a8b25ea29813c86b5bc1915590363b852eac4735be"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "a84dfb10dadf5b24109e8b18100fb8186a9bc583276b3953ff452dfabc54b8d6"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "ac98fb5a53981bd2e98666066a630f8638ac60e52b48e34bea736e238fd2f0d1"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "8b4f45522c222660761e7486296490719aa71c616ae86ed6be4c8ff915aa6254"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            20,
+            31
+          ],
+          "bitmap_sha256": "acf21206847f5a50189849d788dfc97d5e38cc8a4a7151478ad27c9f2037716d"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            10,
+            28
+          ],
+          "bitmap_sha256": "babbcfd28ff892353cb3b8cd696e13072d063f0ca1b1e7b3dd823c619f910cf9"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            8,
+            17
+          ],
+          "bitmap_sha256": "ea58a626a3526e846f452312557341645f27a878709e5d68d3dd186d00af6199"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            17,
+            31
+          ],
+          "bitmap_sha256": "9197e28f7fba64c95869f2dfaf23e0705a0a16a708aedf89de142d37db2b546b"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            14,
+            25
+          ],
+          "bitmap_sha256": "7822d22c4c38e370e5d098a790ef4ed6bd5f01082f245d47088e94aeb5269a10"
+        }
+      }
+    },
+    {
+      "family": "Open Sans",
+      "style": "bold_italic",
+      "font_sha256": "3ca680f2444cc9e50447d057c006464566e92f2e77b0b6e26491e5bd757ed4e7",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            11,
+            23
+          ],
+          "bitmap_sha256": "99a84acd08ed12344f532e514483be974a28388251a7aa75e8109ae77e4b21ea"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            21,
+            31
+          ],
+          "bitmap_sha256": "5455db4af2f54e8c68285139c4da895b98d722d6f67aa8e7191d9767042e2758"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            23,
+            30
+          ],
+          "bitmap_sha256": "5a2f7d43bc40a1eabbc7bb05b4733e94c0ad4505c0595a7d01e5ff84dfc7a4a4"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            23,
+            30
+          ],
+          "bitmap_sha256": "47bbe0f615287279011a08a6dde2e22e23ecaaf7a8cf623a0b6f5410fb12bf75"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            25
+          ],
+          "bitmap_sha256": "42f78c6218d08ae8b56b86fc00c6732a7197edc5f23971f4763a08797ce5f038"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            25
+          ],
+          "bitmap_sha256": "03422f2e5dab3be798674ae194f97a1644e7b84e6a9804bd714d6c7e350ff58a"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            19,
+            25
+          ],
+          "bitmap_sha256": "eadc68532b9ecabf672265ee469dd013c8ada132a74940fb0e5bfcb6f136dd6c"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            22,
+            30
+          ],
+          "bitmap_sha256": "db6421be5060ac4652530c131a2f916a0eb7523af4d4576c5a1a9ad9d8962bd8"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            21,
+            32
+          ],
+          "bitmap_sha256": "cc4551a8857221904d7d482ea4350de16a62af0bbe76e110a357347776802297"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            12,
+            30
+          ],
+          "bitmap_sha256": "e48bbaf6c74d48cd2c34f8020c21a11a918a8e1e52c18de0e369701a97d9c25c"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            9,
+            17
+          ],
+          "bitmap_sha256": "91e29efdc3cc9c892e2e0b0b10d31d4b14f60cf7ef3a5c3c558dd011d59a0808"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            18,
+            31
+          ],
+          "bitmap_sha256": "039ac785d98fc05dae8e4eaf5cd14400066cfd401c7e1700be049870d9dd93b2"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            15,
+            25
+          ],
+          "bitmap_sha256": "b1d3d43ccc4eedcb9d0ac40d5564396cb87cf3d36fc504caac2ab9ea51c4b067"
+        }
+      }
+    },
+    {
+      "family": "Noto Sans",
+      "style": "regular",
+      "font_sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            10,
+            24
+          ],
+          "bitmap_sha256": "16e47fc6ec67538a9d5e6f8a26fdfa8d1a087847db97f5c151d39a9b5f97571e"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            20,
+            32
+          ],
+          "bitmap_sha256": "ee1bc10aa14d3033a0970b5bab715210f037e53d3ca938814199d8b1c94b839c"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "3cc65684f580ef87de8f20b33777b57bce1520d7b58fee067503ae3ec6d9ded0"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            21,
+            30
+          ],
+          "bitmap_sha256": "29caf37afa38fe3f611a99c03a249061fb4057ed8ae2258e9a0e3e0de9062ce9"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            15,
+            26
+          ],
+          "bitmap_sha256": "e415f523866ac0c935f8c562221718b57e4f78ea6127d888e07c7cd1508f1d19"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "2fce76b561cf9ba9637e10b4025bc799c07e738430dcddaf580e2b322b1a2577"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "ec7c6ecd17612db736f75f3147d81db2c7920afc8bf0e8daefb04f6403497eff"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            21,
+            31
+          ],
+          "bitmap_sha256": "7727de063c7ca9f5a5c74b21180916fd4d112c2e34157721b783f6cddfd393b0"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            17,
+            33
+          ],
+          "bitmap_sha256": "e38bd41073e130e35b8138b7bac547f2719a8a30936c4579e52703511458efe7"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            10,
+            31
+          ],
+          "bitmap_sha256": "c1ada70496108380aea701bd66dc8b9592194c4a14e4ca447eb29255ec0fabe1"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            6,
+            18
+          ],
+          "bitmap_sha256": "737e1cdf86fa20739760fbc818ebaa3edbe4088f07f1bd4c2785cd45fd88be8f"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            32
+          ],
+          "bitmap_sha256": "4c71d9c3b0de553478e73957dc04afe66dc2bd956920d453f57dba9835e5d4a4"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            14,
+            26
+          ],
+          "bitmap_sha256": "2c0c5bac422864cefe3a1a36981618f2be1d99d5029309ad3bd93b3e8c9ed394"
+        }
+      }
+    },
+    {
+      "family": "Noto Sans",
+      "style": "bold",
+      "font_sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            12,
+            23
+          ],
+          "bitmap_sha256": "8bbdd5f2f928bc00fea66811525b1c048b8b36de8f28ff724371a71227d3b5db"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            20,
+            31
+          ],
+          "bitmap_sha256": "341b6b8e3f6098a59a2c4b337962a51f2d5dabfe9040fec2c981bc0332c1008b"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "9b7176dbe883e8af6a6acb0b7b9989bc41fa43aff6b70f9339b99b04ef7998e8"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "c376ca8ee0c2d460de2cc654f053610adaa759b6fd38737282251c1f2fd8d433"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            26
+          ],
+          "bitmap_sha256": "93f990cc8b4fcfec76297829b7b01e350e27c8782869c26fe2abbb9613cb66a4"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            19,
+            24
+          ],
+          "bitmap_sha256": "39d6cfa039ae8cb9a34380adde78545402e1a4a83c925e22b5cad08d428d9927"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            19,
+            24
+          ],
+          "bitmap_sha256": "6cbea2461dfa17fcc1d0037f7deac0ffe3a6b5c01567e172754537e25cb310c1"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            21,
+            31
+          ],
+          "bitmap_sha256": "144046566becd9149ec2db2c6229aaaf5164293524b9e6e51aac046a10a5f0e4"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            18,
+            34
+          ],
+          "bitmap_sha256": "0171f51a58b6d035fec760e00732a8c4b0b09710f8bbffb317e96b523336bb9c"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            12,
+            30
+          ],
+          "bitmap_sha256": "b294e8ead4065164792f331d2fc870f53ad51aa6c4994ad4bc7fb1b6754fd322"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            8,
+            18
+          ],
+          "bitmap_sha256": "431bd3d7bfda9ef700c0ccd56a11e352253ede43eaa6727adba8cfb6e27fe48c"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            31
+          ],
+          "bitmap_sha256": "6b121b412a8719d061cdbbcb988dbb5758c4d989b70550d9772a5f683120082b"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            15,
+            26
+          ],
+          "bitmap_sha256": "f34ab14c398fcda916a9af847c77f4a7f735ab6690e2c7b848f857a0f9195bd1"
+        }
+      }
+    },
+    {
+      "family": "Noto Serif",
+      "style": "regular",
+      "font_sha256": "9d7583b7dc9e812afd32a14280c5cac3160012efe50c8d08938f4fea266ff67f",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            11,
+            24
+          ],
+          "bitmap_sha256": "abecb385d1a3596e204ebd7173d277d7466a642f386a07d6f1bb41c836ed92eb"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            19,
+            32
+          ],
+          "bitmap_sha256": "898041404717eb783fa258040247866cc969ccd73566ad5bac0e87387197b4b3"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            22,
+            30
+          ],
+          "bitmap_sha256": "dce7d9be7a1c5a7c7e9349f422a5328dd3731dc6ae671ae4af7bc74191a3ad4e"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            23,
+            30
+          ],
+          "bitmap_sha256": "2b6483521634c327b0de78d13e9f5a96979986274bbe02e89d2d5a987a296313"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            15,
+            26
+          ],
+          "bitmap_sha256": "e1974e6222b5b4de6de828f282d16a86c1cc509ceccc5ce6f2502777ac04c224"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            25
+          ],
+          "bitmap_sha256": "3f76ea9285141b27637dc11659a74202c22d99f0a7bd6521595e6464b1898c44"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            20,
+            25
+          ],
+          "bitmap_sha256": "70faf65b60ba77a5c301adfe38d47bd61ed7cab3dd0a06eb8eef146a1308ef1c"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            30
+          ],
+          "bitmap_sha256": "8f59c440389fc0824dcf7b4b1780b1ef4aa092fba8e7693cb262e7fdbc78a72d"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            17,
+            33
+          ],
+          "bitmap_sha256": "878758d7c5eccb990bd890ad66acba2fcb1c72df49b70935a32188320fd4062d"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            11,
+            30
+          ],
+          "bitmap_sha256": "9cf11c784e9ccb99cf23e5b86400ab569fd019423d866006c2d52325d0ecee8d"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            10,
+            18
+          ],
+          "bitmap_sha256": "f2eea4a33beef63fed574d7c4c023f24cd6cd96dda0bc2d1f7e91f2c61910f24"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            16,
+            32
+          ],
+          "bitmap_sha256": "c17a45e45dbf37c07ffad39bf6a65661f260a9bbe1f4b1afe6c5fe7959640d44"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            14,
+            26
+          ],
+          "bitmap_sha256": "dfe63c28990620e1e27b13ad905fa9bc364462f0bca5dda8f64dcc1aba2427f9"
+        }
+      }
+    },
+    {
+      "family": "Noto Serif",
+      "style": "bold",
+      "font_sha256": "0af0ff2be8f84910fb21ec5fe1b6b7395e3073250502a334baf6ca2f860c88fe",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            12,
+            23
+          ],
+          "bitmap_sha256": "64448f21e096d34b37e131e3b95c8c595850648730b1e0c2829d95e13d819897"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            21,
+            31
+          ],
+          "bitmap_sha256": "dbf99e7cbbb0b9aeffda27a5bae6e415c5b7677c896ee261891d8b5f73e51c09"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "7184a7cd7c0e19d187e8d9b3b865ea0364d294bad2f391b33c5cebe3c21afd7e"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "0a5c0e675ca3e309b987ebc16aa755a1ff45ed68a54c29e48574b1e82ee391dc"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            26
+          ],
+          "bitmap_sha256": "9a5478328aab29ba4152df385c16dec6e4b6f83376482c9d8b4daaa41bf915d8"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            19,
+            25
+          ],
+          "bitmap_sha256": "cc47f9dbe8eeb4ca574d6501c55cea92def7ba53f7c9d15858e2c1a61f4680c6"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            21,
+            25
+          ],
+          "bitmap_sha256": "fde13f8dae37628a3bf94d0817e0d40b1362e17cade978a759903192c140524f"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "c19c903513bfe47d6f75c7ebca6e5d0cd23f25a914cb04d46adc86789c10be0e"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            33
+          ],
+          "bitmap_sha256": "e06b74deb50deeed09e609f1802d112a9373c9bc2e1254d5d61ec16b93d93ac7"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            12,
+            31
+          ],
+          "bitmap_sha256": "aa46d61782922d8fb5c25a35c6ab38e6a774549a3c9377c0c778c7d1f2a68656"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            11,
+            18
+          ],
+          "bitmap_sha256": "a360a57241aca24129e707ae568665d3cf6bff29ef87d507a876865f8594b2f2"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            18,
+            31
+          ],
+          "bitmap_sha256": "c862a9349fecdd0c2764b600cdbc6f4ef734089f41b189f9fb7181eed24de761"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            15,
+            26
+          ],
+          "bitmap_sha256": "02ced7a97ee7c758fe3aedff1054cf04170cd820c9aba72019933709a28f7adf"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Sans",
+      "style": "regular",
+      "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            3,
+            0,
+            7,
+            23
+          ],
+          "bitmap_sha256": "bc2a60aaf0675faa22253a2e6cd9967d1339db6791e3eb46aa5841c129ea51e7"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            21,
+            29
+          ],
+          "bitmap_sha256": "f44fddbb60bc0b5db35db46c6e4c0513c28c6419da0069a57a4698310dce1822"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "2d34bf06508dffc7669ed9b2ae71d58de0035b03f1e32f391b54772a6d730106"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            21,
+            29
+          ],
+          "bitmap_sha256": "b52ee90f41500b70463cbae0d87a37be52be6111ea650bb875eac9a4fb402f2a"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "98272b761e5a2b2f041b7fadc4b0e90f967db2d1e8de98f897c35307adf68a87"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "ec1082353215147dfd4baaa65f4a84da2087783091df08ffdd94024d912b4745"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "e64f2373d416e8a2ae68fa5f20974194b3a3ae397df6663d45e7845c1e8f91fa"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            30
+          ],
+          "bitmap_sha256": "2fdb0fa9f80b880c5700849b93d3937d57723abb693568f0c78ebade368fef77"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            18,
+            33
+          ],
+          "bitmap_sha256": "0ca80a99ad1a504a08f3c3b9dfffcfd0c0e64c2c2a3310ab012912a74c369bfc"
+        },
+        "İ": {
+          "bbox": [
+            3,
+            0,
+            7,
+            29
+          ],
+          "bitmap_sha256": "4ae21c210cda0c269118ee3327afdc8c41a59e277fca183db457a5e76e9cfa96"
+        },
+        "ı": {
+          "bbox": [
+            3,
+            0,
+            6,
+            18
+          ],
+          "bitmap_sha256": "3a0a9c80978bc3529c361f56efd60122655ea44a27e8087a2ac472075daa7f94"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            19,
+            29
+          ],
+          "bitmap_sha256": "7f351e869d357ef1f524311b150434bf920de7aa21a64c699c6fb80eaa726b72"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "d7f183e57ba1dfe23e13f3b20905bc70e3b0eb8639fddfc5676aff8a8093a98d"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Sans",
+      "style": "bold",
+      "font_sha256": "a4c5bc453ca281d90ea079e596da7ae0dfeb5777497c29ec254e76d97ff6f890",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            9,
+            23
+          ],
+          "bitmap_sha256": "1813c98eb462482019c0d2a46631f739b87fed806a24ae3f0791dae2a002cbe5"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "af045242d7dd0f3f84b4dbfc94a03a130bb57338f4fb2235985995be96956e60"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            26,
+            30
+          ],
+          "bitmap_sha256": "4b5922e4f331b256db97d68f6f6bf2aec50313c2aeb51f922840d5cb84928129"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "4656cc1902ac20be58121b66d9fa32f5442715df515c9ac0ec8557c5cc452a3d"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "f4076f489273c71f0c64a0d8cd51deed7d08d234d2320ab8c999c030476c8892"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            21,
+            25
+          ],
+          "bitmap_sha256": "e7cb5df76baa77714338c87dbc7603c4f722e40be4c6ff9e2d6edd08482816e4"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            21,
+            25
+          ],
+          "bitmap_sha256": "16ac4db3a2e6f34a5ad67a7b2635677db95643a4d7e0822e3b3e3518a5f3b29e"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "cf02a0bb257fe72850433c4012761183df56fa2b4ccf05a07dd87392d1fca4bf"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            21,
+            32
+          ],
+          "bitmap_sha256": "c5b1d7ebdac7793ef090ffcb6a5c5da04c380b45b75d268925b2db872988a297"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            9,
+            30
+          ],
+          "bitmap_sha256": "115580cbf0d08f4f24ea770b8e862cfbde5f95fc3d763c4bceaab3a200f43227"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            9,
+            18
+          ],
+          "bitmap_sha256": "433ea49c0e47d0c25d796a6b722ab2d95f5ecec71e23ef2845f3a04c5c626515"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            21,
+            29
+          ],
+          "bitmap_sha256": "38c12b5c8d8cdb8c6bdf95a53d464f43741cc3dd098d42b286ee03c66d675772"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "45d6da8c4ffb515c8b2d704e50b32ce4eb23a5657caa2713b03859a1406ea68c"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Sans",
+      "style": "italic",
+      "font_sha256": "e2f09289f4276309a36b9a93e5a0ac64957ef3eb7158151b243d41f667151ee4",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            9,
+            23
+          ],
+          "bitmap_sha256": "7089a9f196a59d5fab8b233dc33d5ba753f6b68188770acdabfdf9ec618bdb05"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "03214804824819f9b8381c7fffe5382b34ae8b52c76dbac6f79093a752a1a92e"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "103522ca4d23c36843eed357dc46434aa79ea225f695d42ad89a13ada7e0c132"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "16ee1c67c03fa4f02f8fe41b81975beba2fd59e2bd93f384fce363577370e82f"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "3f927aca5e6af60e5df8f98c5b2d97da82b8fc800b0f502a6446ce7186cb318b"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            19,
+            24
+          ],
+          "bitmap_sha256": "395f0c2052e140aec59837244e44255cf61b8256d4984a0d43f404085b21d125"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            19,
+            24
+          ],
+          "bitmap_sha256": "f385868ac3f73bf4172b38135b4b793af5aeda9f44ad9d59ed3cf8ba7bfedf23"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "0c02db052196d4224eda2c92d80399dd01473f47473adb87d752fc8a365180c0"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            33
+          ],
+          "bitmap_sha256": "e61a05cf54520f6d65f83f55b42ed0145ea653321d8a7afe133bd8f48f9dd96b"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            10,
+            29
+          ],
+          "bitmap_sha256": "31bc3d466dbff4121c98810ab2f84cb849b01cabfbc63515b70a4b95f944edc7"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            8,
+            18
+          ],
+          "bitmap_sha256": "2a12bf698ca2c8c20ec18875178a65afe63ec75ec926c7a8eaf2f3340731eae5"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            20,
+            29
+          ],
+          "bitmap_sha256": "1c436d8793b5750ee5875bf96125efd67b1aed9f23a06b8f88e223b8810efeb2"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            16,
+            24
+          ],
+          "bitmap_sha256": "7faafc4741409635a4b4e8f429279ab1691c0f27169dae831d00773eaa8aec8b"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Sans",
+      "style": "bold_italic",
+      "font_sha256": "c35383d5e56add5cc9cdc9f4e4a899f9e540f7c7e49f1901074c2d03af194eff",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            12,
+            23
+          ],
+          "bitmap_sha256": "183df63320ef2157827e3055c9202f39809ff326cb1c2bc6a72df70f71b3c4a8"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "673cb88d1f9f07d753b96252e930f29d3eeda3b578f806a57316a40b8ffb89ad"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            27,
+            30
+          ],
+          "bitmap_sha256": "7ac5e3fbfda06cab1a385da413b70b889b12065104f8fd3f5b1cdd9041a75efa"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            26,
+            30
+          ],
+          "bitmap_sha256": "faf1cb44638852bc9a103ce38dcbd3c866ac87f18083a159194c5ef1e495915b"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            19,
+            24
+          ],
+          "bitmap_sha256": "420b706780df1a0a47f56daecba7c8c7c4e40b0c6b8af9acbfce88a3c8b3f71b"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            21,
+            25
+          ],
+          "bitmap_sha256": "1bce95f7e7d6cf94cfde7311d1a27161ad70b1d36c23625e60c0c95f751b6e17"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            22,
+            25
+          ],
+          "bitmap_sha256": "02c5b36f4b252a3c17dd13207f520ff939d98eaa18f291cb31d8c05ae2dfa520"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            25,
+            30
+          ],
+          "bitmap_sha256": "95c8e3007ce4b749e77ba68289e3fbe43bcab3708e5d4fb4caf81a3d3ec9d66a"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            22,
+            32
+          ],
+          "bitmap_sha256": "9ea83a04dff2f800a5b78d305a174df8d5094e65fe4f3d3f1bedd927aa91a46e"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            12,
+            30
+          ],
+          "bitmap_sha256": "6ba3d02336c3ad91f772c99577f142577bd199f1406256cca97d95b33e5f0438"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            10,
+            18
+          ],
+          "bitmap_sha256": "26a81dc61a0f194ed113019e2765d37404364b9ce434887742e7924ccd6a07eb"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "445ffac1dcba9b1e6aa01e6f0697ccb45a80b3b645f2b31b6a3aa9182d5cb096"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "01e259d4f7fced0c21036dec9ecf9200c5ac4ebd7b2a4ff33932cae999744ec3"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Serif",
+      "style": "regular",
+      "font_sha256": "8cb29f7db250ebb2551a6ce2c1e0bfd5a0eb520e9e233370db0493e82e1f36f7",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            11,
+            23
+          ],
+          "bitmap_sha256": "d02e9ab30e30b3a7609d7a5195305567ed3f3e3f354ebc8cb746e0470b632405"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "e8d4ffebe482069eb972b07e190b616522f1a0108b5ae546526229945d458242"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            25,
+            30
+          ],
+          "bitmap_sha256": "774f6b25a34df74dcf0298c0432af22aaee565104625ad04538af48f23387ea8"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            26,
+            30
+          ],
+          "bitmap_sha256": "41f421af9dab85ffaec108f0f9ce74efd8274d254d8d06a94b7c11b5aed44829"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "00bb98c3e5dd044b01ee65c5b1adccb031b56cda5a96a7ccf3a1f160babfb6d1"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            25
+          ],
+          "bitmap_sha256": "c028d0c73bd14607b27d096e60d19d7f319302b6fe32750498bc543e3c834e56"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            20,
+            25
+          ],
+          "bitmap_sha256": "408468d94ed6654a9fcfced9d11a0711e706e9f1d6bf09f1a4fe69b2899b6c11"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            24,
+            30
+          ],
+          "bitmap_sha256": "767da0f426c0ef7862c8502b227c4949ccb3b118f3f190b7795eac0ebd3c3202"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            32
+          ],
+          "bitmap_sha256": "3c15a7d2e3f11d8cf7c110a0d222c70eb95e21bc1e3a327524290a8678468f3d"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            11,
+            30
+          ],
+          "bitmap_sha256": "df8f54be5a2b03d0aa940483a915d9a0ddfcd00263f0c4ca0f9e8f01ea9ff4a4"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            10,
+            17
+          ],
+          "bitmap_sha256": "7a6d9e5c921d92a1f099e5d6f9e43dbee6334e06246a894683dd74e9bab25f53"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            20,
+            29
+          ],
+          "bitmap_sha256": "63891417e5c1740e299194b1846a240d0d7e14ad6cb7802cad870435a1eb2bff"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            15,
+            23
+          ],
+          "bitmap_sha256": "998b2645bfde976ed356559257844d8c611cde1c702ded71645bb8d693c97b61"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Serif",
+      "style": "bold",
+      "font_sha256": "aac3f559445d23f0f567a243f91f3f6ad6cb4b5cafa1521a3479fffe0637f0bd",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            14,
+            23
+          ],
+          "bitmap_sha256": "33295563f3dde27cc3a165cd19a4dd5b528ab8333fdd3e7588a26f7f2ee09d6e"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "de4e83bfa20f571868bdd14b56f21a5f62795ea2c3dfd0d70fa2386219d01bcb"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            27,
+            30
+          ],
+          "bitmap_sha256": "8d6122782a70ab5fbdd40887c993869f0c7c2588741144b1ea93aef286444cae"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            28,
+            30
+          ],
+          "bitmap_sha256": "7af18679372d469c1fd8b911d784595d51a1b486ff3581cd6fbd8271f77b1751"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "10f8f6d036c259d628a749b2eb0bfec59745b7924e5d2b357ea5575cca96a44b"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            21,
+            25
+          ],
+          "bitmap_sha256": "578e9e4c7bd63358b89396bb0c8546c0af38f4f6101126f3c47e07ac7ad604e7"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            23,
+            25
+          ],
+          "bitmap_sha256": "ae86c1186aba9f5851975199dbb982cacfc3d5d91d2afe3c6518bd3bab6fd55c"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            25,
+            30
+          ],
+          "bitmap_sha256": "c8189106f7457c7910ef634ea21a461e9ec8e9f02e7fe4c415924be82294aa66"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            22,
+            31
+          ],
+          "bitmap_sha256": "bf7bc7b6c79ba5e707b26fbe2f5d74cbb48364e1d97b77a6e26ee7818e795323"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            14,
+            30
+          ],
+          "bitmap_sha256": "1b278386092b43d38fd7c6aa845254d9509f5fba6514027f5d999fc2df1e8133"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            12,
+            17
+          ],
+          "bitmap_sha256": "83841a137e3423a98f667ee6f7ce2f487003a0c1e4613cbad52a6045b20eb494"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "d3c5bb1305728dbc469a6108d250c79bc09b872ed2ae8e54b784ade16d10e70e"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "59c5d2cbb825da5c5bbb7d60fdfe502b817f78dce57db9e13a8dca29f11a87f9"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Serif",
+      "style": "italic",
+      "font_sha256": "d843bf414381dd64b89e6c7c954075657b74168521f02b30e11d308558eda1d2",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            15,
+            24
+          ],
+          "bitmap_sha256": "478380623262b26cc4cc5cbfb6be82d8743720b6970c6a85e5a115e51ba58978"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            24,
+            31
+          ],
+          "bitmap_sha256": "c071202103f0e4fa21f7a06b10760bd4b9afe5703501b90e2a54d229a0397947"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            25,
+            31
+          ],
+          "bitmap_sha256": "e6e870584722e492e19a5a1e97333c6d00fb7202cc74f0ec74007b13bf0f46a5"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            28,
+            31
+          ],
+          "bitmap_sha256": "3e4c714b43a06d87334f2cbe6e8774e00ee6dca346e082b833e661092e552e41"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            18,
+            25
+          ],
+          "bitmap_sha256": "c1e25b463faba099ec55c7dfd036cc44665d0e0782df99b3aec8a8ce90f45950"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            26
+          ],
+          "bitmap_sha256": "c9accaee1beeb4f0843b56a9b4801b95b9e021ad7be13da0892a5e83d8923351"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            19,
+            26
+          ],
+          "bitmap_sha256": "70280410e9577035426e86f6b1c07698ace9d63af0c91d9d5d966fafa36bb7e9"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            25,
+            31
+          ],
+          "bitmap_sha256": "1f95358f0dab705b1684dcab7a8d86ac74071a9b1f5f80aebb8d682b40649d36"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            34
+          ],
+          "bitmap_sha256": "13aad27b8163352887cd850eb7be1277f1e0a6985ddef7bbdc9aaeddee6dea0c"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            15,
+            30
+          ],
+          "bitmap_sha256": "1d0ae07d8f924dbb9d3579066cacb19827ad3a22667daa1c59360c64cd548aa6"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            9,
+            17
+          ],
+          "bitmap_sha256": "e8d484109a41959a6b10452b8e19e3963557444f3452581f85b24a36ccc9c2a6"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            21,
+            31
+          ],
+          "bitmap_sha256": "8642f9d61573193c57ec8ab3c018f0946ab45449759e22ddfdf9d176eb455e5a"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            16,
+            25
+          ],
+          "bitmap_sha256": "fd9c3d769992d78927fcd65cfaa2bf76a114d1af7075b4806875f9896f307a97"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Serif",
+      "style": "bold_italic",
+      "font_sha256": "ed336a3d81f5a2d6a3d12c16dda400b28ba7304792254fc9e96c0d6835fbeab2",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "fb1309246620fdf0a0e7f16e0d7b3af752d0dde8415659fb1d3137e06232b361"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            26,
+            31
+          ],
+          "bitmap_sha256": "728b578fbdfee91f393afa643671cf0c9108c0503cab9044494f5740f3dc0b89"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            27,
+            32
+          ],
+          "bitmap_sha256": "4940ae0e30c71b5a0a885d249ebb169353454d83ea1a221bd901b86070a448f5"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            30,
+            32
+          ],
+          "bitmap_sha256": "33d097e49e3c9b1600a1025f9393b07e6bcf87dccc098020015b1f0c5a2be4c0"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            19,
+            25
+          ],
+          "bitmap_sha256": "6a9d84275322c7af009ce1d394770fd7d3d9979d1fc8cd048f99abbd8eb006ea"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            21,
+            27
+          ],
+          "bitmap_sha256": "2d7e5db606733d207a394dc27c96cc0fb445912c8168e870b994cd1d4d47d369"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            22,
+            27
+          ],
+          "bitmap_sha256": "2fc57e090e01018abcafdc2c64ef05ade7dde8f2d513c7a9dbe6afb314388c82"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            26,
+            31
+          ],
+          "bitmap_sha256": "9fe12e6ad87e6c65e14234b4cf9013d27440932431e233e9c74d96127950d21e"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            22,
+            33
+          ],
+          "bitmap_sha256": "9a4d6094dc94a0cf56392453909086bf125d51256303fbd3793960e316d551af"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            17,
+            31
+          ],
+          "bitmap_sha256": "0197feb134a39c0900adc3c32c5805482773811c0a3eee2384ca5c02bea1189f"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            11,
+            17
+          ],
+          "bitmap_sha256": "c2952f2a2356e16601bd4daac3f486e647b27b1588a078fc3431f242a9e56e48"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            22,
+            31
+          ],
+          "bitmap_sha256": "fe2ec79ab29889abc2fa80e0a1bfae62a121e5072a51d1295e4663042033f1b0"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            19,
+            25
+          ],
+          "bitmap_sha256": "d0c5c91b79dbacb923b51be90a6fb60b962c694b8e3146d68ff2ed7f0ce60047"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Sans Mono",
+      "style": "regular",
+      "font_sha256": "54bf827eb99404e8f430c330ad30f063334f637eba0109b6a18d4f566a8e9dd8",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            3,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "afd7581c0514267ed410372bda07e659220b421a9645f52a04ae2df8fcce0d3e"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            17,
+            29
+          ],
+          "bitmap_sha256": "62619504ed31ea705eb595f828c102c5b731077e93d1d69ac9d55300501d4578"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            29
+          ],
+          "bitmap_sha256": "646ef1715c9995c3b3e363fac0be7d1d8a7029d959446f60fb9ae87b40c87fd5"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            17,
+            29
+          ],
+          "bitmap_sha256": "4600243680fe094417e86ac4698a54bf1b1260c6db2f2e7894be4b306c2ab9b1"
+        },
+        "ç": {
+          "bbox": [
+            3,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "a8a23d0f6e35003fae6b67940ed5faa39a8b101dd3d9c05a119e9af0546bbe41"
+        },
+        "ö": {
+          "bbox": [
+            2,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "c3c14672de7b951bce883d5d10d4246952ca67d48a04f68fa7aa2c56189533a6"
+        },
+        "ü": {
+          "bbox": [
+            3,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "8cf070ef6e1de732bde237650106f1d73acaa82aba88a742bc6edff0c450e428"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            18,
+            30
+          ],
+          "bitmap_sha256": "77e43e1b324ec9cb9122a68db78cba0ac7eaed6867bf3501525536efaad8f211"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            17,
+            33
+          ],
+          "bitmap_sha256": "38ccacb6329af7546bee334d8315740ed43315b807f51a5595e070a55e36d05b"
+        },
+        "İ": {
+          "bbox": [
+            3,
+            0,
+            17,
+            29
+          ],
+          "bitmap_sha256": "1473cf9b105b31d75e663d44fc56586aeffae56604e49c214a736890132eb676"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            18,
+            18
+          ],
+          "bitmap_sha256": "2b549c372cd9b6e9b2e6b62eaa227b953aedd155fc051de052cc73a32865138d"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            18,
+            29
+          ],
+          "bitmap_sha256": "6483bcddfe275ba155b4aa12252dc02aec5a083f0eb28cfa5366499e0c9ad04f"
+        },
+        "ş": {
+          "bbox": [
+            3,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "0295a6ab67142a119a066fa05097d69e55436d106fd736772ac889940a79ce5c"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Sans Mono",
+      "style": "bold",
+      "font_sha256": "0d3c03d1b667192f91223660a3163325cf83132662fe4d9f7d6e596bf7a995c2",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            17,
+            23
+          ],
+          "bitmap_sha256": "cf460546a51e7def615c4053c2030869892c557584ba9b518de80aabde8d7a07"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            17,
+            29
+          ],
+          "bitmap_sha256": "5749cd2c8a1c5d15dc8b540b2d5b22dcf14ebf5567161f930d7300945ff12280"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            30
+          ],
+          "bitmap_sha256": "909f1db1f2562ba95d8e7a78ec667a1eaececb7583a78ca0241053edfddd5492"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            18,
+            30
+          ],
+          "bitmap_sha256": "f7cfee100f6879688cff479f4346228ed3bdfb3bfcf6c421cbc60ebcd88e1752"
+        },
+        "ç": {
+          "bbox": [
+            2,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "b8be5c9fb0cd192e58327f88f6735be2adfb2ade3dbdfea6cbcf1637c9dba858"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            25
+          ],
+          "bitmap_sha256": "2137d6fae1ff85dd358327545df1a339ab638fe6235098c369a33b5db9092eac"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            17,
+            25
+          ],
+          "bitmap_sha256": "8654b75ffbe80a7080bac8d13c14c5b8c55d42dea9ce28a15344f22c82292917"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            18,
+            30
+          ],
+          "bitmap_sha256": "69503f8106ebbfb5a82579c68f07d51e24e02fb886e68650b33e4c2d2fcc37b9"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            18,
+            32
+          ],
+          "bitmap_sha256": "0d986478428f3548e9a00c70fd8b334c69c56c158d6d355a9e739a7275e89248"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            17,
+            30
+          ],
+          "bitmap_sha256": "0e2321fd0a0b454181f2e772f65f502484c794083e7f36c93d092e9cf68b76e5"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            19,
+            18
+          ],
+          "bitmap_sha256": "aac71e1d22008159a66dee6fe125cae5726850541d3d7b3b6b90e68de45597fd"
+        },
+        "Ş": {
+          "bbox": [
+            2,
+            0,
+            18,
+            29
+          ],
+          "bitmap_sha256": "3e55c0b39166ac8bc006aeacc3b41b5f2640d356ac73351500b58cff966522c1"
+        },
+        "ş": {
+          "bbox": [
+            2,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "1537fbcdc13bc8b75b31d39a5f80332f81c1f2684ace7f6b1da34948232ba89b"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Sans Mono",
+      "style": "italic",
+      "font_sha256": "710323dd803666c37988df68e736c233d96efdf5c770c8ee28f4c4f4b84fb32d",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            19,
+            23
+          ],
+          "bitmap_sha256": "177880f727ba6c7e46a63e463e4a592a3d5c2cfb48f5bf7460976690c4ec793e"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            19,
+            29
+          ],
+          "bitmap_sha256": "687f6bbd5545f98aaaa6ff0ccd45769b378ebc22116c22f58b24b97190c8d192"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            29
+          ],
+          "bitmap_sha256": "9b841ca26ba37f2d2826d9618ce7149557c6b7e2a2290837d589072cf425802f"
+        },
+        "Ü": {
+          "bbox": [
+            1,
+            0,
+            20,
+            29
+          ],
+          "bitmap_sha256": "7718aad697a2f34515cae0918516543dd0ff8eb9f5d21743194086eaa79f807a"
+        },
+        "ç": {
+          "bbox": [
+            2,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "a3876c079b0c541adba868ccc6fb11bd4972038e4a293270fa721d09639bfc49"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "9d7c42611f0250e0f5daae0e73f2a4286c3e81407af945e44763c008e0ad1a4f"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "7daa6c57b09542c4ef16e5f166dfed1f1cbb164e9b59c372b7458cfb8475274c"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            19,
+            30
+          ],
+          "bitmap_sha256": "c7ff09b48b17389b4e4672bae0ffb9e9bcfb0b4955087c2398441c5d706e4c4e"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            32
+          ],
+          "bitmap_sha256": "919f62bbd76ff5b263f2d96df91ab8ffc93b9df1eda88e6d9f41f1db3c74cf4d"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            29
+          ],
+          "bitmap_sha256": "93ce36c46393df415fea89d980003e86c980b1abc020c23df039ac31c0597c67"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            16,
+            18
+          ],
+          "bitmap_sha256": "c9e6abdca99c5f0f886f00e836ab2b447951eba30edeccf3eb42a2cf46aaae69"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            18,
+            29
+          ],
+          "bitmap_sha256": "9605d93574305730aecb69fcee7b3cf5c34806603e0bf67b55d92cc96e4acf8b"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            24
+          ],
+          "bitmap_sha256": "40c9b277cdba79e77169a75176b2cf81fb9b58c6c06ff0364227194d9e82f774"
+        }
+      }
+    },
+    {
+      "family": "DejaVu Sans Mono",
+      "style": "bold_italic",
+      "font_sha256": "2084995adab143b149258f5944b7f863804796b753014526bd7f7915b1b20770",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            19,
+            23
+          ],
+          "bitmap_sha256": "5a093b600f1a58e42279779acc92ea07df62b18bc6431d13d5e99f72274ff05c"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            20,
+            29
+          ],
+          "bitmap_sha256": "1a63c5e86162001e37785de0c21f31590a3eec9c11d35094bb9850a6bb86e8df"
+        },
+        "Ö": {
+          "bbox": [
+            0,
+            0,
+            19,
+            30
+          ],
+          "bitmap_sha256": "fd9f1a8d61cefe220cbec41a01985cc90f8c37ae4955775dd203573fd30c9624"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            20,
+            30
+          ],
+          "bitmap_sha256": "3eeb7634112dbd23d9a1d1d55a4c16e65a255852d260cf52621332024e12333d"
+        },
+        "ç": {
+          "bbox": [
+            2,
+            0,
+            19,
+            24
+          ],
+          "bitmap_sha256": "66693ca262701007be2a92710c49a8492e5536cb630e7fe627102532ab626819"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            25
+          ],
+          "bitmap_sha256": "c88cf73b6ea1c875a27ebbd2b1d5a7ad48d9401544e19e4a636f1ec06ad6990c"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            19,
+            25
+          ],
+          "bitmap_sha256": "54c56e984c4fdc8a8a8325a8b024a7f8b9ce37fc4b5c54dd231a02f02a25d26b"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            30
+          ],
+          "bitmap_sha256": "c29ac0d945c6e3de90055ef35d3a57f7f9e7f608b9de964330e3019fe69df8b0"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            32
+          ],
+          "bitmap_sha256": "67b9bc03cfa6929cf1f30011198283108a6093c54f85cb05ee47fa7a17d603d7"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            30
+          ],
+          "bitmap_sha256": "87f89426b6665ac07eae989458a0b6c49021a343f21b4161c83bb6bcebf3460d"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            17,
+            18
+          ],
+          "bitmap_sha256": "e39055a2f4abdf673610fff05b034a4f51ec22dcfdcf1bdf48a7652fae0dee63"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            19,
+            29
+          ],
+          "bitmap_sha256": "bcdaa5b143d7b01f3ecf050f985f5c8389d2fd8a4564c24f4c8a8562a19ac124"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "131a0adeb483d773d2fed250ae6d939a0d57e94f71b13b70d3b9c17eae452ed5"
+        }
+      }
+    },
+    {
+      "family": "URW Bookman",
+      "style": "regular",
+      "font_sha256": "7b1bc8e6a16cef53785ce03d4848f8971f3ba38cd9e266e4786a50e08bd9235b",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            10,
+            22
+          ],
+          "bitmap_sha256": "312416506b7ff997102f1eea43f8b2a869657b5d04649a3198eaef8da4ee3a64"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            23,
+            28
+          ],
+          "bitmap_sha256": "e260920373fc1df414dea1cfeb0e7bcb647a6aa8522cb0ea5c6b7fff6ae1522e"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            25,
+            28
+          ],
+          "bitmap_sha256": "e8fb190953a26e93c7985f935b0bbe54bb94ab631621ea5fe19c76a907916c5b"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            25,
+            28
+          ],
+          "bitmap_sha256": "67c996c6d6c5179ee4599be2616b6d891b6ab0bb6ed30b6f8e4066a510c6bf65"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            16,
+            22
+          ],
+          "bitmap_sha256": "465b6dc90fd8eeb437cc3e53d3b6029c92c09b6055412664b420a249dd33d2ee"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            22
+          ],
+          "bitmap_sha256": "43bb6ada8321af1bbf62a4a8541891b69362b2ff74aa57ea622dbdfeb6dbd3e0"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            21,
+            22
+          ],
+          "bitmap_sha256": "bd6882882c1e9a130f186b6975631bf7f30d6409e740729a853c2b98bcaa5b7a"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            25,
+            28
+          ],
+          "bitmap_sha256": "ae0b669d12b6cf8f86f73dd802bfbcd79ee8cc903dac5d6a398b020ef726e332"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            30
+          ],
+          "bitmap_sha256": "229da2378e02daf2049cf4a90222c564b3c361a13605379fee38238599ce3c1f"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            10,
+            28
+          ],
+          "bitmap_sha256": "41182c2d1b99aa94c64299b6f775a24e9196293878615df5c28b694f034f7a1b"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            10,
+            16
+          ],
+          "bitmap_sha256": "64e5247d8430a903f0aa7d176af8682426ea54ff8eda3e8d969d225f09412722"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            21,
+            28
+          ],
+          "bitmap_sha256": "7a88ee48542e4bcbeedb090c4aa45134656521c8e20818e48a343aa80f18cdf3"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            16,
+            22
+          ],
+          "bitmap_sha256": "631cb034e8d61b3b92c1c96f452a4e297de471afaef87981dc5f8d7e397da1f9"
+        }
+      }
+    },
+    {
+      "family": "URW Bookman",
+      "style": "bold",
+      "font_sha256": "ab8b2fe57cbea9783c6179188dc013c76cfc5717c22cf59bbf3016ef2d7d93ee",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            13,
+            22
+          ],
+          "bitmap_sha256": "ae846e00cb7840e5ac21c0706556f02271472f1e7112e6483cb68f25ca84ac9e"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "2e9280db400af1045a3369d150ce2aa9145b59f783c29d4c8a0db217866ba238"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            25,
+            28
+          ],
+          "bitmap_sha256": "c57ffce10e39fc816235b5b787db537cabb9283718a71897d7781bbd63470ca7"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "6e6a1d111790abb73ddc7832f867cee2afdac041a68acebc7f4acaefd958907f"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            18,
+            23
+          ],
+          "bitmap_sha256": "e78ded79d7f8417e818813c65e82eca5a39c48dd3d6ca53e27cf39db663853c4"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            19,
+            22
+          ],
+          "bitmap_sha256": "e1b77724f52eac60ddad7aa4f16bd59d773dffd3c102935177b779274fbe6f60"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            21,
+            23
+          ],
+          "bitmap_sha256": "86eba874b2d1c95e282482ca4f39ca1bc4b0bc5d06b0e238da577004b26d6b96"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "34f3e825ee7f916476feffd9053bcc5372e2e59d82907ac388e2151d69f8dcc4"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            32
+          ],
+          "bitmap_sha256": "24e94d4cefbb38861edbb98ca35268411a3b18ee9d79cd0692e4328242e2e422"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            13,
+            30
+          ],
+          "bitmap_sha256": "7676ca49e15a8981a9b59d19c35befb1c0e60d1a835049094ab8cc876caff827"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            11,
+            16
+          ],
+          "bitmap_sha256": "1c957aced02b93393b9c63883c6de40cfaac4fa0a5bdc48d234c5e6903869b5b"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            21,
+            29
+          ],
+          "bitmap_sha256": "30d23b4cda0756d894f8ebffb228815a110a57de356ecd7da644bbe70da6228c"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            16,
+            23
+          ],
+          "bitmap_sha256": "60ae62441c398bc197040df44e65903273a9fff7dc1d2eea5ee3b41c3d645c35"
+        }
+      }
+    },
+    {
+      "family": "URW Bookman",
+      "style": "italic",
+      "font_sha256": "ed722e6c2996b08e8516d27a7c017972cfabf5d1736b496b6526da78fd17691a",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            14,
+            22
+          ],
+          "bitmap_sha256": "1bd73b4a0160ec3cfa2ce19352c32041a2c9f74d638b3a8f09d1ece82759cd34"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            24,
+            28
+          ],
+          "bitmap_sha256": "ddb07ef5e62a3c7388061826fd5c65a29e7bbfb56ada83cb9abb36fc82e7323c"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            26,
+            28
+          ],
+          "bitmap_sha256": "2f51ca4f08e15c0c75bcd38a4ed4f372c3db3def90bbfd28566947c4d003d615"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            27,
+            28
+          ],
+          "bitmap_sha256": "bdcc9c1fe8defe3b157e16be15c10acbc3c91861129b35093ce19a36b4afe4f8"
+        },
+        "ç": {
+          "bbox": [
+            2,
+            0,
+            17,
+            22
+          ],
+          "bitmap_sha256": "09c117f636c844895d4465a0d878f5de72b681124877d4535e86a6ad816fce7c"
+        },
+        "ö": {
+          "bbox": [
+            2,
+            0,
+            19,
+            22
+          ],
+          "bitmap_sha256": "9f3ddc44b28e4b943c8de30870cdd72ba48810cb3471bf416310b92c88138343"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            22,
+            22
+          ],
+          "bitmap_sha256": "0943a99e7a0072a20f4353418081648b7c5584a2f7706680849fa855e5c83707"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            26,
+            28
+          ],
+          "bitmap_sha256": "cedac7528fcc2cc2be2b2eec8eeb9e6551394772ed0b1021346a08da453e4179"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            29
+          ],
+          "bitmap_sha256": "35e59e88540c3f9bef4a1949135601a1f8062c6d9617179c9ff932d04186183c"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            14,
+            28
+          ],
+          "bitmap_sha256": "1de4172db0b3436fb5735e5b527d767ce9fa8aea3ea2665b9df3b8302a991b76"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            12,
+            16
+          ],
+          "bitmap_sha256": "e3f5b28adf76a56a2db4acabcc326763fd94c8a909b72d8b831347e1be3036d3"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            22,
+            27
+          ],
+          "bitmap_sha256": "d1e98d368fd9cc56bc1bcb30dac8e52e0089f259b75b26d72caa9ea1ca04ebb7"
+        },
+        "ş": {
+          "bbox": [
+            2,
+            0,
+            18,
+            22
+          ],
+          "bitmap_sha256": "f9be722120c12171e0e35ea1802163f2cb531d7495a75f3dac1b28077244f216"
+        }
+      }
+    },
+    {
+      "family": "URW Bookman",
+      "style": "bold_italic",
+      "font_sha256": "4d9dbaae8178ffa2f5d557245d09dc968eeac9eed7e453cc2db4cc6a9aacb44d",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            16,
+            22
+          ],
+          "bitmap_sha256": "52c9cd68b9e87f5fc19659c2f390448be7314b51fb143fa1e8d66ec9f37be081"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "a7b51e31c4d65881ca0c866d4728822bd0db4e0219f974b1ab1b2df61c6489e3"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            26,
+            29
+          ],
+          "bitmap_sha256": "8039557643d52b32bc05dbcc85924c010f0aa33e904a4f155eb92341c42559a0"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            28,
+            29
+          ],
+          "bitmap_sha256": "78c44a19080e37fe5a6ef2823fc9650bc121567258249b00c3e29f5cb4c63005"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            20,
+            23
+          ],
+          "bitmap_sha256": "c33b1d9e2b36b6fb584a7431f0dc511d56005737011e77a1302bf886c8d390ac"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            21,
+            23
+          ],
+          "bitmap_sha256": "af730b6483cb9461655af2be69820e04303a369bb3a580ae49e28593d979055b"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            23,
+            23
+          ],
+          "bitmap_sha256": "cf0edd512db424ed9a34df259692c2d12531534e3ae25d6056b4a8c29cfbe4ec"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            27,
+            28
+          ],
+          "bitmap_sha256": "20eaf4f984ff2960a823833e3e0f76c4a69846f8e3f4cf8e802594cee1006394"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            22,
+            28
+          ],
+          "bitmap_sha256": "023e8efd22fb8e325cc026efaab7b8e88898716869190d88599e978e1ca762c6"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            16,
+            29
+          ],
+          "bitmap_sha256": "56dc695c69e5ae795925b4044a234518f6df1ae30ef103d3f601dbf4509c5e07"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            14,
+            16
+          ],
+          "bitmap_sha256": "f9d5a19bc76a4cb8e8aa9db2951d73771ed890a099daf5c078418c3f5d0e1294"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "3012238c4d158359b8e881a8212b56f0bc2cb07632fd3731b952fcfe229a8ef3"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            19,
+            23
+          ],
+          "bitmap_sha256": "3bcbed81b38c7f606c2fa34a122d827d5f73ee558717782cbf93321efa27e153"
+        }
+      }
+    },
+    {
+      "family": "P052",
+      "style": "regular",
+      "font_sha256": "f054a7389d8d0e9f4c5f7b4c21feb7e2b14bec8004a1e92778a78d149524eea9",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            11,
+            23
+          ],
+          "bitmap_sha256": "c26b2b0066389ec56608fae3a17afb9f61bedcdd3801f77ecd7986e03f7f1878"
+        },
+        "Ç": {
+          "bbox": [
+            0,
+            0,
+            22,
+            29
+          ],
+          "bitmap_sha256": "57c031906f091ea5d3b218705236a2ab6498af36caa2f58ebfd23476f861904c"
+        },
+        "Ö": {
+          "bbox": [
+            0,
+            0,
+            25,
+            27
+          ],
+          "bitmap_sha256": "a481ef5d856aa78c881df8c58eddc497106351bacb960d0d4eb2974765cc35d5"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "4da6cc1789ff988d03cb223abb41a3fc4caa545368540ebac36e2e1f59d4b878"
+        },
+        "ç": {
+          "bbox": [
+            0,
+            0,
+            14,
+            23
+          ],
+          "bitmap_sha256": "5f1ae53694569989ee275c2c5a1fce2bcd2829c4b9347ca2797b09606b97a018"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            21
+          ],
+          "bitmap_sha256": "74f30739148bdaff50d01b64340f06fabb8cb6dfce37e1c2669f72379f269246"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            19,
+            22
+          ],
+          "bitmap_sha256": "101d05811499150df3234af30e7cf9c699af52f7e10fb1734f847d8aa360f88f"
+        },
+        "Ğ": {
+          "bbox": [
+            0,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "d62d5ec7ecc1faea8328904f1625285816cb40eb9513e9b0dcf87b28fa99cdb8"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            18,
+            32
+          ],
+          "bitmap_sha256": "6620a3ead7e592cf16a36e959582f2a446b781bc64db2f77d6d556e7e27f560c"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            11,
+            29
+          ],
+          "bitmap_sha256": "faf46789b67fea590c43f99cff10bbc3bdee70b4e41f2649b5e20cbc17385a0e"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            9,
+            16
+          ],
+          "bitmap_sha256": "975e4b9815d806b3002bba02296c17d6feb181e51eaeef809bdb5d41092b4131"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            17,
+            29
+          ],
+          "bitmap_sha256": "fbc26bdb04c97e074af165e5224c7a8ebebc171fa0b2ec5c1c050bbf21352065"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            13,
+            23
+          ],
+          "bitmap_sha256": "86acd9b63725e88319a48415bf60e05d549ec615a7049f737a6e13ae3213f18d"
+        }
+      }
+    },
+    {
+      "family": "P052",
+      "style": "bold",
+      "font_sha256": "ba6503baaf0f9e4e40a69cc4c0e57049fbde313fe183aba8fe823208337a94af",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            1,
+            0,
+            12,
+            23
+          ],
+          "bitmap_sha256": "c6c6d21bed8fa7bb73e71a869c0562e336a25bec3bcbdb0748771465ba50f582"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "4f39614e8de74211f6c607e910a8a6bf220f88e9dabf45702261392e30d3c787"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            26,
+            29
+          ],
+          "bitmap_sha256": "dec935ddb66566af614eab6465850489470b8ee0cc6993a034a34920e0b580d4"
+        },
+        "Ü": {
+          "bbox": [
+            0,
+            0,
+            25,
+            30
+          ],
+          "bitmap_sha256": "3b1ca817c08ca7c36f22d459460ab5a388391e130573a0cf697cd51eb5f7f076"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            14,
+            22
+          ],
+          "bitmap_sha256": "73c940fc077f57dc05a1f2690841732d93ece94d04a8126fd759f7809c85ae07"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            17,
+            22
+          ],
+          "bitmap_sha256": "0b4f7dae945e3f3180ad405e171e1fca0c6ae1c69a92759f1193201b2d7e50fa"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            19,
+            23
+          ],
+          "bitmap_sha256": "0d807c31d56c34491171399f356c722243a579a9e44fe9b60c3b603bd108023c"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            25,
+            29
+          ],
+          "bitmap_sha256": "3c1183685509ef4e7f6bc0849f869e7109f6151e952406308c30ca4e6819d7cd"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            30
+          ],
+          "bitmap_sha256": "49a2d0c6bbac2c8d12e1dc5c1260556218f4dce51912e0900bfcc80dd19a18fa"
+        },
+        "İ": {
+          "bbox": [
+            1,
+            0,
+            12,
+            30
+          ],
+          "bitmap_sha256": "7fcbf43d9574d24497b9f66a5693e70d04d6b329238b2b66d1eecf927c36004f"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            10,
+            15
+          ],
+          "bitmap_sha256": "ea4ea6d244325849b58bcfa0729ccbaa1669bcb56da353d7d9908c4eb6754fc1"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            18,
+            29
+          ],
+          "bitmap_sha256": "64bb1a7fee3f1347b5b543b470dbf77e6b19e4da1932f3623ec6502a2d7e788b"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            13,
+            22
+          ],
+          "bitmap_sha256": "81ce193583ae08e826836295a0f1e5facb5be91881c06a7c09ba8fee40283d91"
+        }
+      }
+    },
+    {
+      "family": "P052",
+      "style": "italic",
+      "font_sha256": "1feac6055211cf5c6c812c026e398195070f174064cc4d390f0db01647443b0e",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            12,
+            23
+          ],
+          "bitmap_sha256": "93d90032b0ef82b4ef79ba2b7968f11ad7d53a09acc6df225bba13fb436f3825"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            21,
+            29
+          ],
+          "bitmap_sha256": "54859de64a92b7e19f0543c2220ca571f789698f5f0c40567cd85c285f00bf84"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            24,
+            27
+          ],
+          "bitmap_sha256": "3f2f4c38fe7110fd4c64e65047b61cdecdacf174145915f67ffaa964719b9f7b"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            26,
+            29
+          ],
+          "bitmap_sha256": "cc7b673ea831f1e222df355eba65e5c9f3b17daeb9c0426ce3b01d3f5e5981d2"
+        },
+        "ç": {
+          "bbox": [
+            0,
+            0,
+            13,
+            22
+          ],
+          "bitmap_sha256": "f6b902f80c01223f5b897a490e616cb96065bc8e067715c121242ce4f858f672"
+        },
+        "ö": {
+          "bbox": [
+            0,
+            0,
+            14,
+            20
+          ],
+          "bitmap_sha256": "2a2ec2da9e971b4ef65c973e01278232f1ef8d88fbddd770473b0ced54bad635"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            17,
+            20
+          ],
+          "bitmap_sha256": "a880e2ec5f99b48def3dbe6dbaf231a37756ad74127f6d61b84b57f5236c168e"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "17da769e1db49675666e8006d85a460378d503781d7d36cb526a239799dd2e90"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            18,
+            31
+          ],
+          "bitmap_sha256": "d5b7fe7b6bd675fcc02eb491c129d0dfc770bf33be1d1e4f60fb022c03344161"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            12,
+            29
+          ],
+          "bitmap_sha256": "ab761332f3cbfce5a5f4eac55ce9973fe903e0616faa62946299e557ff6a4e23"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            8,
+            15
+          ],
+          "bitmap_sha256": "e15a846cc6f80de9f16ca9c0323279dcd2c7b93fcc7e1aff926790671be7228f"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            29
+          ],
+          "bitmap_sha256": "039456bece24e7ff923e9111eb8ded98a62285c68958b26c5865b7c9a8bc4de5"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            11,
+            22
+          ],
+          "bitmap_sha256": "bf97e4daf12e420a0ee1b4b9cbbe73e1a98ab44d3525040286e82d4c2d8444d6"
+        }
+      }
+    },
+    {
+      "family": "P052",
+      "style": "bold_italic",
+      "font_sha256": "63e15828175e55559ae09c9bdcd09fc0354537657d43109edb6e2a5509f8299f",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            0,
+            0,
+            15,
+            23
+          ],
+          "bitmap_sha256": "9304c2d75fd6538121ba8da7612ee35f230a2f424252815361b48c3bad3eb918"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            23,
+            29
+          ],
+          "bitmap_sha256": "546a3df0444435dd8d00359de2bccc26365540c8c99c26b52eb82d363ce2a690"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            26,
+            28
+          ],
+          "bitmap_sha256": "c4e5aeed1d7564c86f92367bdb6765671dae58291d189a4bde831dd8332a51f2"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            27,
+            30
+          ],
+          "bitmap_sha256": "f5c90f56121d6e2bc397faa77b1191b8dff25fbc489f5b9f13360518687567a2"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            14,
+            22
+          ],
+          "bitmap_sha256": "d67405b9b82160b180d2afa336a43c74b5fefe7942d82ad1af079bc1ebd0c0cf"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            18,
+            22
+          ],
+          "bitmap_sha256": "5a99f3b2f8eb88b2a555c8003d3d6d8bd8ef1fbc7d1b7132b819702b23e44ae9"
+        },
+        "ü": {
+          "bbox": [
+            0,
+            0,
+            18,
+            22
+          ],
+          "bitmap_sha256": "3cbdc7c98d150d8e204d0ad2929e1b3bff714704201976bd758f3b0317897058"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            24,
+            29
+          ],
+          "bitmap_sha256": "2bf2d5a24986ae2648f2c0228439f364c0b63ec72d56c883ad79548a555d6d98"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            31
+          ],
+          "bitmap_sha256": "b440e204f8c1d885437434670052fe7b3582299b794bcae989ca772ef2cf77a9"
+        },
+        "İ": {
+          "bbox": [
+            0,
+            0,
+            15,
+            30
+          ],
+          "bitmap_sha256": "71a80146705f3520bdbe247c227bcba7fee649d831d75c31374abb1d115d9c62"
+        },
+        "ı": {
+          "bbox": [
+            0,
+            0,
+            10,
+            15
+          ],
+          "bitmap_sha256": "c2a57ecc1751e65e32daf323bd729c04e7d17e629568b9df76d33a906df7f3f6"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            17,
+            29
+          ],
+          "bitmap_sha256": "8feb4d9e4ee37466e9d53f1d77599be5f7af30f4a9913a2a537aafa47664f218"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            13,
+            22
+          ],
+          "bitmap_sha256": "7b7763e3b1d7e90f82faae2255b1e7ce903000bb013b8a079ef614840091c13a"
+        }
+      }
+    },
+    {
+      "family": "URW Gothic",
+      "style": "regular",
+      "font_sha256": "04318316cee29950805110c9c8949eea189ef5575132881f4d4d7e03e5299903",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            5,
+            24
+          ],
+          "bitmap_sha256": "0ca8a2e43527790fe884457eeaec28ffeb5c78ac61a356a8efca589e1023aede"
+        },
+        "Ç": {
+          "bbox": [
+            1,
+            0,
+            25,
+            32
+          ],
+          "bitmap_sha256": "c4acb4c625f75245ca619c9ae3689261e7dd81b12596949b1c616623d340c385"
+        },
+        "Ö": {
+          "bbox": [
+            1,
+            0,
+            27,
+            30
+          ],
+          "bitmap_sha256": "cfb1ea42d13125fae8c7186250d2f7ea200a92b32cd66121dadfeda591479372"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            19,
+            31
+          ],
+          "bitmap_sha256": "b2a0541925d30a6d02e2d75a71615fc0236b9210c89cc4404d8e4817fec1b746"
+        },
+        "ç": {
+          "bbox": [
+            1,
+            0,
+            20,
+            25
+          ],
+          "bitmap_sha256": "9622c33f0195d680e55684867674bc9a43b0d986e25bb0bef0e203a087591dc8"
+        },
+        "ö": {
+          "bbox": [
+            1,
+            0,
+            20,
+            24
+          ],
+          "bitmap_sha256": "ca47460559d2b603b6d35471816760dbeb961177413e5acd2f91797d63926734"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            18,
+            24
+          ],
+          "bitmap_sha256": "75ffabd854153364dcdcc48e1bfa5fbf88bb3df94f3422bf406be1a9033e3015"
+        },
+        "Ğ": {
+          "bbox": [
+            1,
+            0,
+            27,
+            30
+          ],
+          "bitmap_sha256": "e74419f9a9f81cdf2e23979e77548acc9dd72c15bfb8997624cd4515b2e6b1cb"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            20,
+            31
+          ],
+          "bitmap_sha256": "57f549dda11adb4c55c130356646defd31cb6d4a04176f61ec4d3255fa212111"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            5,
+            31
+          ],
+          "bitmap_sha256": "f8abbea545d4c4d52a6af04c725dcc67bcf49de4303bce9de0c68d8cc023e760"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            5,
+            18
+          ],
+          "bitmap_sha256": "9293fcbdfb38283f26abc616583590793160912b17809e714893436d44c6d9a8"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            16,
+            31
+          ],
+          "bitmap_sha256": "877d57f16409ab95a92f5a92b0ce0b09310a00b9c56b6edb84621c885f62bea2"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            12,
+            25
+          ],
+          "bitmap_sha256": "81b146f59c54c9450f6c2b6a988a6e699c6d2fb7ab86f4a72a9f745521cfd8e5"
+        }
+      }
+    },
+    {
+      "family": "URW Gothic",
+      "style": "bold",
+      "font_sha256": "5b009410cf5231dcb1e45b155c1afedcfc63d82042fd8c414d0dd7705c9fbbae",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            7,
+            24
+          ],
+          "bitmap_sha256": "0c4d399d33c7ff5f4e25763b2ddc5e9d9bc5cbc23979329a44472aab41d9577f"
+        },
+        "Ç": {
+          "bbox": [
+            0,
+            0,
+            25,
+            32
+          ],
+          "bitmap_sha256": "59411c2bc395ee54c0023379e543abc20a9d49dcbbcbb82626892a19d3a59b91"
+        },
+        "Ö": {
+          "bbox": [
+            0,
+            0,
+            26,
+            30
+          ],
+          "bitmap_sha256": "7caa8f68df61a7d641f37c207c31844e03b58f9dd0cd492b49cfb6be5e8f26b8"
+        },
+        "Ü": {
+          "bbox": [
+            2,
+            0,
+            19,
+            31
+          ],
+          "bitmap_sha256": "20d120068776dc08459fa3d0c0b2971f98eb3771e404d78771380b6789bfbe77"
+        },
+        "ç": {
+          "bbox": [
+            0,
+            0,
+            20,
+            26
+          ],
+          "bitmap_sha256": "6dd68227608e0d6651e8ba3fa47b66ca56f6eec54536fc560c1a2c2dcc1c319a"
+        },
+        "ö": {
+          "bbox": [
+            0,
+            0,
+            20,
+            25
+          ],
+          "bitmap_sha256": "ea974f870df5481b0b148f653d22e3b352e4875319569905bf8f625ebc9e0e36"
+        },
+        "ü": {
+          "bbox": [
+            1,
+            0,
+            18,
+            25
+          ],
+          "bitmap_sha256": "226630cf90232098f20a170a8dbbf64227193c903188281218c98a0c1ee17d5e"
+        },
+        "Ğ": {
+          "bbox": [
+            0,
+            0,
+            27,
+            31
+          ],
+          "bitmap_sha256": "ba3b5b11ddb1b9b68ecbc425853b2a1c9b40fd47d223b65f02441586fff562c6"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            20,
+            32
+          ],
+          "bitmap_sha256": "c16f715ba049efc75101842459aa00d69842cc29a430c1c8e2820e6464d8bba9"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            7,
+            31
+          ],
+          "bitmap_sha256": "657494d08f48319a863e2a4109e857efea81bec424fbd00183ec7170f5451192"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            6,
+            18
+          ],
+          "bitmap_sha256": "fd90c8c5eb53cda0b22a04bfce5ffea3306038b350c58531c5123864b1e4f6e0"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "bitmap_sha256": "2644879c457a13671ea59ef2a320acd2ba0ae31c389dc35c0bb4776633f8db66"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            14,
+            26
+          ],
+          "bitmap_sha256": "c7f182b696797861bf75d422757f5b9f6f543e341ee457fb57db6f18a9c810f4"
+        }
+      }
+    },
+    {
+      "family": "URW Gothic",
+      "style": "italic",
+      "font_sha256": "ec4e947734950fd344918e560bc8ad0c5d8b17d0ab4853988824f13b9f77e53f",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            10,
+            24
+          ],
+          "bitmap_sha256": "474a9e8f27f94dcb7fe0657b35264ae52ef2455166192fe6e71aa177a577f3e1"
+        },
+        "Ç": {
+          "bbox": [
+            3,
+            0,
+            28,
+            31
+          ],
+          "bitmap_sha256": "98cf621b4c186168b3073133c89cbb15e778b0ef8082f1be98c08ce5ce7a95c3"
+        },
+        "Ö": {
+          "bbox": [
+            3,
+            0,
+            29,
+            30
+          ],
+          "bitmap_sha256": "531ec35fcb126a83dac8dc8fe4ca670a4c9ab0e23f7e79352ee12373facfad82"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            23,
+            31
+          ],
+          "bitmap_sha256": "cc6cad39abadf712244d3e282cf5b7eb29f20d5dd8040a70fd0572c725c6f1ac"
+        },
+        "ç": {
+          "bbox": [
+            2,
+            0,
+            22,
+            25
+          ],
+          "bitmap_sha256": "cc71f6137d2d2d3b58f5be11be4a69042f6474a47a01031f3ca318e58801e5f2"
+        },
+        "ö": {
+          "bbox": [
+            2,
+            0,
+            22,
+            24
+          ],
+          "bitmap_sha256": "6ad3d3aabd11acf40cbd6e7301a5eeeb4d48eefc2146231c6c5a654e44e2b17c"
+        },
+        "ü": {
+          "bbox": [
+            3,
+            0,
+            21,
+            24
+          ],
+          "bitmap_sha256": "6e34dfb9036c19ac1d6f97b74ade78721b93e16c9e548e9ec55fe5b5afe127a0"
+        },
+        "Ğ": {
+          "bbox": [
+            3,
+            0,
+            29,
+            30
+          ],
+          "bitmap_sha256": "907e7cf2ef305f095b66b60b6978bd7d130ff6d8e9910186e2a4c16b5e29e8e6"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            31
+          ],
+          "bitmap_sha256": "d930bd451b644ee39308a264ad1ab0ea64e022e79d3f75e20505305d5d1f1bd8"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            11,
+            31
+          ],
+          "bitmap_sha256": "9cecb73eef9eed53349c5e1719ebe0e3babd05a1d62e80d3d1f4f14ef9c40765"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            8,
+            18
+          ],
+          "bitmap_sha256": "50d5e899f7a1e375bab4436e3d3bbba2a39fcb6f334194b25dc382a8b7e62e78"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            19,
+            32
+          ],
+          "bitmap_sha256": "11ff47c299c1b1108eee8ac65f46d7ecbd62231e0832d064f798cd1db4b91496"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            14,
+            26
+          ],
+          "bitmap_sha256": "31d1061c8e40ede9aa8d6ffb33b4492918673bec11843685ce97c6e0270ae3dc"
+        }
+      }
+    },
+    {
+      "family": "URW Gothic",
+      "style": "bold_italic",
+      "font_sha256": "d57abaa6d40718cfbf735ad50080d0b095e7194e451992e02786a7c0113db35c",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            11,
+            24
+          ],
+          "bitmap_sha256": "e0235f31394047f1847e4c9d23fd62b9dd8fbd426af14bdbcf33ef34309c2123"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            28,
+            32
+          ],
+          "bitmap_sha256": "22baebb8aaab278e0370aa9bd490f33d190709fa38e45e033dd0d3f04b218668"
+        },
+        "Ö": {
+          "bbox": [
+            2,
+            0,
+            28,
+            30
+          ],
+          "bitmap_sha256": "86705fb627ccf179b40a97a2cb31e7053a1f626971a075a9be343e47034857e1"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            23,
+            31
+          ],
+          "bitmap_sha256": "89b1c4996c6e6cbed92e6e0dd95838134b259b4a76a81e690f5661141ab4d6a6"
+        },
+        "ç": {
+          "bbox": [
+            2,
+            0,
+            22,
+            26
+          ],
+          "bitmap_sha256": "be98eed63c0a4aeffa284897281392c747b5dab507bc7bf54abb77e10e395b76"
+        },
+        "ö": {
+          "bbox": [
+            2,
+            0,
+            22,
+            25
+          ],
+          "bitmap_sha256": "acb1697794677dd24cdb6cecd07a607a10fad48cb039a6665dac45887b4cbe17"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            21,
+            25
+          ],
+          "bitmap_sha256": "fb17eab261c3606e944b6aa49f6ca199ae258f60114050d60d1f4e8d3802e729"
+        },
+        "Ğ": {
+          "bbox": [
+            2,
+            0,
+            29,
+            31
+          ],
+          "bitmap_sha256": "f07ab551a955282d04edcb4c9ae0616abcf70a76ad3af7e3f161b28d3f7574da"
+        },
+        "ğ": {
+          "bbox": [
+            1,
+            0,
+            23,
+            32
+          ],
+          "bitmap_sha256": "4c5eae334ecc317ec88e326185b6da4191a75582414cf763117d333d37f7014b"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            13,
+            31
+          ],
+          "bitmap_sha256": "fb05c123e3d4b22da7211f879efd9beb48b1b73847218e3a946faec11eab2f29"
+        },
+        "ı": {
+          "bbox": [
+            1,
+            0,
+            10,
+            18
+          ],
+          "bitmap_sha256": "c557e4fc3e6855d0248c84fb1771ea913b29cfcbb6575012a940da521ef6b650"
+        },
+        "Ş": {
+          "bbox": [
+            1,
+            0,
+            19,
+            32
+          ],
+          "bitmap_sha256": "68133d5e26d4daf325a52c09c319e482e8c507590ccdfdc9fb59dacd82fd9806"
+        },
+        "ş": {
+          "bbox": [
+            1,
+            0,
+            16,
+            26
+          ],
+          "bitmap_sha256": "c5c5cebd9f8ba001ce554da3e0525396b11e92f87de582fef8aeec3eace9970d"
+        }
+      }
+    },
+    {
+      "family": "Z003",
+      "style": "italic",
+      "font_sha256": "a04947e59fc9339ea3c4b34c31fd46764f22af7512afc2c074ce190e79ed7a09",
+      "glyphs": {
+        "I": {
+          "bbox": [
+            2,
+            0,
+            16,
+            18
+          ],
+          "bitmap_sha256": "35c65fa04f67cb95f7a8e915866898a8849ba03d64b1f1c160e1ed73194ea288"
+        },
+        "Ç": {
+          "bbox": [
+            2,
+            0,
+            21,
+            28
+          ],
+          "bitmap_sha256": "7a14dc82a06d3e0f067f1ea21a8fea4457b4d7b3235ba744dceec6af50c30f5a"
+        },
+        "Ö": {
+          "bbox": [
+            3,
+            0,
+            21,
+            24
+          ],
+          "bitmap_sha256": "4d2e437850630501c1038abd6d52382ff717dd7b49aa22386a3c6ddea908f3af"
+        },
+        "Ü": {
+          "bbox": [
+            3,
+            0,
+            25,
+            26
+          ],
+          "bitmap_sha256": "ff94565d02eac3891b122c70cdf29524c2fe4e091b4c41773d61c05c275267bc"
+        },
+        "ç": {
+          "bbox": [
+            2,
+            0,
+            13,
+            20
+          ],
+          "bitmap_sha256": "06d1bdd8e5217e817efbf362aa5ba178f25ae0df6afc379b57de3cda706671be"
+        },
+        "ö": {
+          "bbox": [
+            2,
+            0,
+            15,
+            20
+          ],
+          "bitmap_sha256": "c431ec64d0bb9afbf67cd998664fa219de4b98136871b72b6c748ebd31260c68"
+        },
+        "ü": {
+          "bbox": [
+            2,
+            0,
+            17,
+            20
+          ],
+          "bitmap_sha256": "baa6cfc4fd5c825dea3a5e97dbd9fdf8630bde322bb43cf68515bd2044725db8"
+        },
+        "Ğ": {
+          "bbox": [
+            3,
+            0,
+            22,
+            32
+          ],
+          "bitmap_sha256": "aa2ba4411531858a02639e11d02751e78cb868bc4c6f4187f232900b9565d75a"
+        },
+        "ğ": {
+          "bbox": [
+            0,
+            0,
+            19,
+            28
+          ],
+          "bitmap_sha256": "a6c01a2c75ebfff276b0bfbe191e2f17373dcf1b30933a1368452467845bc6b8"
+        },
+        "İ": {
+          "bbox": [
+            2,
+            0,
+            16,
+            25
+          ],
+          "bitmap_sha256": "4f1889c1788dceffe5b49f83afd452905f1b108a2c81c9a206129ee38a6fcd25"
+        },
+        "ı": {
+          "bbox": [
+            2,
+            0,
+            10,
+            13
+          ],
+          "bitmap_sha256": "2c4f4a7905705075b0b81bdd7944c0bae3173f0eaf45b68d1985c5d62c7d71bb"
+        },
+        "Ş": {
+          "bbox": [
+            0,
+            0,
+            17,
+            27
+          ],
+          "bitmap_sha256": "c121d482c86514129c29afe3ef7cab74c89e1aa797da4f4adcc7f147f2339872"
+        },
+        "ş": {
+          "bbox": [
+            0,
+            0,
+            14,
+            20
+          ],
+          "bitmap_sha256": "37fac764ea0411152e37b916cfa30d1858857a6248c767e2c511bb66b7e87c08"
+        }
+      }
+    }
+  ],
+  "size": 32,
+  "layout_engine": "Pillow BASIC"
+}
