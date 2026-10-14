@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "samples": 611,
+  "primary_font_files": 62,
+  "camera_exposure_lighting_combinations": 150,
+  "width_buckets": [
+    320,
+    640,
+    960,
+    1280,
+    1920,
+    2560,
+    4096
+  ],
+  "metadata_and_image_hashes_identical": true,
+  "all_ctc_enlarged_buckets_included": true
+}

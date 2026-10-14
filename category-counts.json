@@ -1,0 +1,169 @@
+{
+  "content_type": {
+    "extra_long_sentence": 10000,
+    "date": 10000,
+    "long_sentence": 10000,
+    "short_line": 10000,
+    "ascii_word": 10000,
+    "price": 10000,
+    "synthetic_id": 10000,
+    "medium_line": 10000,
+    "turkish_word": 10000,
+    "confusables": 10000
+  },
+  "role": {
+    "body": 33334,
+    "small": 33334,
+    "heading": 33332
+  },
+  "underline": {
+    "plain": 50000,
+    "underlined": 50000
+  },
+  "curve": {
+    "straight": 25000,
+    "bowl": 25000,
+    "wave": 25000,
+    "arch": 25000
+  },
+  "geometry": {
+    "none": 40000,
+    "perspective_right_mild": 10000,
+    "perspective_left_strong": 10000,
+    "skew": 20000,
+    "perspective_right_strong": 10000,
+    "perspective_left_mild": 10000
+  },
+  "background": {
+    "white": 10000,
+    "ruled_paper": 10000,
+    "dark_sign": 10000,
+    "pink_form": 10000,
+    "blue_form": 10000,
+    "uneven_light": 10000,
+    "photocopy": 10000,
+    "aged_paper": 10000,
+    "graph_paper": 10000,
+    "receipt": 10000
+  },
+  "lighting_effect": {
+    "none": 50000,
+    "partial_shadow": 12500,
+    "gradient": 12500,
+    "soft_shadow": 12500,
+    "hard_shadow": 12500
+  },
+  "contrast": {
+    "normal": 60000,
+    "low_contrast": 30000,
+    "faint_print": 10000
+  },
+  "degradation": {
+    "clean": 30000,
+    "motion_blur": 10000,
+    "defocus": 20000,
+    "defocus_motion": 5000,
+    "low_resolution": 10000,
+    "strong_defocus": 10000,
+    "strong_motion": 5000,
+    "noisy_scan": 10000
+  },
+  "crop_error": {
+    "none": 50000,
+    "neighbor_below": 5000,
+    "neighbors_both": 5000,
+    "tight_top": 5000,
+    "vertical_shift": 5000,
+    "neighbor_above": 5000,
+    "tight_left": 5000,
+    "tight_right": 5000,
+    "tight_sides": 5000,
+    "tight_bottom": 5000,
+    "tight_both": 5000
+  },
+  "spacing": {
+    "normal": 50000,
+    "touching": 12500,
+    "irregular_word_gaps": 12500,
+    "wide": 12500,
+    "tight": 12500
+  },
+  "printing": {
+    "none": 50000,
+    "missing_ink": 12500,
+    "ink_bleed": 12500,
+    "broken_strokes": 12500,
+    "dot_matrix": 12500
+  },
+  "occlusion": {
+    "none": 50000,
+    "fold": 12500,
+    "stamp": 12500,
+    "strikethrough": 12500,
+    "signature": 12500
+  },
+  "mixed_typography": {
+    "uniform": 50000,
+    "mixed_fonts": 20000,
+    "mixed_sizes": 10000,
+    "subscript": 5000,
+    "superscript": 5000,
+    "mixed_styles": 10000
+  },
+  "exposure": {
+    "normal": 50000,
+    "underexposed": 12500,
+    "bright": 12500,
+    "low_light": 12500,
+    "overexposed": 12500
+  },
+  "font_family": {
+    "Comic Sans MS": 5000,
+    "Georgia": 5000,
+    "DejaVu Serif": 5000,
+    "URW Bookman": 5000,
+    "DejaVu Sans": 5000,
+    "Trebuchet MS": 5000,
+    "URW Gothic": 5000,
+    "Times New Roman": 5000,
+    "Noto Sans": 5000,
+    "Verdana": 5000,
+    "P052": 5000,
+    "Impact": 5000,
+    "Noto Serif": 5000,
+    "Courier New": 5000,
+    "Open Sans": 5000,
+    "Z003": 5000,
+    "Andale Mono": 5000,
+    "DejaVu Sans Mono": 5000,
+    "Arial": 5000,
+    "Arial Black": 5000
+  },
+  "font_style": {
+    "regular": 38750,
+    "bold": 23750,
+    "italic": 21250,
+    "bold_italic": 16250
+  },
+  "text_case": {
+    "original": 45000,
+    "uppercase": 45000,
+    "mixed": 10000
+  },
+  "confusable_group": {
+    "none": 90000,
+    "u_umlaut": 1250,
+    "c_cedilla": 1250,
+    "s_cedilla": 1250,
+    "letter_l_digit_1": 1250,
+    "turkish_i": 1250,
+    "letter_O_digit_0": 1250,
+    "o_umlaut": 1250,
+    "g_breve": 1250
+  },
+  "clipping_severity": {
+    "none": 65000,
+    "severe": 7000,
+    "mild": 28000
+  }
+}
