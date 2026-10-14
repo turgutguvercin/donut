@@ -25,6 +25,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 import generate_tr_recognition as base
+import capture_effects
 
 ROOT = Path(__file__).resolve().parents[1]
 CLIPS = (*base.CLIPPING_ERRORS, *base.HORIZONTAL_ERRORS)
@@ -143,6 +144,25 @@ def plan_samples(config, fonts, count, seed):
                     raise ValueError("Insufficient normal-contrast blur donors")
                 j = donors.pop()
                 row["degradation"], block[j]["degradation"] = block[j]["degradation"], row["degradation"]
+        if "exposure" in config["axes"]:
+            # Opt-in camera recipe: preserve v1 scheduling/RNG when absent.
+            for axis, value in {"exposure": "normal", "lighting_effect": "none", "geometry": "none"}.items():
+                require_values(block, axis, dict.fromkeys(protected, value), rng)
+            difficult_light = {i for i, r in enumerate(block) if r["exposure"] in ("low_light", "overexposed")}
+            camera_protected = protected | difficult_light
+            require_values(block, "contrast", dict.fromkeys(controls | severe | difficult_light, "normal"), rng)
+            for axis in ("printing", "occlusion"):
+                require_values(block, axis, dict.fromkeys(camera_protected, "none"), rng)
+            donors = [i for i, r in enumerate(block) if i not in camera_protected
+                      and r["contrast"] == "normal" and r["degradation"] not in base.STRONG_BLURS]
+            rng.shuffle(donors)
+            for i, row in enumerate(block):
+                # Recheck low contrast after the contrast-axis swaps above.
+                if (i in difficult_light or row["contrast"] == "low_contrast") and row["degradation"] in base.STRONG_BLURS:
+                    if not donors:
+                        raise ValueError("Insufficient normal-contrast donors for camera blur constraints")
+                    j = donors.pop()
+                    block[i]["degradation"], block[j]["degradation"] = block[j]["degradation"], block[i]["degradation"]
         for i, row in enumerate(block):
             row["clean_control"] = i in controls
             row["clipping_severity"] = "severe" if i in severe else "mild" if row["crop_error"] in CLIPS else "none"
@@ -355,7 +375,10 @@ def postprocess(image, glyph_mask, rng, row, config):
     coverage = float(((np.asarray(overlay.getchannel("A")) > 0) & mask).sum() / max(1, mask.sum()))
     image = Image.alpha_composite(image.convert("RGBA"), overlay).convert("RGB")
     lighting = row["lighting_effect"]
-    if lighting != "none":
+    capture_params = {}
+    if "exposure" in row:
+        image, capture_params = capture_effects.apply_lighting(image, rng, lighting, row["exposure"], glyph_mask)
+    elif lighting != "none":
         xx = np.linspace(0, 1, width)
         if lighting == "shadow":
             profile = 1 - .25 * np.exp(-((xx - float(rng.uniform(.2, .8))) / .18) ** 2)
@@ -366,7 +389,7 @@ def postprocess(image, glyph_mask, rng, row, config):
         image = Image.fromarray(np.clip(np.asarray(image) * profile[None, :, None], 0, 255).astype("uint8"))
     bbox = glyph_mask.getbbox()
     return image, {"width_cap_scale": scale, "glyph_bounds_output": list(bbox) if bbox else None,
-                   "occluded_ink_fraction": coverage, "occlusion_is_transcribed": False}
+                   "occluded_ink_fraction": coverage, "occlusion_is_transcribed": False, **capture_params}
 
 
 def initialize(corpus, font_manifest, config, output):
@@ -503,6 +526,10 @@ def make_previews(root, rows):
     targets += [("crop_error", v) for v in CLIPS]
     targets += [("confusable_group", v) for v in WORKER.get("config", {}).get("confusable_groups", {})]
     targets += [("content_type", v) for v in ("long_sentence", "extra_long_sentence")]
+    if "exposure" in WORKER.get("config", {}).get("axes", {}):
+        targets = ([("geometry", v) for v in capture_effects.SIDE_GEOMETRIES]
+                   + [("exposure", v) for v in capture_effects.EXPOSURES if v != "normal"]
+                   + [("lighting_effect", v) for v in capture_effects.LIGHTING if v != "none"] + targets)
     selected = []
     for key, value in targets:
         candidates = [r for r in rows if r["categories"][key] == value]
@@ -548,11 +575,14 @@ def finish(root, config, plan, rows, corpus, fonts, manifest, seed):
     pair_axes = [("font_family", "content_type"), ("font_family", "crop_error"), ("font_family", "confusable_group"),
                  ("content_type", "crop_error"), ("content_type", "degradation"), ("crop_error", "clipping_severity"),
                  ("contrast", "degradation"), ("printing", "occlusion"), ("curve", "geometry")]
+    if "exposure" in config["axes"]:
+        pair_axes.extend([("geometry", "exposure"), ("lighting_effect", "exposure"),
+                          ("exposure", "degradation"), ("exposure", "contrast")])
     write_json(root / "pair-counts.json", {a + " × " + b: dict(Counter(r["categories"][a] + " | " + r["categories"][b] for r in rows)) for a, b in pair_axes})
     metadata = {"schema_version": 5, "count": len(rows), "seed": seed,
                 "config": config, "corpus_sha256": hashlib.sha256(corpus.read_bytes()).hexdigest(),
                 "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-                "generator_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in (Path(__file__), Path(base.__file__))},
+                "generator_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in (Path(__file__), Path(base.__file__), Path(capture_effects.__file__))},
                 "split_counts": dict(Counter(r["split"] for r in rows)), "font_family_count": len(set(f.family for f in fonts)),
                 "font_file_count": len(fonts), "balance": "explicit weighted marginal quotas; styles equal within each family; not a full Cartesian product",
                 "clean_control_count": sum(r["clean_control"] for r in rows),
@@ -562,6 +592,11 @@ def finish(root, config, plan, rows, corpus, fonts, manifest, seed):
                                 "low contrast excludes strong blur", "irregular word gaps require multiword text"],
                 "provenance": "Turkish Wikipedia contributors, CC BY-SA 4.0; exact revisions in trwiki.sources.json. Synthetic fields and confusable templates are generated.",
                 "license": "Generated images and labels: CC BY-SA 4.0. Reproduction code: repository MIT license. PaddleOCR-derived configs: Apache-2.0. Font binaries are excluded; font notices are in licenses/."}
+    if "exposure" in config["axes"]:
+        metadata["schema_version"] = 6
+        metadata["constraints"].extend([
+            "clean controls, severe clips and faint print use frontal geometry, normal exposure and no extra lighting",
+            "low light and overexposure use normal ink contrast, no print defects or occlusion, and exclude strong blur"])
     write_json(root / "metadata.json", metadata)
     WORKER["config"] = config
     make_previews(root, rows)
@@ -624,6 +659,8 @@ def audit(root):
         duplicate_texts += canonical(label) in text_groups
         text_groups[canonical(label)], source_groups[row["source_group_sha256"]] = row["split"], row["split"]
         severity = row["categories"]["clipping_severity"]
+        if "exposure" in config["axes"]:
+            capture_effects.audit_capture(row)
         if row["categories"]["occlusion"] != "none" and row["occluded_ink_fraction"] <= 0:
             raise ValueError("Requested occlusion misses target ink")
         if row["occluded_ink_fraction"] > 0:

@@ -11,6 +11,10 @@ The published run uses source commit `dd133a34a5d90e86d849a34d263f195fd299e24e`,
 has no duplicate image hashes, and passed pinned PaddleOCR preprocessing and
 label encoding for every sample. A 232-sample replay covered all 62 font files.
 
+For a new run with explicit camera sides, stronger perspective, low light and
+soft/hard/partial shadows, see the [camera and lighting extension](turkish-camera-lighting.md).
+Those additional categories are not included in the published v1 dataset above.
+
 Activate the Turkish environment described in the main README, prepare
 `resources/corpus/trwiki.txt` with `scripts/prepare_tr_corpus.py`, and supply a
 licensed font catalog in the format documented in the README. From `synthdog/`:

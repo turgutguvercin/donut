@@ -121,6 +121,11 @@ see [the balanced dataset guide](docs/turkish-recognition-100k.md). The original
 document configurations and the smaller recognition generator below remain
 available.
 
+For explicit camera views from either side, low light, exposure variation and
+soft/hard/partial shadows, use the [camera and lighting recipe](docs/turkish-camera-lighting.md).
+It retains 48-pixel recognition height and adds separately balanced camera,
+exposure and lighting categories, plus a command to render controlled comparisons.
+
 For recognition training, generate single-line images with UTF-8 transcriptions.
 The generator uses five system font families (DejaVu Sans, Serif and Sans Mono;
 Liberation Sans and Serif) with real regular, bold, italic/oblique and bold italic

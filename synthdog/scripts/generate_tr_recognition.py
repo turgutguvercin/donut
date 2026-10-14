@@ -19,6 +19,8 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 from scipy import ndimage
 from synthtiger.layers import TextLayer
 
+from capture_effects import SIDE_GEOMETRIES, side_view_corners
+
 TURKISH = "çğışöüÇĞİŞÖÜıI"
 STYLES = ("regular", "bold", "italic", "bold_italic")
 BACKGROUNDS = (
@@ -485,7 +487,7 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
                 crop_error="none", context_texts=(), clipping_severity="mild",
                 patch_renderer=None, image_processor=None, rotation_jitter=True,
                 compact_scene=False):
-    if geometry not in CAPTURE_GEOMETRIES or contrast not in CONTRASTS:
+    if geometry not in (*CAPTURE_GEOMETRIES, *SIDE_GEOMETRIES) or contrast not in CONTRASTS:
         raise ValueError("Unknown capture geometry or contrast")
     if crop_error not in (*CROP_ERRORS, *HORIZONTAL_ERRORS):
         raise ValueError("Unknown detector crop error")
@@ -504,6 +506,7 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
         glyph_patch = curve_patch(glyph_patch, curve, amplitude)
     geometry_params = {}
     perspective_scale = 1.0
+    has_perspective = geometry == "perspective" or geometry in SIDE_GEOMETRIES
     if geometry == "perspective":
         width, height = rgba.size
         taper = (0.04, 0.10) if role == "small" else (0.10, 0.25)
@@ -518,18 +521,26 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
         if glyph_patch is not None:
             glyph_patch, _ = perspective_patch(glyph_patch, destination)
         perspective_scale = 1 - 2 * inset / (height - 1)
+    elif geometry in SIDE_GEOMETRIES:
+        width, height = rgba.size
+        destination, camera_params = side_view_corners(rgba.size, geometry, rng)
+        rgba, geometry_params = perspective_patch(rgba, destination)
+        if glyph_patch is not None:
+            glyph_patch, _ = perspective_patch(glyph_patch, destination)
+        geometry_params.update(camera_params)
+        perspective_scale = camera_params["far_to_near_height_ratio"]
     opacity_limits = (0.50, 0.68) if contrast == "low_contrast" else (0.28, 0.42)
     opacity = 1.0 if contrast == "normal" else float(rng.uniform(*opacity_limits))
     if opacity < 1:
         rgba.putalpha(rgba.getchannel("A").point(lambda value: round(value * opacity)))
     padding_x = int(rng.integers(8, 18))
     padding_y = int(rng.integers(4, 9) if role == "heading" else rng.integers(7, 16))
-    if geometry == "perspective" and role == "small":
+    if has_perspective and role == "small":
         # Perspective already adds transparent padding. Avoid normalizing a
         # mostly empty crop while the narrow end contains tiny characters.
         padding_y = min(padding_y, 5)
     # Larger padding on some lines deliberately varies relative text height.
-    minimum_height = 0 if geometry == "perspective" and role == "small" else 48
+    minimum_height = 0 if has_perspective and role == "small" else 48
     crop_size = (rgba.width + padding_x * 2, max(minimum_height, rgba.height + padding_y * 2))
     if crop_error == "none":
         image = background(crop_size, kind, rng)
@@ -542,7 +553,7 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
         # pixels after height normalization. Bound the added vertical extent.
         maximum = min(4.0, float(np.degrees(np.arctan(0.6 * rgba.height / rgba.width))))
         angle = float(rng.uniform(0.6, 1.0) * maximum * rng.choice((-1, 1)))
-    elif geometry == "perspective":
+    elif has_perspective:
         maximum = min(0.7, float(np.degrees(np.arctan(0.15 * rgba.height / rgba.width))))
         angle = float(rng.uniform(-maximum, maximum))
     else:
@@ -571,7 +582,7 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
         for side, context in zip(sides, context_texts):
             neighbor, _ = text_patch(context, font, size, ink)
             neighbor = curve_patch(neighbor, curve, amplitude)
-            if geometry == "perspective":
+            if has_perspective:
                 # Apply the same normalized mapping to each adjacent line.
                 factors = np.array((neighbor.width - 1, neighbor.height - 1)) / np.array((width - 1, height - 1))
                 neighbor, _ = perspective_patch(neighbor, np.asarray(destination) * factors)
