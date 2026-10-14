@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "height": 48,
+  "max_width": 4096,
+  "max_text_length": 256,
+  "width_buckets": [320, 640, 960, 1280, 1920, 2560, 4096],
+  "splits": {"train": 90, "val": 5, "test": 5},
+  "clean_control_percent": 5,
+  "severe_fraction_of_clipping": 0.2,
+  "axes": {
+    "content_type": {"ascii_word": 1, "turkish_word": 1, "short_line": 1, "medium_line": 1, "long_sentence": 1, "extra_long_sentence": 1, "confusables": 1, "date": 1, "price": 1, "synthetic_id": 1},
+    "role": {"small": 1, "body": 1, "heading": 1},
+    "underline": {"plain": 1, "underlined": 1},
+    "curve": {"straight": 1, "arch": 1, "bowl": 1, "wave": 1},
+    "geometry": {"none": 2, "skew": 1, "perspective": 1},
+    "background": {"white": 1, "aged_paper": 1, "blue_form": 1, "receipt": 1, "ruled_paper": 1, "graph_paper": 1, "pink_form": 1, "photocopy": 1, "uneven_light": 1, "dark_sign": 1},
+    "lighting_effect": {"none": 2, "shadow": 1, "gradient": 1},
+    "contrast": {"normal": 6, "low_contrast": 3, "faint_print": 1},
+    "degradation": {"clean": 6, "defocus": 4, "motion_blur": 2, "low_resolution": 2, "noisy_scan": 2, "strong_defocus": 2, "strong_motion": 1, "defocus_motion": 1},
+    "crop_error": {"none": 10, "neighbor_above": 1, "neighbor_below": 1, "neighbors_both": 1, "vertical_shift": 1, "tight_top": 1, "tight_bottom": 1, "tight_both": 1, "tight_left": 1, "tight_right": 1, "tight_sides": 1},
+    "spacing": {"normal": 4, "tight": 1, "wide": 1, "irregular_word_gaps": 1, "touching": 1},
+    "printing": {"none": 4, "broken_strokes": 1, "missing_ink": 1, "ink_bleed": 1, "dot_matrix": 1},
+    "occlusion": {"none": 4, "stamp": 1, "signature": 1, "fold": 1, "strikethrough": 1},
+    "mixed_typography": {"uniform": 10, "mixed_fonts": 4, "mixed_styles": 2, "mixed_sizes": 2, "superscript": 1, "subscript": 1}
+  },
+  "confusable_groups": {"turkish_i": "iıİI", "c_cedilla": "cçCÇ", "s_cedilla": "sşSŞ", "g_breve": "gğGĞ", "u_umlaut": "uüUÜ", "o_umlaut": "oöOÖ", "letter_O_digit_0": "O0", "letter_l_digit_1": "l1"}
+}

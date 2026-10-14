@@ -115,6 +115,12 @@ configurations remain available with their original resources.
 
 ### PaddleOCR recognition crops
 
+For the complete 100,000-image recipe (including confusable characters, mixed
+font runs, print defects, occlusion, spacing, and horizontal detector errors),
+see [the balanced dataset guide](docs/turkish-recognition-100k.md). The original
+document configurations and the smaller recognition generator below remain
+available.
+
 For recognition training, generate single-line images with UTF-8 transcriptions.
 The generator uses five system font families (DejaVu Sans, Serif and Sans Mono;
 Liberation Sans and Serif) with real regular, bold, italic/oblique and bold italic

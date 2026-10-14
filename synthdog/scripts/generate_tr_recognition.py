@@ -45,6 +45,7 @@ CROP_ERRORS = (*("none",) * 12, "neighbor_above", "neighbor_below",
                "neighbors_both", "neighbors_both", "tight_top", "tight_bottom",
                "tight_both", "vertical_shift")
 CLIPPING_ERRORS = ("tight_top", "tight_bottom", "tight_both", "vertical_shift")
+HORIZONTAL_ERRORS = ("tight_left", "tight_right", "tight_sides")
 STRONG_BLURS = ("strong_defocus", "strong_motion", "defocus_motion")
 TEXT_LENGTHS = {"single_word": (3, 17), "short_line": (15, 31),
                 "medium_line": (31, 56), "long_line": (56, 91)}
@@ -390,7 +391,8 @@ def bounded_vertical_crop(mask, top, bottom, severity="mild"):
 
 
 def detector_crop(patch, glyph_mask, neighbors, kind, rng, padding_x, padding_y,
-                  angle, error, text_height, severity="mild"):
+                  angle, error, text_height, severity="mild", return_mask=False,
+                  compact_scene=False):
     """Render neighboring lines in one scene, then crop after camera rotation."""
     extent = max([patch.height, *(item[1].height for item in neighbors)])
     scene_width = patch.width + padding_x * 2
@@ -399,6 +401,8 @@ def detector_crop(patch, glyph_mask, neighbors, kind, rng, padding_x, padding_y,
     gap = max(padding_y + 2, round(text_height * float(rng.uniform(0.08, 0.18))))
     gap += int(np.ceil(scene_width * abs(np.tan(np.radians(angle)))))
     size = (scene_width, patch.height + 2 * (extent + gap + 8))
+    if compact_scene and not neighbors:
+        size = (scene_width, patch.height + 2 * (padding_y + 8))
     image = background(size, kind, rng)
     target_y = (size[1] - patch.height) // 2
     target_mask = Image.new("L", size)
@@ -433,6 +437,20 @@ def detector_crop(patch, glyph_mask, neighbors, kind, rng, padding_x, padding_y,
     # Account for underline extent when retaining the bottom edge.
     bottom = last if bottom_cut else decorated_mask.getbbox()[3] + padding_y
     left, right = max(0, bounds[0] - padding_x), min(image.width, bounds[2] + padding_x)
+    if error in HORIZONTAL_ERRORS:
+        fraction = float(rng.uniform(0.25, 0.45) if severity == "severe" else rng.uniform(0.04, 0.12))
+        cut = max(1, round(text_height * fraction))
+        left_cut = cut if error in ("tight_left", "tight_sides") else 0
+        right_cut = cut if error in ("tight_right", "tight_sides") else 0
+        first_x, last_x, horizontal = bounded_vertical_crop(
+            target_mask.transpose(Image.Transpose.TRANSPOSE), left_cut, right_cut, severity)
+        if left_cut:
+            left = first_x
+        if right_cut:
+            right = last_x
+        horizontal["clipped_left_native"] = horizontal.pop("clipped_top_native")
+        horizontal["clipped_right_native"] = horizontal.pop("clipped_bottom_native")
+        metrics.update(horizontal)
     for side, mask in neighbor_masks.items():
         row_ink = (np.asarray(mask)[:, left:right] >= 64).sum(axis=1)
         # Target a measured ink fraction rather than an arbitrary height: a
@@ -457,23 +475,27 @@ def detector_crop(patch, glyph_mask, neighbors, kind, rng, padding_x, padding_y,
     metrics.update({"crop_box_native": list(box), "scene_size_native": list(image.size),
                     "target_bounds_native": list(bounds), "neighbor_lines": neighbor_records,
                     "label_scope": "target_line_only", "mask_alpha_threshold": 64})
+    if return_mask:
+        metrics["_glyph_mask"] = target_mask.crop(box)
     return image.crop(box), metrics
 
 
 def render_line(text, font, size, kind, degradation, rng, underline=False, role="body",
                 curve="straight", curve_strength=0.5, geometry="none", contrast="normal",
-                crop_error="none", context_texts=(), clipping_severity="mild"):
+                crop_error="none", context_texts=(), clipping_severity="mild",
+                patch_renderer=None, image_processor=None, rotation_jitter=True,
+                compact_scene=False):
     if geometry not in CAPTURE_GEOMETRIES or contrast not in CONTRASTS:
         raise ValueError("Unknown capture geometry or contrast")
-    if crop_error not in CROP_ERRORS:
+    if crop_error not in (*CROP_ERRORS, *HORIZONTAL_ERRORS):
         raise ValueError("Unknown detector crop error")
     if clipping_severity not in ("mild", "severe"):
         raise ValueError("Unknown clipping severity")
     ink = (241, 236, 216) if kind == "dark_sign" else (
         (24, 45, 80) if kind in ("blue_form", "pink_form") else (35, 32, 29)
     )
-    rgba, decoration = text_patch(text, font, size, ink, underline)
-    glyph_patch = rgba.copy() if crop_error != "none" else None
+    rgba, decoration = (patch_renderer or text_patch)(text, font, size, ink, underline)
+    glyph_patch = rgba.copy() if crop_error != "none" or image_processor is not None else None
     if glyph_patch is not None and underline:
         glyph_patch.paste((0, 0, 0, 0), (0, decoration["text_height_native"], rgba.width, rgba.height))
     amplitude = round(decoration["text_height_native"] * curve_strength) if curve != "straight" else 0
@@ -512,6 +534,9 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
     if crop_error == "none":
         image = background(crop_size, kind, rng)
         image.paste(rgba, (padding_x, (image.height - rgba.height) // 2), rgba)
+        if image_processor is not None:
+            output_mask = Image.new("L", image.size)
+            output_mask.paste(glyph_patch.getchannel("A"), (padding_x, (image.height - rgba.height) // 2))
     if geometry == "skew":
         # A fixed angle on a long line can shrink every character to a few
         # pixels after height normalization. Bound the added vertical extent.
@@ -524,14 +549,18 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
         # Long sentences must not shrink to tiny glyphs under a fixed tilt.
         maximum = min(0.7, float(np.degrees(np.arctan(0.25 * rgba.height / rgba.width)))) if len(text) > 90 else 0.7
         angle = float(rng.uniform(-maximum, maximum))
+    if not rotation_jitter and geometry != "skew":
+        angle = 0.0
     crop_params = {"crop_error": crop_error, "label_scope": "target_line_only",
                    "target_ink_retention": 1.0, "minimum_component_retention": 1.0,
                    "clipped_top_native": 0, "clipped_bottom_native": 0, "neighbor_lines": [],
                    "removed_components": 0, "partial_components": 0,
-                   "clipping_severity": clipping_severity if crop_error in CLIPPING_ERRORS else "none",
-                   "potentially_ambiguous": clipping_severity == "severe" and crop_error in CLIPPING_ERRORS}
+                   "clipping_severity": clipping_severity if crop_error in (*CLIPPING_ERRORS, *HORIZONTAL_ERRORS) else "none",
+                   "potentially_ambiguous": clipping_severity == "severe" and crop_error in (*CLIPPING_ERRORS, *HORIZONTAL_ERRORS)}
     if crop_error == "none":
         image = image.rotate(angle, Image.Resampling.BICUBIC, expand=True, fillcolor=image.getpixel((0, 0)))
+        if image_processor is not None:
+            output_mask = output_mask.rotate(angle, Image.Resampling.BICUBIC, expand=True)
     else:
         sides = {"neighbor_above": ("above",), "neighbor_below": ("below",),
                  "neighbors_both": ("above", "below"),
@@ -551,7 +580,10 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
             neighbors.append((side, neighbor, context))
         image, metrics = detector_crop(rgba, glyph_patch.getchannel("A"), neighbors, kind, rng,
                                       padding_x, padding_y, angle, crop_error, decoration["text_height_native"],
-                                      clipping_severity)
+                                      clipping_severity, return_mask=image_processor is not None,
+                                      compact_scene=compact_scene)
+        if image_processor is not None:
+            output_mask = metrics.pop("_glyph_mask")
         crop_params.update(metrics)
     text_height_output = decoration["text_height_native"] * perspective_scale * 48 / image.height
     curve_amplitude_output = amplitude * 48 / image.height
@@ -564,6 +596,13 @@ def render_line(text, font, size, kind, degradation, rng, underline=False, role=
               "text_height_output": text_height_output,
               "geometry": geometry, "contrast": contrast, "ink_opacity": opacity,
               **geometry_params, **decoration, **crop_params}
+    if image_processor is not None:
+        output_mask = output_mask.resize(image.size, Image.Resampling.LANCZOS)
+        image, extra_params = image_processor(image, output_mask, rng)
+        params.update(extra_params)
+        text_height_output *= extra_params.get("width_cap_scale", 1.0)
+        params["text_height_output"] = text_height_output
+        params["curve_amplitude_output"] *= extra_params.get("width_cap_scale", 1.0)
     if degradation == "defocus":
         params["blur_radius"] = float(rng.uniform(0.35, 0.65) if role == "small" else rng.uniform(0.75, 1.25))
         image = image.filter(ImageFilter.GaussianBlur(params["blur_radius"]))

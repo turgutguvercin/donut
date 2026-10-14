@@ -1,0 +1,125 @@
+# Turkish recognition dataset: 100,000 images
+
+This recipe generates recognition crops and exact UTF-8 target transcriptions.
+It does not generate text-detection polygons or train an OCR model.
+
+Activate the Turkish environment described in the main README, prepare
+`resources/corpus/trwiki.txt` with `scripts/prepare_tr_corpus.py`, and supply a
+licensed font catalog in the format documented in the README. From `synthdog/`:
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python scripts/generate_tr_dataset.py \
+  --font-manifest /path/to/recognition-fonts.json \
+  --output outputs/turkish-recognition-100k \
+  --count 100000 --seed 20261014 --workers 4
+
+python scripts/generate_tr_dataset.py \
+  --font-manifest /path/to/recognition-fonts.json \
+  --output outputs/turkish-recognition-100k --validate-only
+```
+
+The seed, corpus hash, exact Wikipedia revisions, font hashes/licenses, generator
+hashes, per-image seeds, rendering parameters and image hashes are included.
+Worker count does not affect image content. Use the pinned dependencies in
+`requirements-tr.txt` for image replay. Output directories must be new; a failed
+run leaves its completed images and metadata available for diagnosis.
+
+## What balanced means
+
+`config_tr_recognition_100k.json` defines explicit **weighted marginal quotas**.
+Each non-control variant in a group has equal coverage, except the deliberately
+documented blur and typography mixes below. This is not every possible Cartesian
+combination and is not a promise of equal raw character frequencies in natural
+Turkish. `planned-counts.json`, `category-counts.json`, `pair-counts.json` and
+`categories.csv` expose the actual distribution.
+
+| Category | Quota at 100,000 |
+|---|---|
+| Primary font family | 5,000 each with the supplied 20-family catalog |
+| Real font style | Equal within the styles actually available for each family |
+| Content | 10,000 each: ASCII word, Turkish-marked word, short span, medium span, long sentence, extra-long sentence, confusables, date, price, synthetic document ID |
+| Confusable group | 1,250 each; every member appears exactly once in the targeted span |
+| Text role/size | Approximately one third small, body and heading; split rounding differs by at most two |
+| Case | 45,000 original, 45,000 Turkish uppercase, 10,000 deliberately mixed confusable examples |
+| Decoration | 50,000 plain; 50,000 underlined |
+| Baseline | 25,000 each: straight, arch, bowl, wave |
+| Background | 10,000 each of ten procedural paper/form/surface backgrounds |
+| Geometry | 50,000 without extra geometry; 25,000 skew; 25,000 perspective |
+| Extra lighting | 50,000 none; 25,000 shadow; 25,000 gradient; some background textures already include uneven illumination |
+| Contrast | 60,000 normal; 30,000 low; 10,000 faint |
+| Degradation | 30,000 clean; 20,000 defocus; 10,000 each motion, low resolution, noise, strong defocus; 5,000 each strong motion and combined blur |
+| Detector crop | 50,000 clean; 5,000 each: neighbor above, below, both, vertical shift, tight top, bottom, both vertical edges, left, right, both horizontal edges |
+| Clipping severity | Of the 35,000 clipping examples, 28,000 mild and 7,000 severe |
+| Spacing | 50,000 normal; 12,500 each tight, wide, irregular word gaps, touching/overlapping tracking |
+| Printing | 50,000 ordinary; 12,500 each broken strokes, missing ink, bleed, dot matrix |
+| Occlusion | 50,000 none; 12,500 each synthetic stamp, signature stroke, fold, strikethrough |
+| Mixed typography | 50,000 uniform; 20,000 mixed fonts; 10,000 each mixed styles/sizes; 5,000 each superscript/subscript |
+
+The eight confusable groups are `iıİI`, `cçCÇ`, `sşSŞ`, `gğGĞ`, `uüUÜ`,
+`oöOÖ`, `O0`, and `l1`. The targeted spans have equal member counts; unrelated
+characters in surrounding text are not part of that balancing claim. Natural
+content supplies letters in words as well as these explicit exercises.
+
+Mixed typography records every actual font run and its hash. A family without
+an italic or bold face is never given an artificial style; a mixed-style run can
+use another licensed family. Primary-family quotas do not count secondary runs.
+Superscript/subscript examples append a visible footnote/index digit and include
+it in the label. Long sentences retain their full text; sentence boundaries use
+the existing punctuation/abbreviation heuristic.
+
+There are 5,000 clean reference controls. Severe crops use normal contrast,
+ordinary spacing and clean rendering without additional print damage or
+occlusion. Faint text avoids blur/print damage/occlusion, and low contrast avoids
+strong blur. These constraints preserve the quotas but intentionally restrict
+some combinations; the pair counts make that visible.
+
+## Crops, labels and splits
+
+`labels.txt` contains `relative/path.jpg<TAB>exact text`. Neighbors, stamps,
+signatures and underlines are not part of the target transcription. Neighbor
+transcriptions appear in `metadata.jsonl`. All corpus-derived target and context
+text is selected within its assigned split. Canonical target labels and source
+text groups must be disjoint between **90,000 train / 5,000 val / 5,000 test**.
+Words can naturally occur within longer sentences in other splits; the grouping
+prevents identical full target/source strings, not all shared substrings.
+
+Mild cropping preserves at least 97% of target ink and 50% of each connected
+component. Severe cropping preserves at least 70% of total ink and can erase
+dots, umlauts, cedillas or edge letters. These measurements exclude underline
+strokes and are taken before final resizing, occlusion and blur. Original labels
+remain on severe examples, so some are visually ambiguous. Their metadata sets
+`potentially_ambiguous: true`; `*-without-severe-clips.txt` provides optional
+filtered splits. Do not interpret synthetic validation scores as real OCR accuracy.
+
+## PaddleOCR dimensions
+
+Images are RGB JPEGs, **48 pixels high with variable width, at most 4,096**.
+Long lines are not squeezed to 320 pixels. If a proportional 48-pixel-high line
+exceeds 4,096 pixels, it is uniformly reduced to that width and padded vertically
+back to 48. The scale and glyph bounds are recorded. The dictionary includes
+all observed characters plus Turkish letters; use `use_space_char: true`.
+
+Width buckets are `320, 640, 960, 1280, 1920, 2560, 4096`, with one label list
+per split and bucket. Right-pad within a bucket. For PaddleOCR configurations
+that always resize to a fixed width, use 4,096 for the full set or use a matching
+bucket configuration and bucket list. A 320-wide resize for all samples destroys
+long-line detail. Keep image height 48 and allow labels up to 256 characters
+in both the label encoder and recognition head. The standard English PP-OCRv4
+example defaults to only 25 characters and must be adapted.
+
+The audit verifies all images, file hashes, UTF-8/NFC labels, actual font-run
+cmap coverage, counts, split isolation, dictionary coverage, crop bounds, width
+buckets, and CTC sequence capacity assuming width stride four. It does not
+measure recognition accuracy or certify the readability of every hard example.
+
+## Attribution and redistribution
+
+Turkish Wikipedia contributors: CC BY-SA 4.0,
+<https://creativecommons.org/licenses/by-sa/4.0/>. The exact revision URLs and
+resource hashes accompany the dataset in `trwiki.sources.json`. This generated
+dataset is distributed under CC BY-SA 4.0 with that attribution. Transformations
+include text selection, authored fields/confusable spans, rendering, typography,
+geometric distortions, cropping/context, noise, lighting, print effects,
+occlusions, blur, scaling and compression. Keep the attribution and notices when
+redistributing it. Font licenses/notices accompany the data; font binaries and
+the downloaded raw corpus are excluded from the code repository and archives.
