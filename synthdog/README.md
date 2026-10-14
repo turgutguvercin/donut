@@ -115,16 +115,15 @@ configurations remain available with their original resources.
 
 ### PaddleOCR recognition crops
 
-For the complete 100,000-image recipe (including confusable characters, mixed
-font runs, print defects, occlusion, spacing, and horizontal detector errors),
-see [the balanced dataset guide](docs/turkish-recognition-100k.md). The original
-document configurations and the smaller recognition generator below remain
-available.
-
-For explicit camera views from either side, low light, exposure variation and
-soft/hard/partial shadows, use the [camera and lighting recipe](docs/turkish-camera-lighting.md).
-It retains 48-pixel recognition height and adds separately balanced camera,
-exposure and lighting categories, plus a command to render controlled comparisons.
+The [full 100,000-image v2 dataset](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v2)
+includes explicit camera views from either side, low light, exposure variation,
+soft/hard/partial shadows, and the existing font, confusable-character, printing,
+occlusion, spacing and detector-crop categories. See the
+[camera and lighting guide](docs/turkish-camera-lighting.md) for downloads,
+generation commands, exact quotas and PaddleOCR settings. The
+[base recipe guide](docs/turkish-recognition-100k.md) documents the shared categories
+and original v1 dataset. The document configurations and smaller recognition
+generator below remain available.
 
 For recognition training, generate single-line images with UTF-8 transcriptions.
 The generator uses five system font families (DejaVu Sans, Serif and Sans Mono;

@@ -3,7 +3,11 @@
 This recipe generates recognition crops and exact UTF-8 target transcriptions.
 It does not generate text-detection polygons or train an OCR model.
 
-**Published dataset:** [download 100,000 images and labels](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v1)
+**Latest full dataset:** [100,000-image v2 with camera angles, exposure and shadows](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v2).
+Its [camera recipe guide](turkish-camera-lighting.md) documents the additional quotas
+and download commands. The base recipe and results below describe v1.
+
+**Original v1 dataset:** [download 100,000 images and labels](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v1)
 (986 MB across 15 independent ZIP parts, with an automatic downloader).
 [Preview](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v1/preview-03.jpg)
 and [full audit](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v1/audit.json).
@@ -168,7 +172,9 @@ stream. The standard-library downloader verifies each part and its ZIP CRCs,
 then checks the extracted image/label counts:
 
 ```bash
-python scripts/download_tr_dataset.py --output turkish-ocr-download
+python scripts/download_tr_dataset.py \
+  --manifest https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v1/download-manifest.json \
+  --output turkish-ocr-download
 ```
 
 Already verified ZIPs are reused if a download is interrupted. If you downloaded

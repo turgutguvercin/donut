@@ -5,7 +5,31 @@ with explicit views from the left/right, exposure and shadows. Use this config
 when generating a new dataset. The published `turkish-ocr-100k-v1` and its default
 recipe retain their original images and categories.
 
-**Published sample set:** [download 1,000 images and labels (11.4 MB ZIP)](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-camera-lighting-1000-v1/turkish-camera-lighting-1000-v1.zip).
+**Full 100,000-image v2 dataset:** [release, downloads and audits](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v2).
+The camera, exposure and shadow categories below are integrated across the full
+90,000 training / 5,000 validation / 5,000 test samples, with the exact listed quotas.
+The 14 ZIP parts total 902 MB. All 100,000 images passed dataset and pinned Paddle
+preprocessing/encoding checks, with zero duplicate image hashes, dropped label
+characters or horizontal squeezing. A 611-sample replay matched images and
+metadata across all 62 font files, all 150 observed camera/exposure/lighting
+combinations, all width buckets and every sample needing extra CTC capacity.
+The generation source is commit `1a0763dc78c0d69c14b5b0591dff8ffdb3ae75b4`;
+the exact generator hashes and dependency versions accompany the data.
+From `synthdog/`, download and verify all ZIP parts automatically:
+
+```bash
+python scripts/download_tr_dataset.py --output turkish-ocr-v2
+```
+
+The resulting directory is `turkish-ocr-v2/turkish-recognition-100k-v2/`.
+The release also offers a browser ZIP containing all parts. After extracting it,
+run its included `download_dataset.py --manifest download-manifest.json --parts-dir . --output .`
+to verify and extract the parts locally. Full v2 retains all the other typography,
+content, confusable-character, crop and degradation categories from the base recipe.
+Use one version's grouped splits for an experiment; cross-version split isolation
+is not guaranteed.
+
+**Smaller preview set:** [download 1,000 images and labels (11.4 MB ZIP)](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-camera-lighting-1000-v1/turkish-camera-lighting-1000-v1.zip).
 [Camera comparison](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-camera-lighting-1000-v1/comparison-1.jpg) ·
 [Lighting comparison](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-camera-lighting-1000-v1/comparison-2.jpg) ·
 [Release and audits](https://github.com/turgutguvercin/donut/releases/tag/turkish-camera-lighting-1000-v1).
