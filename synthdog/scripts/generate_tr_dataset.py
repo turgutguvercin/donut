@@ -272,6 +272,15 @@ def rich_patch(text, primary, size, ink, underline, row, rng, fonts):
             pixels[gaps] = np.rint(pixels[gaps] * 0.28).astype("uint8")
         alpha = Image.fromarray(pixels)
     print_ink = int((np.asarray(alpha) >= 64).sum())
+    if print_mode == "broken_strokes" and print_ink == original_ink:
+        # Short words can evade all randomly placed breaks. Put one break on
+        # measured glyph ink so the category is an actual defect, not a no-op.
+        pixels = np.array(alpha)
+        ink_positions = np.argwhere(pixels >= 64)
+        py, px = ink_positions[len(ink_positions) // 2]
+        pixels[py, px:px + max(2, size // 8)] = 0
+        alpha = Image.fromarray(pixels)
+        print_ink = int((pixels >= 64).sum())
     height = alpha.height
     gap, thickness = (max(2, round(size * .06)), max(1, round(size * .04))) if underline else (0, 0)
     patch = Image.new("RGBA", (alpha.width, alpha.height + gap + thickness), (*ink, 0))
@@ -317,6 +326,16 @@ def postprocess(image, glyph_mask, rng, row, config):
         draw.line((2, height // 2, width - 3, height // 2 + int(rng.integers(-3, 4))),
                   fill=(65, 50, 52, 170), width=1)
     mask = np.asarray(glyph_mask) >= 64
+    overlay_mask = np.asarray(overlay.getchannel("A")) > 0
+    if kind != "none" and mask.any() and not (overlay_mask & mask).any():
+        # Move the existing stamp/stroke/fold onto actual ink, preserving its
+        # shape, instead of counting a decoration that misses the text.
+        glyph_points, overlay_points = np.argwhere(mask), np.argwhere(overlay_mask)
+        target_y, target_x = glyph_points[len(glyph_points) // 2]
+        source_y, source_x = overlay_points[len(overlay_points) // 2]
+        shifted = Image.new("RGBA", image.size)
+        shifted.paste(overlay, (int(target_x - source_x), int(target_y - source_y)))
+        overlay = shifted
     coverage = float(((np.asarray(overlay.getchannel("A")) > 0) & mask).sum() / max(1, mask.sum()))
     image = Image.alpha_composite(image.convert("RGBA"), overlay).convert("RGB")
     lighting = row["lighting_effect"]
@@ -437,7 +456,7 @@ def expected_counts(plan, config):
 
 def save_notices(output, corpus, fonts, manifest):
     shutil.copy2(corpus.with_suffix(".sources.json"), output / "trwiki.sources.json")
-    (output / "licenses").mkdir()
+    (output / "licenses").mkdir(exist_ok=True)
     for notice in sorted({f.notice for f in fonts}, key=str):
         if notice:
             digest = hashlib.sha256(notice.read_bytes()).hexdigest()[:12]
@@ -516,7 +535,7 @@ def finish(root, config, plan, rows, corpus, fonts, manifest, seed):
                                 "faint printing uses clean rendering without print defects or occlusion",
                                 "low contrast excludes strong blur"],
                 "provenance": "Turkish Wikipedia contributors, CC BY-SA 4.0; exact revisions in trwiki.sources.json. Synthetic fields and confusable templates are generated.",
-                "license": "CC BY-SA 4.0 for this generated dataset; font binaries are excluded and font notices are in licenses/"}
+                "license": "Generated images and labels: CC BY-SA 4.0. Reproduction code: repository MIT license. PaddleOCR-derived configs: Apache-2.0. Font binaries are excluded; font notices are in licenses/."}
     write_json(root / "metadata.json", metadata)
     WORKER["config"] = config
     make_previews(root, rows)
@@ -536,6 +555,9 @@ def audit(root):
     duplicate_images, duplicate_texts = 0, 0
     confusable_characters = defaultdict(Counter)
     buckets = defaultdict(Counter)
+    character_frequency, font_run_usage = Counter(), Counter()
+    primary_font_turkish_characters = defaultdict(Counter)
+    measured_occlusions = Counter()
     for row, record in zip(rows, labels):
         name, label = record.split("\t", 1)
         if name != row["file_name"] or label != row["text"] or name in paths:
@@ -549,6 +571,9 @@ def audit(root):
         for run in row["font_runs"]:
             if not set(map(ord, label[run["start"]:run["end"]])) <= font_points[run["font_sha256"]]:
                 raise ValueError("Missing glyph in actual rendered run")
+            font_run_usage[run["family"] + " | " + run["style"]] += 1
+        character_frequency.update(label)
+        primary_font_turkish_characters[row["categories"]["font_family"]].update(c for c in label if c in base.TURKISH)
         paths.add(name)
         digest = hashlib.sha256((root / name).read_bytes()).hexdigest()
         if digest != row["image_sha256"]:
@@ -571,6 +596,12 @@ def audit(root):
         duplicate_texts += canonical(label) in text_groups
         text_groups[canonical(label)], source_groups[row["source_group_sha256"]] = row["split"], row["split"]
         severity = row["categories"]["clipping_severity"]
+        if row["categories"]["occlusion"] != "none" and row["occluded_ink_fraction"] <= 0:
+            raise ValueError("Requested occlusion misses target ink")
+        if row["occluded_ink_fraction"] > 0:
+            measured_occlusions[row["categories"]["occlusion"]] += 1
+        if row["categories"]["printing"] == "broken_strokes" and row["printing_ink_ratio"] >= 1:
+            raise ValueError("Broken-stroke category has no measured ink loss")
         ink_floor, component_floor = (.7, 0) if severity == "severe" else (.97, .5)
         if row["target_ink_retention"] < ink_floor - 1e-9 or row["minimum_component_retention"] < component_floor - 1e-9:
             raise ValueError("Excessive detector clipping")
@@ -607,6 +638,10 @@ def audit(root):
               "crops_with_completely_removed_components": sum(r["removed_components"] > 0 for r in rows),
               "width_capped_by_uniform_scaling": sum(r["width_cap_scale"] < 1 for r in rows),
               "maximum_occluded_ink_fraction": max(r["occluded_ink_fraction"] for r in rows),
+              "measured_occlusion_counts": dict(measured_occlusions),
+              "primary_font_turkish_character_counts": dict(primary_font_turkish_characters),
+              "actual_font_run_counts": dict(font_run_usage),
+              "label_character_frequency": dict(character_frequency),
               "limitations": ["Coverage and label checks do not measure OCR accuracy or guarantee human readability.",
                               "Severe crops retain source labels even when marks/letters are missing; use the filtered split files if desired.",
                               "Synthetic validation/test images are not a substitute for real detector crops."]}

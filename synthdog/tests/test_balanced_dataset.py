@@ -99,6 +99,16 @@ def test_width_cap_preserves_aspect_and_measures_occlusion(config):
     assert params["occluded_ink_fraction"] == 0
 
 
+def test_occlusions_reach_even_off_center_glyphs(config):
+    from PIL import ImageDraw
+    image, mask = Image.new("RGB", (300, 48), "white"), Image.new("L", (300, 48))
+    ImageDraw.Draw(mask).rectangle((3, 1, 8, 5), fill=255)
+    for kind in ("stamp", "signature", "fold", "strikethrough"):
+        _, params = dataset.postprocess(image, mask, np.random.default_rng(4),
+                                         {"occlusion": kind, "lighting_effect": "none"}, config)
+        assert params["occluded_ink_fraction"] > 0
+
+
 @pytest.mark.parametrize("edge", base.HORIZONTAL_ERRORS)
 def test_horizontal_crop_ink_bounds(fonts, edge):
     image, params = base.render_line("Çiğdem üzüm İŞÇİ", fonts[0], 40, "white", "clean",

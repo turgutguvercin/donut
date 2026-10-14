@@ -107,10 +107,68 @@ long-line detail. Keep image height 48 and allow labels up to 256 characters
 in both the label encoder and recognition head. The standard English PP-OCRv4
 example defaults to only 25 characters and must be adapted.
 
+Prepare version-pinned PP-OCRv4 configs and validate using its real resize and
+CTC/NRTR label-encoding operators (the script downloads checksum-verified
+upstream source; it does not install or train Paddle's neural-network runtime):
+
+```bash
+python scripts/prepare_paddle_tr.py \
+  --dataset outputs/turkish-recognition-100k \
+  --cache /tmp/paddleocr-reference \
+  --data-dir ./train_data/turkish-recognition-100k-v1
+```
+
+The reference is PaddleOCR `release/2.8` commit
+`2172c14bf65ceacf37a839ebbe61117a6339a865`. `paddle/rec_tr_all.yml` uses every
+training/validation sample, right-padded to 4,096, with a small batch size.
+`paddle/rec_tr_w*.yml` uses **only that bucket's samples**. Efficient joint
+training with mixed bucket widths needs a suitable batch sampler; these seven
+configs are not automatic sequential training stages. Additional RecAug and
+RecConAug are disabled to preserve the planned effects and label lengths.
+
+After installing a compatible PaddleOCR environment, place the dataset under
+`PaddleOCR/train_data/turkish-recognition-100k-v1`. From that PaddleOCR checkout:
+
+```bash
+python tools/train.py -c train_data/turkish-recognition-100k-v1/paddle/rec_tr_all.yml
+```
+
+The generated config starts with `pretrained_model: null`. For fine-tuning, set
+it to an appropriate checkpoint and account for the changed dictionary/output
+head. Use matching width settings during export/inference. Training is not run
+by the dataset generator, and this command is provided as a starting configuration.
+
 The audit verifies all images, file hashes, UTF-8/NFC labels, actual font-run
 cmap coverage, counts, split isolation, dictionary coverage, crop bounds, width
 buckets, and CTC sequence capacity assuming width stride four. It does not
 measure recognition accuracy or certify the readability of every hard example.
+
+## Downloading and packaging
+
+The distribution uses independent ZIP archives with a SHA-256 manifest. Extract
+**all** parts into the same directory; they are not segments of a split ZIP
+stream. The standard-library downloader verifies each part and its ZIP CRCs,
+then checks the extracted image/label counts:
+
+```bash
+python scripts/download_tr_dataset.py --output turkish-ocr-download
+```
+
+Already verified ZIPs are reused if a download is interrupted. If you downloaded
+and extracted the complete GitHub tag archive containing all ZIPs, run its
+included helper locally without downloading those ZIPs again:
+
+```bash
+python download_dataset.py --manifest download-manifest.json --parts-dir . --output .
+```
+
+To package your own completed run after both audits pass:
+
+```bash
+python scripts/package_tr_dataset.py \
+  --dataset outputs/turkish-recognition-100k \
+  --output outputs/turkish-recognition-100k-parts
+```
 
 ## Attribution and redistribution
 
