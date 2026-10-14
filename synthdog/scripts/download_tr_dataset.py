@@ -14,7 +14,7 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-DEFAULT_MANIFEST = "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v2/download-manifest.json"
+DEFAULT_MANIFEST = "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/download-manifest.json"
 
 
 def checksum(path):

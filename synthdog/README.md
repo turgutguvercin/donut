@@ -115,15 +115,17 @@ configurations remain available with their original resources.
 
 ### PaddleOCR recognition crops
 
-The [full 100,000-image v2 dataset](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v2)
-includes explicit camera views from either side, low light, exposure variation,
-soft/hard/partial shadows, and the existing font, confusable-character, printing,
-occlusion, spacing and detector-crop categories. See the
-[camera and lighting guide](docs/turkish-camera-lighting.md) for downloads,
-generation commands, exact quotas and PaddleOCR settings. The
-[base recipe guide](docs/turkish-recognition-100k.md) documents the shared categories
-and original v1 dataset. The document configurations and smaller recognition
-generator below remain available.
+The [full 100,000-image v3 dataset](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v3)
+expands to 400 Turkish Wikipedia articles across 20 topics, with **52,387 distinct
+readable word forms**. Natural text is balanced at 3,000 images per topic and
+150 per article, with 360/20/20 separate training/validation/test articles.
+All camera angles, low light, exposure/shadows, fonts, confusable characters,
+printing, occlusion, spacing, blur, curves and detector-crop categories remain.
+See the [balanced vocabulary guide](docs/turkish-balanced-vocabulary.md) for
+downloads, corpus replay, generation commands, audits and PaddleOCR settings.
+The [camera guide](docs/turkish-camera-lighting.md) and
+[base recipe guide](docs/turkish-recognition-100k.md) retain earlier versions.
+The document configurations and smaller recognition generator remain available.
 
 For recognition training, generate single-line images with UTF-8 transcriptions.
 The generator uses five system font families (DejaVu Sans, Serif and Sans Mono;

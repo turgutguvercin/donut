@@ -4,6 +4,29 @@
 explicit article sampling. It preserves all existing visual-category quotas.
 The older recipes and datasets remain independently reproducible.
 
+**Published v3:** [100,000 images, downloads and audits](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v3).
+Actual labels contain **52,387 distinct readable word forms**
+(50,261 in training), up from **13,389** in v2.
+All 100,000 images passed dataset and pinned Paddle preprocessing/encoding checks;
+duplicate image hashes: 0. Fresh deterministic replay of
+940 samples matched exact image hashes and metadata across all 400 source
+articles, 62 font files, camera/lighting combinations and width buckets.
+All 60,000 natural source strings were checked against their assigned article text.
+81 repository tests pass. No neural-network accuracy is claimed.
+All Turkish alphabet letters appear in training; foreign letters `ć` and `ň`
+appear only in held-out labels, as recorded in the vocabulary report.
+
+Download and verify all parts from `synthdog/`:
+
+```bash
+python scripts/download_tr_dataset.py --output turkish-ocr-v3
+```
+
+The result is `turkish-ocr-v3/turkish-recognition-100k-v3/`. The release also offers
+a browser ZIP containing all parts; extract it and use its helper with
+`--manifest download-manifest.json --parts-dir . --output .` for local verification.
+The source commit is `6fbcfa37f2d08c11a28efd1132b813216a3ece0a`.
+
 ## Source balance
 
 The corpus preparation script selects **400 usable articles across 20 editorial

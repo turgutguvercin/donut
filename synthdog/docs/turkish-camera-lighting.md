@@ -1,5 +1,8 @@
 # Turkish recognition: camera angle, exposure and shadows
 
+The [balanced-vocabulary v3 guide](turkish-balanced-vocabulary.md) expands to 400
+articles while retaining every camera/lighting quota below.
+
 `config_tr_recognition_camera.json` extends the [100k recipe](turkish-recognition-100k.md)
 with explicit views from the left/right, exposure and shadows. Use this config
 when generating a new dataset. The published `turkish-ocr-100k-v1` and its default
@@ -18,7 +21,9 @@ the exact generator hashes and dependency versions accompany the data.
 From `synthdog/`, download and verify all ZIP parts automatically:
 
 ```bash
-python scripts/download_tr_dataset.py --output turkish-ocr-v2
+python scripts/download_tr_dataset.py \
+  --manifest https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v2/download-manifest.json \
+  --output turkish-ocr-v2
 ```
 
 The resulting directory is `turkish-ocr-v2/turkish-recognition-100k-v2/`.
