@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "samples": 940,
+  "primary_font_files": 62,
+  "source_articles": 400,
+  "camera_exposure_lighting_combinations": 150,
+  "width_buckets": [
+    320,
+    640,
+    960,
+    1280,
+    1920,
+    2560,
+    4096
+  ],
+  "metadata_and_image_hashes_identical": true,
+  "all_ctc_enlarged_buckets_included": true,
+  "all_natural_target_sources_verified_against_actual_article_text": 60000
+}

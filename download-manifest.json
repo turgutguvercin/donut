@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "dataset_directory": "turkish-recognition-100k-v3",
+  "image_count": 100000,
+  "parts": [
+    {
+      "file": "turkish-ocr-100k-part-01.zip",
+      "bytes": 9846721,
+      "sha256": "81179ba5d91a9ae2ecddba2e9d568005b9999ded31ffba8aa0f9c0aed570d3ea",
+      "image_count": 0,
+      "entry_count": 46,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-01.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-02.zip",
+      "bytes": 75373550,
+      "sha256": "74e5c8250a304585d9907994487c47ae0318b999abe2acf0d3186532800c9b49",
+      "image_count": 0,
+      "entry_count": 1,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-02.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-03.zip",
+      "bytes": 10233908,
+      "sha256": "5167f96f054f6441a4cd8f668e6fde92c88aa1fadbeeb21b5682d87652eb2a24",
+      "image_count": 0,
+      "entry_count": 74,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-03.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-04.zip",
+      "bytes": 78896038,
+      "sha256": "df9a836323f679333e203b3205442a1dffe4ef16982138fa03e61994915a64c9",
+      "image_count": 9413,
+      "entry_count": 9413,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-04.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-05.zip",
+      "bytes": 78522026,
+      "sha256": "e8467577f68149928bb8e22504ba8d63f435b2afcb8138a2046aa6115720b615",
+      "image_count": 9757,
+      "entry_count": 9757,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-05.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-06.zip",
+      "bytes": 78617067,
+      "sha256": "e1ab91b589a964eb2d0be130a4be6e3f171552c6ae35e6ef4a22a15105a2787f",
+      "image_count": 9806,
+      "entry_count": 9806,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-06.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-07.zip",
+      "bytes": 78700414,
+      "sha256": "58d45293f41c3af0769392b9963f579b23a40debe2cdd4e1d9cf947e2187f172",
+      "image_count": 9696,
+      "entry_count": 9696,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-07.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-08.zip",
+      "bytes": 78849655,
+      "sha256": "e779a3cd611ead1e920889faf38f222ceee8dea04db729f6c484a2bb88894bef",
+      "image_count": 9429,
+      "entry_count": 9429,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-08.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-09.zip",
+      "bytes": 78831960,
+      "sha256": "a4348155e10727dcdada9c608c7e2b6c4793fbbdad2e9dc765330997c71ca199",
+      "image_count": 9571,
+      "entry_count": 9571,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-09.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-10.zip",
+      "bytes": 78637991,
+      "sha256": "9fdae4f1ea09e4bc8c56f46609858e9e02022c98f75ff4d22e1f24d10dd6d63e",
+      "image_count": 9797,
+      "entry_count": 9797,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-10.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-11.zip",
+      "bytes": 78662040,
+      "sha256": "af2276850ed8501d2b2612538d983c210f350b2e1f48a5350a478500a1acb384",
+      "image_count": 9596,
+      "entry_count": 9596,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-11.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-12.zip",
+      "bytes": 78783456,
+      "sha256": "da3f7b9d086a715972aa77db025bfe9e358f8fc205588cabfcdcd579443d3d47",
+      "image_count": 9567,
+      "entry_count": 9567,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-12.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-13.zip",
+      "bytes": 78745218,
+      "sha256": "51ef2b170fb6333d01a634719ecc83747007890d7024c77f5b2d70d53c4c0244",
+      "image_count": 9644,
+      "entry_count": 9644,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-13.zip"
+    },
+    {
+      "file": "turkish-ocr-100k-part-14.zip",
+      "bytes": 30081583,
+      "sha256": "1c8ac2fb9eb0f588d76d4e9965c9babc895a2ec942c714b55893e1b6bd14d95c",
+      "image_count": 3724,
+      "entry_count": 3724,
+      "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/turkish-ocr-100k-part-14.zip"
+    }
+  ],
+  "total_download_bytes": 912781627,
+  "instructions": "Download every part and extract all into the same directory. These are independent ZIP archives, not a split ZIP stream.",
+  "license": "CC BY-SA 4.0; see attribution and font notices inside the dataset."
+}

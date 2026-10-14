@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "articles_hashed_and_replayed": 400,
+  "corpus_and_manifest_byte_identical": true,
+  "revision_url_fetches_verified": 20,
+  "network_check_one_article_per_topic": true,
+  "articles_by_split": {
+    "val": 20,
+    "test": 20,
+    "train": 360
+  },
+  "articles_by_topic": {
+    "turkiye_cografyasi": 20,
+    "dunya_cografyasi": 20,
+    "tarih": 20,
+    "biyografi": 20,
+    "edebiyat": 20,
+    "sanat_mimari": 20,
+    "muzik": 20,
+    "sinema_medya": 20,
+    "dil_egitim": 20,
+    "saglik": 20,
+    "biyoloji": 20,
+    "cevre_doga": 20,
+    "fizik_astronomi": 20,
+    "kimya_malzeme": 20,
+    "matematik": 20,
+    "bilisim": 20,
+    "muhendislik_ulasim": 20,
+    "ekonomi_hukuk": 20,
+    "spor_yasam": 20,
+    "gida_tarim": 20
+  },
+  "corpus_sha256": "63478c09f06af2f537cd0880a7f803758a105cab11c2e7fde5ae947e416f1a46",
+  "corpus_unique_word_forms": 117284,
+  "characters": 7935692,
+  "note": "All 400 exact revisions reconstructed from verified download cache; one per topic also fetched by revision ID and hash checked."
+}
