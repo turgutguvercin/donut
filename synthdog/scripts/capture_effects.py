@@ -90,6 +90,23 @@ def apply_lighting(image, rng, lighting="none", exposure="normal", glyph_mask=No
             profile = minimum + (1 - minimum) * fraction
             params["shadow_edge_pixels"] = edge_pixels
         params.update(shadow_center_fraction=center, shadow_slope=slope, shadow_minimum=minimum)
+    mask = np.asarray(glyph_mask) >= 64 if glyph_mask is not None else np.ones(profile.shape, dtype=bool)
+    if lighting.endswith("shadow") and mask.any() and not ((profile < .75) & mask).any():
+        # Short, curved or perspective-warped words can sit wholly outside a
+        # randomly placed shadow. Recenter the same profile on actual ink,
+        # without changing its strength/shape or consuming more RNG values.
+        original_center = center
+        center = float(np.median(xx[mask] + slope * (yy[mask] - .5)))
+        coordinate = xx + slope * (yy - .5) - center
+        if lighting == "soft_shadow":
+            profile = 1 - (1 - minimum) * np.exp(-.5 * (coordinate / spread) ** 2)
+        else:
+            signed_distance = np.abs(coordinate) - half_width if lighting == "partial_shadow" else coordinate * direction
+            fraction = np.clip(signed_distance * max(1, width - 1) / edge_pixels + .5, 0, 1)
+            fraction = fraction * fraction * (3 - 2 * fraction)
+            profile = minimum + (1 - minimum) * fraction
+        params.update(shadow_center_fraction=center, shadow_recentered=True,
+                      shadow_original_center_fraction=original_center)
     ev_ranges = {"low_light": (-3.8, -2.5), "underexposed": (-1.8, -.8),
                  "bright": (.35, .75), "overexposed": (1.0, 1.8)}
     if exposure != "normal":
@@ -110,7 +127,6 @@ def apply_lighting(image, rng, lighting="none", exposure="normal", glyph_mask=No
     # A no-op must stay byte-identical, without spending any random numbers.
     output = image.copy() if lighting == "none" and exposure == "normal" else Image.fromarray(
         np.clip(np.rint(result), 0, 255).astype("uint8"))
-    mask = np.asarray(glyph_mask) >= 64 if glyph_mask is not None else np.ones(profile.shape, dtype=bool)
     luma = np.array((.2126, .7152, .0722))
     params.update(illumination_min=float(profile.min()), illumination_max=float(profile.max()),
                   shadowed_ink_fraction=float(((profile < .75) & mask).sum() / max(1, mask.sum())),

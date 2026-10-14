@@ -87,6 +87,9 @@ Recognition images retain height 48 and proportional widths up to 4,096, with
 the existing seven PaddleOCR width buckets and maximum label length 256. Longer
 text is not squeezed to width 320. All camera, exposure, shadows, curves, blur,
 font styles, underlines, sizes, crop errors and confusable groups remain enabled.
+If a randomly positioned shadow misses a short or off-center word, its center
+is moved onto actual glyph ink while retaining its shape, strength and random
+stream. Metadata records this adjustment and audits require positive ink overlap.
 
 `source-balance.json` reports article/topic allocation and source isolation.
 Every sample records its target article, if applicable, and context article.

@@ -93,3 +93,22 @@ def test_lighting_none_preserves_rng():
     rng = np.random.default_rng(42)
     capture.apply_lighting(Image.new("RGB", (10, 48), "white"), rng)
     assert rng.random() == np.random.default_rng(42).random()
+
+
+@pytest.mark.parametrize("kind", ("soft_shadow", "hard_shadow", "partial_shadow"))
+def test_shadow_reaches_small_off_center_word_without_changing_random_stream(kind):
+    image = Image.new("RGB", (600, 48), (220, 220, 220))
+    mask = Image.new("L", image.size)
+    ImageDraw.Draw(mask).rectangle((2, 20, 10, 26), fill=255)
+    recentered = 0
+    for seed in range(12):
+        rng, reference = np.random.default_rng(seed), np.random.default_rng(seed)
+        output, params = capture.apply_lighting(image, rng, lighting=kind, glyph_mask=mask)
+        capture.apply_lighting(image, reference, lighting=kind)
+        assert rng.random() == reference.random()
+        lighting = params["capture_lighting"]
+        assert lighting["shadowed_ink_fraction"] > 0
+        # Raster evidence at actual glyph pixels, not just a metadata flag.
+        assert np.asarray(output)[np.asarray(mask) > 0].mean() < 200
+        recentered += lighting.get("shadow_recentered", False)
+    assert recentered > 0
