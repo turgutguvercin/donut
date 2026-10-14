@@ -54,6 +54,8 @@ def test_full_quota_plan_and_readability_constraints(config):
             assert row["degradation"] == "clean"
         if row["contrast"] == "low_contrast":
             assert row["degradation"] not in base.STRONG_BLURS
+        if row["spacing"] == "irregular_word_gaps":
+            assert row["content_type"] not in ("ascii_word", "turkish_word", "date")
     assert all(max(c.values()) - min(c.values()) <= 1 for c in per_family.values())
 
 

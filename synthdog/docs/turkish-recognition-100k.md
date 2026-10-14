@@ -71,7 +71,8 @@ There are 5,000 clean reference controls. Severe crops use normal contrast,
 ordinary spacing and clean rendering without additional print damage or
 occlusion. Faint text avoids blur/print damage/occlusion, and low contrast avoids
 strong blur. These constraints preserve the quotas but intentionally restrict
-some combinations; the pair counts make that visible.
+some combinations; the pair counts make that visible. Irregular word gaps use
+multiword text, so this category cannot be wasted on a single word.
 
 ## Crops, labels and splits
 

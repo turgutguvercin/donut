@@ -151,6 +151,22 @@ def plan_samples(config, fonts, count, seed):
     for i, row in enumerate(rows):
         row["index"] = i
         row["seed"] = int(np.random.SeedSequence([seed, i]).generate_state(1)[0])
+    # Word-gap variation requires multiple words. Reallocate only this axis,
+    # preserving every split's quotas and all previously assigned factors.
+    spacing_rng = np.random.default_rng([seed, 1701])
+    multiword_kinds = {"short_line", "medium_line", "long_sentence", "extra_long_sentence",
+                      "confusables", "price", "synthetic_id"}
+    for split in config["splits"]:
+        invalid = [r for r in rows if r["split"] == split and r["spacing"] == "irregular_word_gaps"
+                   and r["content_type"] not in multiword_kinds]
+        donors = [r for r in rows if r["split"] == split and r["spacing"] == "normal"
+                  and r["content_type"] in multiword_kinds and not r["clean_control"]
+                  and r["clipping_severity"] != "severe"]
+        spacing_rng.shuffle(donors)
+        if len(donors) < len(invalid):
+            raise ValueError("Insufficient multiword samples for gap variation")
+        for row, donor in zip(invalid, donors):
+            row["spacing"], donor["spacing"] = "normal", "irregular_word_gaps"
     return rows
 
 
@@ -389,6 +405,8 @@ def select_label(row, font, rng):
             continue
         if row["mixed_typography"] in ("superscript", "subscript"):
             text += " " + str(int(rng.integers(2, 10)))
+        if row["spacing"] == "irregular_word_gaps" and len(text.split()) < 2:
+            continue
         if safe_text(text) and set(map(ord, text)) <= font.codepoints:
             return text, source, confusable_span
     raise ValueError(f"No label for {row}")
@@ -541,7 +559,7 @@ def finish(root, config, plan, rows, corpus, fonts, manifest, seed):
                 "constraints": ["5% clean controls have white background, plain decoration and no geometric/capture defects",
                                 "severe clips use normal contrast, clean rendering, normal spacing and no print defect or occlusion",
                                 "faint printing uses clean rendering without print defects or occlusion",
-                                "low contrast excludes strong blur"],
+                                "low contrast excludes strong blur", "irregular word gaps require multiword text"],
                 "provenance": "Turkish Wikipedia contributors, CC BY-SA 4.0; exact revisions in trwiki.sources.json. Synthetic fields and confusable templates are generated.",
                 "license": "Generated images and labels: CC BY-SA 4.0. Reproduction code: repository MIT license. PaddleOCR-derived configs: Apache-2.0. Font binaries are excluded; font notices are in licenses/."}
     write_json(root / "metadata.json", metadata)
@@ -574,6 +592,8 @@ def audit(root):
             raise ValueError("Invalid UTF-8/NFC/dictionary text")
         if len(label) > config["max_text_length"]:
             raise ValueError("Label length exceeds PaddleOCR configuration")
+        if row["categories"]["spacing"] == "irregular_word_gaps" and len(label.split()) < 2:
+            raise ValueError("Word-gap category requires more than one word")
         if row["categories"]["text_case"] == "uppercase" and base.turkish_upper(label) != label:
             raise ValueError("Wrong Turkish uppercase label")
         for run in row["font_runs"]:
