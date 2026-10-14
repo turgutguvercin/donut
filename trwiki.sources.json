@@ -1,0 +1,59 @@
+{
+  "language": "tr",
+  "source": "https://tr.wikipedia.org/w/api.php",
+  "pages": [
+    {
+      "title": "Türkiye",
+      "revision": 38108422,
+      "url": "https://tr.wikipedia.org/w/index.php?oldid=38108422",
+      "sha256": "978af1788b658373cab279839845683b293bb81cd321d73868c2e397aa9d6c75"
+    },
+    {
+      "title": "Türkçe",
+      "revision": 38230828,
+      "url": "https://tr.wikipedia.org/w/index.php?oldid=38230828",
+      "sha256": "acd78d01bbe2b65f892a718901830b2a10fd3d7e0adcd3713f884a7889dc1034"
+    },
+    {
+      "title": "İstanbul",
+      "revision": 38102076,
+      "url": "https://tr.wikipedia.org/w/index.php?oldid=38102076",
+      "sha256": "8c9db317fcac024431e6931f22d14ed8eb5dd2618e508cc153894cbddccb1eb4"
+    },
+    {
+      "title": "Ankara",
+      "revision": 38092019,
+      "url": "https://tr.wikipedia.org/w/index.php?oldid=38092019",
+      "sha256": "4c25a9cfefce094cd4247c34e80e5520f68464312111d658730b7398e9f81d3b"
+    },
+    {
+      "title": "İzmir",
+      "revision": 38204638,
+      "url": "https://tr.wikipedia.org/w/index.php?oldid=38204638",
+      "sha256": "a010ce876c1eb527769d126fab616f4551f4529306b54c061082fcaa76f4768a"
+    },
+    {
+      "title": "Bilim",
+      "revision": 38210374,
+      "url": "https://tr.wikipedia.org/w/index.php?oldid=38210374",
+      "sha256": "f7cee7f8e8b565bb506eed20245b0db8281b267346b8132c2a2ecfed829f3f76"
+    },
+    {
+      "title": "Müzik",
+      "revision": 37648152,
+      "url": "https://tr.wikipedia.org/w/index.php?oldid=37648152",
+      "sha256": "55144ce1a435191d08be078c54b45fe3f50905ff0c61095410ae854025218cfd"
+    },
+    {
+      "title": "Edebiyat",
+      "revision": 36542831,
+      "url": "https://tr.wikipedia.org/w/index.php?oldid=36542831",
+      "sha256": "d178d4497fd1955b39693ace33353f6dabc2c46ebbb0b272c926f328540c9734"
+    }
+  ],
+  "license": "CC-BY-SA-4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "attribution": "Turkish Wikipedia contributors; see each revision URL and its page history.",
+  "transformation": "HTML paragraphs, references removed, NFC normalization, whitespace collapsed",
+  "sha256": "c75333459b9ffbd978541f0dd3a15a58498517c88c048722e8139605e94a648e"
+}
