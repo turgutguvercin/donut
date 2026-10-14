@@ -196,7 +196,7 @@ def safe_text(text):
             and all(not c.isalpha() or "LATIN" in unicodedata.name(c, "") for c in text))
 
 
-def make_pools(corpus):
+def make_pools(corpus, required_splits=("train", "val", "test"), allow_empty=False):
     corpus = unicodedata.normalize("NFC", " ".join(corpus.split()))
     words = sorted(set(re.findall(r"\b[A-Za-zÇĞİÖŞÜçğıöşü]{3,20}\b", corpus)))
     pools = {"ascii_word": [w for w in words if w.isascii()],
@@ -217,9 +217,15 @@ def make_pools(corpus):
     pools.update(base.sentence_pools(corpus))
     result = {}
     for kind, texts in pools.items():
-        for split in ("train", "val", "test"):
-            selected = [t for t in texts if safe_text(t) and text_split(t) == split]
-            if not selected:
+        grouped = {split: [] for split in required_splits}
+        for text in texts:
+            if safe_text(text):
+                split = text_split(text)
+                if split in grouped:
+                    grouped[split].append(text)
+        for split in required_splits:
+            selected = grouped[split]
+            if not selected and not allow_empty:
                 raise ValueError(f"Empty {split} pool for {kind}")
             result[kind, split] = selected
     return result
@@ -396,12 +402,27 @@ def initialize(corpus, font_manifest, config, output):
     # Native BLAS/OpenCV threading is set in the launch command as well.
     import cv2
     cv2.setNumThreads(1)
-    WORKER.update(fonts=base.load_font_manifest(Path(font_manifest)), config=config,
-                  pools=make_pools(Path(corpus).read_text(encoding="utf-8")), output=Path(output))
+    WORKER.clear()
+    WORKER.update(fonts=base.load_font_manifest(Path(font_manifest)), config=config, output=Path(output))
+    if config.get("source_sampling") == "balanced_articles_v1":
+        import article_sampling
+        WORKER.update(articles=article_sampling.load_articles(Path(corpus)), article_pools={})
+    else:
+        WORKER["pools"] = make_pools(Path(corpus).read_text(encoding="utf-8"))
+
+
+def row_pools(row):
+    if "article_index" not in row:
+        return WORKER["pools"]
+    index = row["article_index"]
+    if index not in WORKER["article_pools"]:
+        article = WORKER["articles"][index]
+        WORKER["article_pools"][index] = make_pools(article["text"], (article["split"],))
+    return WORKER["article_pools"][index]
 
 
 def select_label(row, font, rng):
-    config, pools = WORKER["config"], WORKER["pools"]
+    config, pools = WORKER["config"], row_pools(row)
     kind, split = row["content_type"], row["split"]
     confusable_span = None
     for _ in range(3000):
@@ -449,7 +470,7 @@ def generate_one(row):
     font = fonts[row["font_index"]]
     text, source, span = select_label(row, font, rng)
     # Context is selected from the SAME split and remains excluded from the target label.
-    context_pool = WORKER["pools"]["medium_line", row["split"]]
+    context_pool = row_pools(row)["medium_line", row["split"]]
     context = []
     while len(context) < 2:
         candidate = context_pool[int(rng.integers(len(context_pool)))]
@@ -479,7 +500,14 @@ def generate_one(row):
     axes = {key: row[key] for key in config["axes"]}
     axes.update(font_family=font.family, font_style=font.style, text_case=row["text_case"],
                 confusable_group=row["confusable_group"], clipping_severity=row["clipping_severity"])
-    return {"file_name": relative, "text": text, "source_text": source,
+    provenance = {}
+    if "article_index" in row:
+        import article_sampling
+        article = WORKER["articles"][row["article_index"]]
+        source_article = {k: article[k] for k in ("title", "revision", "url", "sha256", "topic", "split")}
+        provenance = {"source_article": source_article if row["content_type"] in article_sampling.NATURAL else None,
+                      "context_article": source_article}
+    return {"file_name": relative, "text": text, "source_text": source, **provenance,
             "source_group_sha256": hashlib.sha256(canonical(source).encode()).hexdigest(),
             "split": row["split"], "index": row["index"], "seed": row["seed"],
             "width": image.width, "height": image.height, "width_bucket": bucket,
@@ -597,6 +625,12 @@ def finish(root, config, plan, rows, corpus, fonts, manifest, seed):
         metadata["constraints"].extend([
             "clean controls, severe clips and faint print use frontal geometry, normal exposure and no extra lighting",
             "low light and overexposure use normal ink contrast, no print defects or occlusion, and exclude strong blur"])
+    if config.get("source_sampling") == "balanced_articles_v1":
+        import article_sampling
+        metadata["schema_version"] = 7
+        metadata["generator_sha256"]["article_sampling.py"] = hashlib.sha256(Path(article_sampling.__file__).read_bytes()).hexdigest()
+        metadata["source_sampling"] = "Equal topic/article allocation per natural content type and split; article-disjoint splits; canonical text hash filtering retained"
+        write_json(root / "source-balance.json", article_sampling.audit_sources(rows, json.loads(corpus.with_suffix(".sources.json").read_text(encoding="utf-8"))))
     write_json(root / "metadata.json", metadata)
     WORKER["config"] = config
     make_previews(root, rows)
@@ -711,6 +745,14 @@ def audit(root):
               "limitations": ["Coverage and label checks do not measure OCR accuracy or guarantee human readability.",
                               "Severe crops retain source labels even when marks/letters are missing; use the filtered split files if desired.",
                               "Synthetic validation/test images are not a substitute for real detector crops."]}
+    if config.get("source_sampling") == "balanced_articles_v1":
+        import article_sampling
+        source_report = article_sampling.audit_sources(rows, json.loads((root / "trwiki.sources.json").read_text(encoding="utf-8")))
+        if source_report != json.loads((root / "source-balance.json").read_text(encoding="utf-8")):
+            raise ValueError("Source balance audit changed")
+        report["article_disjoint_splits"] = True
+        report["source_article_count"] = source_report["articles_used"]
+        report["source_topic_count"] = source_report["topics_used"]
     write_json(root / "audit.json", report)
     return report
 
@@ -719,6 +761,9 @@ def generate(args):
     config = json.loads(args.config.read_text(encoding="utf-8"))
     fonts = base.load_font_manifest(args.font_manifest)
     plan = plan_samples(config, fonts, args.count, args.seed)
+    if config.get("source_sampling") == "balanced_articles_v1":
+        import article_sampling
+        article_sampling.assign_articles(plan, article_sampling.load_articles(args.corpus), args.seed)
     if args.output.exists():
         raise ValueError("Output already exists; choose a fresh directory")
     args.output.mkdir(parents=True)
