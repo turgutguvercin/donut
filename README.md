@@ -247,3 +247,9 @@ SynthDoG supports Turkish through `synthdog/config_tr.yaml`, using the existing
 SIL OFL Noto fonts. See [Turkish setup and generation](synthdog/README.md#turkish)
 for the reproducible Wikipedia corpus preparation, dependency installation,
 20-document generation, and UTF-8 OCR validation commands.
+
+For PaddleOCR recognition, the [100,000-image Turkish dataset](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v1)
+provides balanced category quotas, 20 font families, confusable-character coverage,
+detector crop errors, and 90k/5k/5k grouped splits. Images are 48 pixels high with
+variable widths up to 4,096. See the [generation and training-data guide](synthdog/docs/turkish-recognition-100k.md)
+for the recipe, PaddleOCR width/label settings, audit results, and verified downloader.

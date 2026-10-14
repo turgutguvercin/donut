@@ -3,6 +3,14 @@
 This recipe generates recognition crops and exact UTF-8 target transcriptions.
 It does not generate text-detection polygons or train an OCR model.
 
+**Published dataset:** [download 100,000 images and labels](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v1)
+(986 MB across 15 independent ZIP parts, with an automatic downloader).
+[Preview](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v1/preview-03.jpg)
+and [full audit](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v1/audit.json).
+The published run uses source commit `dd133a34a5d90e86d849a34d263f195fd299e24e`,
+has no duplicate image hashes, and passed pinned PaddleOCR preprocessing and
+label encoding for every sample. A 232-sample replay covered all 62 font files.
+
 Activate the Turkish environment described in the main README, prepare
 `resources/corpus/trwiki.txt` with `scripts/prepare_tr_corpus.py`, and supply a
 licensed font catalog in the format documented in the README. From `synthdog/`:
