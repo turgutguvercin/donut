@@ -63,6 +63,12 @@ def test_turkish_case_split_identity():
         assert dataset.text_split(label) == dataset.text_split(base.turkish_upper(label))
 
 
+def test_ctc_bucket_reserves_repeated_character_timesteps(config):
+    assert dataset.recognition_bucket(300, "a" * 100, config) == 960
+    assert dataset.recognition_bucket(800, "a" * 200, config) == 1920
+    assert dataset.recognition_bucket(1800, "Çiğdem", config) == 1920
+
+
 def test_real_font_runs_spacing_and_script_baselines(fonts):
     font = fonts[0]
     label = "Çiğdem ışığı gördü 2"

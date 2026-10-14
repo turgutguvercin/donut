@@ -100,7 +100,10 @@ back to 48. The scale and glyph bounds are recorded. The dictionary includes
 all observed characters plus Turkish letters; use `use_space_char: true`.
 
 Width buckets are `320, 640, 960, 1280, 1920, 2560, 4096`, with one label list
-per split and bucket. Right-pad within a bucket. For PaddleOCR configurations
+per split and bucket. A bucket must fit both the image width and enough CTC
+timesteps for the label, including adjacent repeated characters at width stride
+four. Some condensed long lines therefore use a larger padding bucket.
+Right-pad within a bucket. For PaddleOCR configurations
 that always resize to a fixed width, use 4,096 for the full set or use a matching
 bucket configuration and bucket list. A 320-wide resize for all samples destroys
 long-line detail. Keep image height 48 and allow labels up to 256 characters

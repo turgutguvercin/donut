@@ -394,6 +394,14 @@ def select_label(row, font, rng):
     raise ValueError(f"No label for {row}")
 
 
+def recognition_bucket(width, text, config):
+    # CTC needs a blank timestep between adjacent repeated characters. A very
+    # condensed long line can need a larger padded bucket than its pixel width.
+    timesteps = len(text) + sum(a == b for a, b in zip(text, text[1:]))
+    required_width = max(width, 4 * timesteps)
+    return next(bucket for bucket in config["width_buckets"] if bucket >= required_width)
+
+
 def generate_one(row):
     rng = np.random.default_rng(row["seed"])
     fonts, config, output = WORKER["fonts"], WORKER["config"], WORKER["output"]
@@ -426,7 +434,7 @@ def generate_one(row):
     path = output / relative
     path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path, quality=params["jpeg_quality"], subsampling=0)
-    bucket = next(w for w in config["width_buckets"] if w >= image.width)
+    bucket = recognition_bucket(image.width, text, config)
     axes = {key: row[key] for key in config["axes"]}
     axes.update(font_family=font.family, font_style=font.style, text_case=row["text_case"],
                 confusable_group=row["confusable_group"], clipping_severity=row["clipping_severity"])
@@ -637,6 +645,7 @@ def audit(root):
               "severe_clips": sum(r["potentially_ambiguous"] for r in rows),
               "crops_with_completely_removed_components": sum(r["removed_components"] > 0 for r in rows),
               "width_capped_by_uniform_scaling": sum(r["width_cap_scale"] < 1 for r in rows),
+              "buckets_enlarged_for_ctc_capacity": sum(r["width_bucket"] > next(w for w in config["width_buckets"] if w >= r["width"]) for r in rows),
               "maximum_occluded_ink_fraction": max(r["occluded_ink_fraction"] for r in rows),
               "measured_occlusion_counts": dict(measured_occlusions),
               "primary_font_turkish_character_counts": dict(primary_font_turkish_characters),
