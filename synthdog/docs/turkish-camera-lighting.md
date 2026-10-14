@@ -5,6 +5,14 @@ with explicit views from the left/right, exposure and shadows. Use this config
 when generating a new dataset. The published `turkish-ocr-100k-v1` and its default
 recipe retain their original images and categories.
 
+**Published sample set:** [download 1,000 images and labels (11.4 MB ZIP)](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-camera-lighting-1000-v1/turkish-camera-lighting-1000-v1.zip).
+[Camera comparison](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-camera-lighting-1000-v1/comparison-1.jpg) ·
+[Lighting comparison](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-camera-lighting-1000-v1/comparison-2.jpg) ·
+[Release and audits](https://github.com/turgutguvercin/donut/releases/tag/turkish-camera-lighting-1000-v1).
+This run includes 900 training / 50 validation / 50 test samples and 14 separate
+controlled comparison crops. All 1,000 samples passed dataset and pinned Paddle
+preprocessing checks. Source commit: `9163ad6c3e3552a86b9117f8e1276bbbb0029b68`.
+
 ## Categories and balance
 
 | Factor | Quota for 100,000 images |
