@@ -1,0 +1,518 @@
+{
+  "passed": true,
+  "model": "PP-OCRv6_medium_rec",
+  "paddleocr_commit": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+  "base_release": "turkish-ocr-200k-v4",
+  "images": 200000,
+  "base_images_labels_categories_and_splits_changed": 0,
+  "repository_tests_passed": 98,
+  "paddle_version": "3.2.2",
+  "device": "cpu",
+  "full_training_performed": false,
+  "production_accuracy_measured": false,
+  "gpu_memory_and_speed_measured": false,
+  "scripts_sha256": {
+    "paddle_v6_utils.py": "6f7d2e90d613f7047ce59db8cbb4022da81c1b58cdb75ee772c4046085f293ee",
+    "prepare_paddle_tr_v6.py": "2852162e81dbb232bc3b2d59cccb6e8b3553225b5dc1f947e55d232af8cb2cda",
+    "paddle_tr_v6_runtime.py": "5d8649bfd9390fb19fff49f64e9ab55afecf07bcbd0a74ce4d6e53fc4025ce07",
+    "paddle_tr_v6_pool.py": "591489005b7029fd68600c02cc2d6d794198ee46b0b6374b4712dfcc537fbfb2",
+    "train_paddle_tr_v6.py": "4befdecb9e0047708e57e2b43a9280f61ba1434978068c2e239bd0fbf5643d8e",
+    "prepare_paddle_v6_weights.py": "8ebcc1a0f0beed54c859d61d839a312095631a5ac50d8e2ebfdb556a4a85aed4",
+    "check_paddle_tr_v6.py": "737d178e54671ceb716c95ae8364adf8ec82dc948062a63d25c9cc57e08e5293"
+  },
+  "requirements_sha256": "19f522fed8e73625dbb546655f6c3d44a2a716ef92055b99c5ebfb5e94bec4db",
+  "audits": {
+    "dataset-compatibility.json": {
+      "passed": true,
+      "model": "PP-OCRv6_medium_rec",
+      "paddleocr_commit": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+      "images": 200000,
+      "base_images_labels_and_splits_changed": 0,
+      "base_width_buckets_changed": 0,
+      "height": 48,
+      "maximum_width": 4096,
+      "ctc_width_stride": 8,
+      "maximum_text_length_setting": 256,
+      "nrtr_actual_character_capacity": 254,
+      "dictionary_symbols_including_space": 221,
+      "split_counts": {
+        "train": 180000,
+        "val": 10000,
+        "test": 10000
+      },
+      "recommended_counts": {
+        "train": 151402,
+        "val": 8391,
+        "test": 8410
+      },
+      "challenge_counts": {
+        "train": 28598,
+        "val": 1609,
+        "test": 1590
+      },
+      "width_counts": {
+        "2560": 8028,
+        "320": 63781,
+        "1280": 17369,
+        "1920": 17126,
+        "640": 50993,
+        "960": 34657,
+        "4096": 8046
+      },
+      "required_base_file_sha256": {
+        "metadata.jsonl": "80b3d413de0ea7c7e473a974b376f0371c46b715e5d27fa391886e5592f086fd",
+        "turkish_dict.txt": "f87a16be63d65a22190d3a145c69852c80897828984266663b341c09e423079f",
+        "labels.txt": "ae6c7f5ad0da9a26987e244265322c24ee60c02610aef267128c1f9cf9b1e165",
+        "train.txt": "5c79e97574d441857266129f5578fd9bf19905976e770e03d7f68e5ba710cac0",
+        "train-w320.txt": "94f136b74f2f20d72cfa426ddb5ed1ebcc4e56aad4ed2de9e43beb6b700fb2a8",
+        "train-w640.txt": "bb1768e332bb675c0bc8be4837363bd9730d423dd2f0b9b04472b85ffee157f0",
+        "train-w960.txt": "9726f70b2558743dd84dbd4602cba20de634669f697893f9e41adacdb8b59cdf",
+        "train-w1280.txt": "c843c2effc0480f0565c015a08119b581500a088d1c48b2a4201c7e9ae4ac307",
+        "train-w1920.txt": "6fd7fe022c4e1335e583abebcde3f8543eb30a4fd6b080fa89e34f7f83c26d91",
+        "train-w2560.txt": "1051c2d999de899b3b7ab6ccc8487d3e60ce41d6c50b2edc58b82d6df77d20c2",
+        "train-w4096.txt": "5b0e1908e81409d8a74c8e1b5ad466b08a49c4cada1adda35ae2735840ea64a5",
+        "train-recommended.txt": "65ffba904f70312b83cc6ac256fc3b777b9e745a903657db55864a66582e1de8",
+        "train-recommended-w320.txt": "e542da157508fca6c4872ef75572d8038850586255ba075c44ab9be9aa6c00f3",
+        "train-recommended-w640.txt": "9edc9a75f25e7add7f2cda017ee1ec4f334fc63d5cebfeb06818bbeb733f13e3",
+        "train-recommended-w960.txt": "177bfd3d9cbc33eabd4c032294332ac8c1fc7f42da109b1217dc46242f1e3365",
+        "train-recommended-w1280.txt": "4be71748d903919fcaca03f11dd2a329e4e6ece4669bc21014f9cba7d3415d30",
+        "train-recommended-w1920.txt": "1567c9dc3fd678bf979c91e39b2f5b771286755dfea49bb08034fccbc2d045d2",
+        "train-recommended-w2560.txt": "cfa933ae55e1c1cf55c3356bfaf5902813e66ecac081bf1ec4a50a16e9931d08",
+        "train-recommended-w4096.txt": "71555153229aa8b00bbd0adf76c4285ec8c3403b1205392238f31cdd5ffa9fee",
+        "train-challenge.txt": "f981df779282625e522491c61e85e5ada87ff48aea61e8b53d20406507fbab5d",
+        "train-challenge-w320.txt": "33b2b85bc2a44d318f86aadfbeae337902a0ef3df9e02b203d27c90c6a8e92ad",
+        "train-challenge-w640.txt": "5ee654cbb05ca7ad076f3f90aee59c3ff1ace41441d8ed7d074d9d7d9e1d5a8d",
+        "train-challenge-w960.txt": "29ce1fd50194c5560f11e97e53ea6918a765b2d13f61fcbfb97a80def53235df",
+        "train-challenge-w1280.txt": "10578f9e012c8252beacb8fd9f9bbbca59dcf9ecc88d3ffde1e2375cc9fae5a1",
+        "train-challenge-w1920.txt": "6022d9a33559c12c69317e88fc22f9252da3d7213c1f58c1f8c93e8c033fd07b",
+        "train-challenge-w2560.txt": "2b075b86d53879fcedaf25cd883ee7816ce1e25c7c0378336c41cc5ef6c99840",
+        "train-challenge-w4096.txt": "d8c0cf5f6b1b0dd3e4ac692d08f55c493967833415f8744d69925ce1feb8aaf6",
+        "val.txt": "9322fb447b40c43cbea00226c6f04992ffcf87dcb26401e62708f0bf0c0f971d",
+        "val-w320.txt": "6bfa43e22f7fd6d5ae45e922544389955e47a99d23386580e1c2e24146f8a7cb",
+        "val-w640.txt": "946592f4a86092277114ed138bff37db1d41e3edaf4253a61bf96b66fa147e8f",
+        "val-w960.txt": "f6d1883cbd1bab24d60406d9ff9ec2d6e3e12208ebb8f1ff92a24ac150859435",
+        "val-w1280.txt": "73a9f575fa1f5a17d7a1cc5b99aab409d1cf4130ea7f648cc8b883136a51cd6b",
+        "val-w1920.txt": "b73eb0dc4f1bc36b1a38ca912f574edec87cae1a2116acd88a9780eeff493cb6",
+        "val-w2560.txt": "2eb37201afde23dae187e9d1aecc2dc4418a00dbbacb5d06a4618bd441e59873",
+        "val-w4096.txt": "6efc2c03a15cea589e6fed9c4e743caf140ea731ae7b1ec0f9cb33e3bad2e701",
+        "val-recommended.txt": "e3851dc465e6c468a036d681b92f3401b1f9555f422ddba7d9f3c66ac4c9d1df",
+        "val-recommended-w320.txt": "1e2f95f1fd3baec66887c905d21efbf3c3664ce547fd035628aa7ddb437d7cb6",
+        "val-recommended-w640.txt": "ddf30c0bc9efa673f1cbb051590bd83b957c7d641883cf00bcdded867e2665f5",
+        "val-recommended-w960.txt": "1fe674e5f14a64dff7c2fa9b9abdbe9c7b44bd79d79b612e93859071cbc32cf8",
+        "val-recommended-w1280.txt": "58559692feb089d07e5405fbb3ee91611a4bc4f78ed5eba987e6eb44afb030d9",
+        "val-recommended-w1920.txt": "9de84a2965613b1ed5c5122cea7b8dc4529fb959902a252202d35039ff2f9d48",
+        "val-recommended-w2560.txt": "821e3dd7f7c2a50974bf82eb18e8cd3b5a0a8b7a8ab3ccd1821d3a8d6e305e0f",
+        "val-recommended-w4096.txt": "54c17692627a30cd14392dc8c2122f264cf260bcbe58ba6e1067faa82b87ba74",
+        "val-challenge.txt": "fba93942ac044fab1d8cae240bf4e80adbd8fada909c8a366db06478b699e3b4",
+        "val-challenge-w320.txt": "c83e9a177668d2a736909eebafe83af9da0b4104c2150e48d30c54456d58ad09",
+        "val-challenge-w640.txt": "b85954e8b3d47f8b9e2bef2d0418805d4427e54733eb0bfa004122a672fb97d2",
+        "val-challenge-w960.txt": "80e12c172c7d1cd018615ab4a8d0707b47f5e36a82e9a59b6602389a7d57113d",
+        "val-challenge-w1280.txt": "dedad39fceb502af1315422efa2ae41d85c6bea0ef8e07d61111600d49b862f5",
+        "val-challenge-w1920.txt": "ad7b04dd99e5048ba635163d994e06d924077d19943bb6f1f553fb2b439f5703",
+        "val-challenge-w2560.txt": "1170c5bf04d68ca18c980e321b6f37e6d153415ea034455eab95c62e5e7addcb",
+        "val-challenge-w4096.txt": "3aa8259b50f15f38d09e39038d1e0ed51c8ffaed075646e6ea50224f961156ed",
+        "test.txt": "2742abbc59bc860788c6310fc024a3bf26de69ea847ea7fe10abbbd69f6e0c82",
+        "test-w320.txt": "f69b5be95837d63c3bcca055619b99da664d339fdbcd260b4620d0ab3e878432",
+        "test-w640.txt": "9644f53490629be14831f0921cdd3199784be35c4a2a2a9e3695c10805ce3655",
+        "test-w960.txt": "cdd3783b3c9e0700e474e5e4539fd413e8d54b67a3a0100e325ff486dfb0ce71",
+        "test-w1280.txt": "28c7d3a9fa875de4104f6cf4a96efdd945295e527907618306857fd57a90cdf1",
+        "test-w1920.txt": "86fb568d74b386aaaf92cffcdda09b8849fc1cdd93880d5485724fbd01f59874",
+        "test-w2560.txt": "dbcd12e88621d1b694ac0b07b08727d8c96805d79fa3200f2214b956cb70543e",
+        "test-w4096.txt": "d19f1054bb84d46911b9567ac4cc4ae357f8d68fa090352ac8f0f5734f222158",
+        "test-recommended.txt": "b1f812f41900ad094538d7093dbb48d36b72f939eee30a91733b0351539df3de",
+        "test-recommended-w320.txt": "01d00ac0b2e43e0305ead968a23f05180ffae755b1575122ee8a250dca7c8df9",
+        "test-recommended-w640.txt": "8b4703c40eb19c543447ee5da59e0746355f548a7a383185268b70e9efe0d3bf",
+        "test-recommended-w960.txt": "d0b9a10a208b457ae83ca1108d4975940263464fd73fa95b5978473aee802a18",
+        "test-recommended-w1280.txt": "e521b2b7e6e0a854672e2fd531832e90051e627a4f5e20df60a46dd2201d80fd",
+        "test-recommended-w1920.txt": "6cd5a7c903c2318c78521739504c41af621001f2e216adfd601f6f43c48c17b3",
+        "test-recommended-w2560.txt": "45b90d552a64abbc4476e34c40f9b94a4c132bbaa136cb3d3a79b25ed80db2e9",
+        "test-recommended-w4096.txt": "df8862579e06718416a14a47368854bec96ede23fc447246011772a9890aaed9",
+        "test-challenge.txt": "00110faa9f34cd3153348c0bbb875c57fc8344ad176af061d82462fefbdfd743",
+        "test-challenge-w320.txt": "fea79115ea9e6de17254973f5ab57e76374c699f1203b270cbfc7418b4ac7cad",
+        "test-challenge-w640.txt": "bcca889c7307e045373824319854bef1cf3822005daa61d7e4a6a82379c96868",
+        "test-challenge-w960.txt": "a55c062d02f024526ef00db5a071e93efe902532dfa2a94f839d2427a47be808",
+        "test-challenge-w1280.txt": "77681a2c78b75dd381f8420ba8ebfe28e745eeb98ab62555792d8aff33164ef6",
+        "test-challenge-w1920.txt": "8e654909823b364661f230c5d7b7a4dc2923c01697724666ba6c948f5234940c",
+        "test-challenge-w2560.txt": "8912577511917f2b301d24afbfa441304614906f9b604e3b5edaad5d58853be4",
+        "test-challenge-w4096.txt": "df989fb3e6b539b43653164d0f20e348960ba363ef7003a25892debdd3f2a2a4"
+      },
+      "all_samples_checked_against_real_v6_ctc_capacity": 200000,
+      "all_full_recommended_challenge_and_width_lists_checked": true
+    },
+    "model-shape-audit.json": {
+      "passed": true,
+      "model": "PP-OCRv6_medium_rec",
+      "paddleocr_commit": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+      "config_sha256": "5ebee6044fc713b645c2204ed51de67d6834830b0eafeb27b3cd76717c942af0",
+      "paddle_version": "3.2.2",
+      "device": "cpu",
+      "ctc_width_stride": 8,
+      "tested_widths": [
+        {
+          "input_shape": [
+            1,
+            3,
+            48,
+            320
+          ],
+          "ctc_shape": [
+            1,
+            40,
+            222
+          ],
+          "time_steps": 40,
+          "elapsed_seconds": 0.443
+        },
+        {
+          "input_shape": [
+            1,
+            3,
+            48,
+            640
+          ],
+          "ctc_shape": [
+            1,
+            80,
+            222
+          ],
+          "time_steps": 80,
+          "elapsed_seconds": 0.623
+        },
+        {
+          "input_shape": [
+            1,
+            3,
+            48,
+            960
+          ],
+          "ctc_shape": [
+            1,
+            120,
+            222
+          ],
+          "time_steps": 120,
+          "elapsed_seconds": 1.17
+        },
+        {
+          "input_shape": [
+            1,
+            3,
+            48,
+            1280
+          ],
+          "ctc_shape": [
+            1,
+            160,
+            222
+          ],
+          "time_steps": 160,
+          "elapsed_seconds": 0.768
+        },
+        {
+          "input_shape": [
+            1,
+            3,
+            48,
+            1920
+          ],
+          "ctc_shape": [
+            1,
+            240,
+            222
+          ],
+          "time_steps": 240,
+          "elapsed_seconds": 1.463
+        },
+        {
+          "input_shape": [
+            1,
+            3,
+            48,
+            2560
+          ],
+          "ctc_shape": [
+            1,
+            320,
+            222
+          ],
+          "time_steps": 320,
+          "elapsed_seconds": 1.757
+        },
+        {
+          "input_shape": [
+            1,
+            3,
+            48,
+            4096
+          ],
+          "ctc_shape": [
+            1,
+            512,
+            222
+          ],
+          "time_steps": 512,
+          "elapsed_seconds": 2.431
+        }
+      ],
+      "pretrained_weights_loaded": false,
+      "accuracy_evaluated": false,
+      "scope": "Full pinned model, random-weight eval forwards; dimensions only."
+    },
+    "native-data-audit.json": {
+      "passed": true,
+      "model": "PP-OCRv6_medium_rec",
+      "paddleocr_commit": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+      "samples": 200000,
+      "splits": {
+        "train": 180000,
+        "val": 10000,
+        "test": 10000
+      },
+      "native_paddleocr_operators": true,
+      "labels_rejected_truncated_or_changed": 0,
+      "horizontal_squeezing": 0,
+      "ctc_and_nrtr_utf8_roundtrips_checked": 200000,
+      "sampler_two_epochs_exact_coverage": true,
+      "partial_batches_retained": true,
+      "sampler_reshuffles_between_epochs": true,
+      "all_batches_same_width": true,
+      "scope": "All samples passed native upstream decoding/encoding/normalization; no accuracy claim.",
+      "two_worker_native_dataloader_train_and_eval_batches": {
+        "Train": [
+          [
+            32,
+            3,
+            48,
+            320
+          ],
+          [
+            1,
+            3,
+            48,
+            4096
+          ],
+          [
+            2,
+            3,
+            48,
+            2560
+          ]
+        ],
+        "Eval": [
+          [
+            32,
+            3,
+            48,
+            320
+          ],
+          [
+            32,
+            3,
+            48,
+            320
+          ],
+          [
+            32,
+            3,
+            48,
+            320
+          ]
+        ]
+      }
+    },
+    "training-smoke-audit.json": {
+      "passed": true,
+      "model": "PP-OCRv6_medium_rec",
+      "paddleocr_commit": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+      "pretrained_weights_loaded": true,
+      "optimizer_steps": 7,
+      "device": "cpu",
+      "width_preserving_training_pooling": true,
+      "nonzero_ctc_gradients_all_widths": true,
+      "widths": [
+        {
+          "width": 320,
+          "characters": 40,
+          "ctc_steps": 40,
+          "minimum_ctc_steps": 40,
+          "ctc_loss": 729.9307250976562,
+          "nrtr_loss": 8.290067672729492,
+          "finite_gradients": true,
+          "weights_updated": true,
+          "elapsed_seconds": 7.799
+        },
+        {
+          "width": 640,
+          "characters": 80,
+          "ctc_steps": 80,
+          "minimum_ctc_steps": 80,
+          "ctc_loss": 1394.4061279296875,
+          "nrtr_loss": 7.581429958343506,
+          "finite_gradients": true,
+          "weights_updated": true,
+          "elapsed_seconds": 18.821
+        },
+        {
+          "width": 960,
+          "characters": 120,
+          "ctc_steps": 120,
+          "minimum_ctc_steps": 120,
+          "ctc_loss": 1865.8583984375,
+          "nrtr_loss": 9.31718635559082,
+          "finite_gradients": true,
+          "weights_updated": true,
+          "elapsed_seconds": 17.062
+        },
+        {
+          "width": 1280,
+          "characters": 160,
+          "ctc_steps": 160,
+          "minimum_ctc_steps": 160,
+          "ctc_loss": 2408.927978515625,
+          "nrtr_loss": 6.948232173919678,
+          "finite_gradients": true,
+          "weights_updated": true,
+          "elapsed_seconds": 22.354
+        },
+        {
+          "width": 1920,
+          "characters": 240,
+          "ctc_steps": 240,
+          "minimum_ctc_steps": 240,
+          "ctc_loss": 3976.650146484375,
+          "nrtr_loss": 8.773626327514648,
+          "finite_gradients": true,
+          "weights_updated": true,
+          "elapsed_seconds": 61.619
+        },
+        {
+          "width": 2560,
+          "characters": 252,
+          "ctc_steps": 320,
+          "minimum_ctc_steps": 253,
+          "ctc_loss": 2436.8916015625,
+          "nrtr_loss": 9.085955619812012,
+          "finite_gradients": true,
+          "weights_updated": true,
+          "elapsed_seconds": 60.636
+        },
+        {
+          "width": 4096,
+          "characters": 252,
+          "ctc_steps": 512,
+          "minimum_ctc_steps": 255,
+          "ctc_loss": 942.7049560546875,
+          "nrtr_loss": 5.403537273406982,
+          "finite_gradients": true,
+          "weights_updated": true,
+          "elapsed_seconds": 85.9
+        }
+      ],
+      "native_dataloader_collation_passed": true,
+      "maximum_label_length_exercised": 252,
+      "accuracy_evaluated": false,
+      "production_training_performed": false,
+      "scope": "Seven short CTC+NRTR backward/Adam checks on real recommended crops; not a trained OCR deliverable."
+    },
+    "official-trainer-audit.json": {
+      "passed": true,
+      "model": "PP-OCRv6_medium_rec",
+      "paddleocr_commit": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+      "device": "cpu",
+      "paddle_version": "3.2.2",
+      "actual_official_trainer_used": true,
+      "train_samples": 2,
+      "validation_samples": 2,
+      "training_widths": [
+        320,
+        4096
+      ],
+      "training_label_lengths": [
+        40,
+        252
+      ],
+      "epochs": 1,
+      "optimizer_steps": 2,
+      "positive_finite_ctc_and_nrtr_losses": true,
+      "evaluation_executed": true,
+      "best_and_latest_checkpoints_saved": true,
+      "state_tensors": 441,
+      "changed_state_tensors": 440,
+      "all_saved_tensors_finite": true,
+      "pretrained_load_warnings": 0,
+      "config_sha256": "06b71b54e4386d769eefc6a011cae6f6188452ae03303dd3774052b60710c32e",
+      "latest_checkpoint_sha256": "85486abccc961d7054883a73c0a634b3ad924ce6f73e12cc70298ce1d22ea5d3",
+      "production_accuracy_evaluated": false,
+      "scope": "Two training and two validation crops test trainer/loader/checkpoint integration only, not production accuracy."
+    },
+    "weights-transfer.json": {
+      "passed": true,
+      "model": "PP-OCRv6_medium_rec",
+      "paddleocr_commit": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+      "source_url": "https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv6_medium_rec_pretrained.pdparams",
+      "source_sha256": "c4a110423c23739f157ff870e27f41649d8c89e4c8df5230c2cd2e9fd90a7e92",
+      "target_dictionary_sha256": "f87a16be63d65a22190d3a145c69852c80897828984266663b341c09e423079f",
+      "checkpoint_sha256": "431511139bc67094aee6d8f884c618d78558953c23f8d35e1ff824ef42613390",
+      "feature_tensors_copied_exactly": 437,
+      "vocabulary_tensors_remapped": [
+        "head.ctc_head.fc.weight",
+        "head.ctc_head.fc.bias",
+        "head.gtc_head.embedding.embedding.weight",
+        "head.gtc_head.tgt_word_prj.weight"
+      ],
+      "shared_characters_including_space": 217,
+      "new_initialized_characters": [
+        "ḥ",
+        "ṓ",
+        "ṭ",
+        "⁄"
+      ],
+      "all_turkish_letters_transferred": true,
+      "ctc_output_classes": 222,
+      "nrtr_encoder_classes": 225,
+      "nrtr_head_output_classes": 226,
+      "nrtr_trailing_extra_output_preserved": true,
+      "seed": 20261015,
+      "model_training_performed": false
+    },
+    "export-inference-audit.json": {
+      "passed": true,
+      "model": "PP-OCRv6_medium_rec",
+      "paddleocr_commit": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+      "device": "cpu",
+      "official_export_model_used": true,
+      "official_predict_rec_used": true,
+      "dynamic_widths_verified": [
+        {
+          "input_width": 320,
+          "output_shape": [
+            1,
+            40,
+            222
+          ],
+          "nonempty_utf8_prediction": true,
+          "elapsed_seconds": 0.30373406410217285
+        },
+        {
+          "input_width": 4096,
+          "output_shape": [
+            1,
+            512,
+            222
+          ],
+          "nonempty_utf8_prediction": true,
+          "elapsed_seconds": 2.5413615703582764
+        }
+      ],
+      "exported_files": {
+        "inference.json": "651b256c6c0b76866f7f61aa82499e0960b3ce2a62fb1fc6de185a9513a6f096",
+        "inference.pdiparams": "810cb83403f0f1df86b705ccbc49c7841533910fec6e3179608bef8cb543e7f5",
+        "inference.yml": "3ee64ed731748af0fd98280198338b5a9cdfdea4040fa9f2a993313f7a3dd17e"
+      },
+      "checkpoint_trained_for_steps": 2,
+      "production_accuracy_evaluated": false,
+      "jit_cache_redirected_to_writable_tmp_for_cloud_sandbox": true,
+      "scope": "Export/inference integration on two synthetic crops; not an accuracy benchmark."
+    }
+  }
+}
