@@ -514,5 +514,22 @@
       "jit_cache_redirected_to_writable_tmp_for_cloud_sandbox": true,
       "scope": "Export/inference integration on two synthetic crops; not an accuracy benchmark."
     }
+  },
+  "public_adapter_download": {
+    "passed": true,
+    "url": "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-v6-medium-adapter-v1/turkish-v6-medium-adapter-v1.zip",
+    "bytes": 41350,
+    "sha256": "70cd1e0901006ee27c1978817bc1410bbe9700f1f9d668ad61c8bad65aea491e",
+    "zip_crc_checked": true,
+    "zip_entries": 23,
+    "all_manifest_file_hashes_checked": true,
+    "required_base_files_rechecked": 75,
+    "base_images": 200000,
+    "adapter_source_commit": "6e817499951ec0c559bbcd2837796bb2b71ef87c",
+    "downloaded_runtime_import_and_native_operator_smoke_passed": true,
+    "downloaded_runtime_smoke_label_lengths": [
+      40,
+      252
+    ]
   }
 }
