@@ -36,9 +36,16 @@ def analyze(root):
             characters[row["split"]].update(text)
             labels.add(" ".join(normal(text).split()))
             kind = row["categories"]["content_type"]
-            if kind == "confusables":
+            if kind in ("confusables", "official_confusables_words", "official_confusables_codes"):
                 continue
-            tokens = words(text)
+            readable_text = text
+            if kind.startswith("official_"):
+                # Generated URLs, email addresses, UUIDs and document numbers
+                # must not inflate vocabulary with random alphabetic chunks.
+                readable_text = re.sub(r"https?://\S+|[\w.+-]+@[\w.-]+", " ", readable_text, flags=re.I)
+                readable_text = re.sub(r"\b[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\b", " ", readable_text, flags=re.I)
+                readable_text = re.sub(r"\b[EZO]-\d{8}-\d{3}\.\d{2}-\d+\b", " ", readable_text, flags=re.I)
+            tokens = words(readable_text)
             if kind == "synthetic_id":
                 tokens = [t for t in tokens if t != "tr"]
             readable.update(tokens)
@@ -52,7 +59,7 @@ def analyze(root):
     if count != expected:
         raise ValueError("Wrong dataset size")
     report = {"dataset": root.name, "images": count,
-              "method": "NFC, Turkish lowercase I→ı/İ→i, normalize apostrophes; alphabetic word forms with suffixes; numeric/alphanumeric units, synthetic ID prefix and confusable exercises excluded. Inflections, names and abbreviations count separately; no stemming or dictionary validation.",
+              "method": "NFC, Turkish lowercase I→ı/İ→i, normalize apostrophes; alphabetic word forms with suffixes; numeric/alphanumeric units, synthetic ID prefix and confusable exercises excluded. Official-field URLs, emails, UUIDs and document numbers are removed before word counting. Inflections, names and abbreviations count separately; no stemming or dictionary validation.",
               "unique_word_forms_including_readable_fields": len(readable),
               "word_occurrences_including_readable_fields": sum(readable.values()),
               "unique_word_forms_by_split_including_readable_fields": {s: len(c) for s, c in by_split.items()},

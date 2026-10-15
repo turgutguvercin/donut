@@ -7,7 +7,8 @@ import zipfile
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from download_tr_dataset import checksum, download_part, extract_part
+from download_tr_dataset import checksum, download_part, extract_part, assemble_metadata
+from package_tr_dataset import package
 from prepare_paddle_tr import training_config
 
 
@@ -54,3 +55,40 @@ def test_paddle_full_and_bucket_configs_are_explicit_and_preserve_template():
         assert bucket[mode]["dataset"]["label_file_list"] == [f"./data/{split}-w320.txt"]
         assert full[mode]["dataset"]["transforms"][2] == {"RecResizeImg": {"image_shape": [3, 48, 4096], "padding": True}}
         assert "sampler" not in full[mode]
+
+
+def test_large_metadata_roundtrip_and_checksum_failure(tmp_path):
+    root = tmp_path / "dataset"
+    (root / "images/000").mkdir(parents=True)
+    (root / "images/000/a.jpg").write_bytes(b"small image fixture")
+    (root / "labels.txt").write_text("images/000/a.jpg\tİl Müdürlüğü 2021\n", encoding="utf-8")
+    payload = ('{"text":"Çiğdem, şüphe ve ışık"}\n' * 1000).encode("utf-8")
+    (root / "metadata.jsonl").write_bytes(payload)
+    (root / "audit.json").write_text('{"passed":true,"images_decoded_and_hashed":1}')
+    (root / "paddle-preprocessing-audit.json").write_text('{"passed":true,"samples":1}')
+    parts = tmp_path / "parts"
+    manifest = package(root, parts, max_bytes=8192, prefix="turkish-ocr-200k")
+    assert manifest["schema_version"] == 2 and manifest["image_count"] == 1
+    assert all(p["bytes"] <= 8192 and p["file"].startswith("turkish-ocr-200k-") for p in manifest["parts"])
+    destination = tmp_path / "download"
+    for part in manifest["parts"]:
+        extract_part(parts / part["file"], destination)
+    dataset = destination / "dataset"
+    record = manifest["assembled_files"][0]
+    first = dataset / record["parts"][0]["file"]
+    saved = first.read_bytes()
+    first.write_bytes(b"bad" + saved[3:])
+    with pytest.raises(ValueError, match="shard failed"):
+        assemble_metadata(dataset, manifest)
+    assert not (dataset / "metadata.jsonl").exists()
+    first.write_bytes(saved)
+    assemble_metadata(dataset, manifest)
+    assert (dataset / "metadata.jsonl").read_bytes() == payload
+    assert not list((dataset / "_metadata_parts").glob("*.part"))
+    assemble_metadata(dataset, manifest)  # A complete verified download is resumable.
+
+
+def test_metadata_reassembly_rejects_escape(tmp_path):
+    record = {"file": "../escape", "bytes": 0, "sha256": "", "parts": []}
+    with pytest.raises(ValueError, match="Unsafe"):
+        assemble_metadata(tmp_path, {"assembled_files": [record]})

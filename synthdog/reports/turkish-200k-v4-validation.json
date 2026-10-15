@@ -1,0 +1,56 @@
+{
+  "dataset": "turkish-ocr-200k-v4",
+  "passed": true,
+  "generation_commit": "9b80d79f96d0b3d4da15113dfb49e24c37969805",
+  "images": 200000,
+  "split_counts": {
+    "train": 180000,
+    "val": 10000,
+    "test": 10000
+  },
+  "quality_subsets": {
+    "train": {
+      "recommended": 151402,
+      "challenge": 28598
+    },
+    "val": {
+      "recommended": 8391,
+      "challenge": 1609
+    },
+    "test": {
+      "recommended": 8410,
+      "challenge": 1590
+    }
+  },
+  "official_classes_each": 10000,
+  "new_official_images": 100000,
+  "preserved_v3_images_labels_splits": 100000,
+  "actual_font_files": 62,
+  "font_families": 20,
+  "longest_label": 252,
+  "nrtr_real_character_capacity": 254,
+  "ctc_width_stride": 8,
+  "samples_moved_to_wider_bucket": 11092,
+  "image_hash_duplicates": 0,
+  "labels_truncated_or_characters_dropped": 0,
+  "repository_tests_passed": 89,
+  "reproducible_samples_checked": 569,
+  "unique_readable_word_forms": 52442,
+  "download_parts": 59,
+  "download_bytes": 2917959021,
+  "public_download_verification": {
+    "passed": true,
+    "public_parts_verified_sha256_crc_and_content": 59,
+    "bytes_downloaded": 2917959021,
+    "image_hashes_verified": 200000,
+    "all_metadata_and_labels_match_source_bytes": true,
+    "metadata_reassembly_sha256_verified": true,
+    "public_sample_zip_images_and_labels": 100,
+    "public_previews_verified": 5,
+    "browser_archive_http_and_zip_signature_verified": true,
+    "scope": "All public ZIPs downloaded sequentially; every entry CRC/SHA checked against the source; sharded metadata concatenation hash verified in streaming order. Full helper extraction separately exercised on the real 1000-image pilot."
+  },
+  "real_document_training_crops": 0,
+  "model_training_or_accuracy_evaluated": false,
+  "release": "https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-200k-v4"
+}

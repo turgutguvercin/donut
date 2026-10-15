@@ -10,7 +10,7 @@ import zipfile
 from download_tr_dataset import checksum
 
 
-def package(root, output, max_bytes=90_000_000, base_url=""):
+def package(root, output, max_bytes=90_000_000, base_url="", prefix="turkish-ocr-100k"):
     audit = json.loads((root / "audit.json").read_text(encoding="utf-8"))
     paddle = json.loads((root / "paddle-preprocessing-audit.json").read_text(encoding="utf-8"))
     if not audit["passed"] or not paddle["passed"] or audit["images_decoded_and_hashed"] != paddle["samples"]:
@@ -20,44 +20,65 @@ def package(root, output, max_bytes=90_000_000, base_url=""):
     output.mkdir(parents=True)
     metadata = sorted(p for p in root.rglob("*") if p.is_file() and "images" not in p.relative_to(root).parts)
     images = sorted((root / "images").glob("*/*.jpg"))
-    # Metadata compression is efficient; JPEG payloads are already compressed.
-    # Use metadata-only parts first, then pack image parts by exact source size
-    # with a conservative allowance for ZIP headers and compression expansion.
-    batches, batch, size = [], [], 0
-    for group in (metadata, images):
-        for path in group:
-            estimated = path.stat().st_size + 1024
-            if estimated > max_bytes:
-                # A large JSONL stays one entry in a dedicated archive, provided
-                # compression brings the archive below the byte limit.
-                temporary = output / "compressed-large.zip"
-                with zipfile.ZipFile(temporary, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
-                    archive.write(path, root.name + "/" + path.relative_to(root).as_posix())
-                if temporary.stat().st_size > max_bytes:
-                    raise ValueError(f"A single compressed file exceeds the ZIP limit: {path}")
-                if batch:
-                    batches.append(batch)
-                    batch, size = [], 0
-                batches.append([path])
-                temporary.unlink()
+    if not prefix or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_" for c in prefix):
+        raise ValueError("Use a simple archive filename prefix")
+    # A 200k JSONL exceeds the 100MB GitHub single-file limit even compressed.
+    # Store bounded byte ranges as independently checksummed metadata shards.
+    # The downloader reassembles them atomically, checking the original hash.
+    assembled_files = []
+    def entries(paths):
+        result = []
+        for path in paths:
+            relative = path.relative_to(root).as_posix()
+            size = path.stat().st_size
+            if size <= max_bytes - 2048:
+                result.append((path, relative, 0, size))
                 continue
+            shards = []
+            chunk_size = max_bytes // 2
+            with path.open("rb") as source:
+                for i, offset in enumerate(range(0, size, chunk_size)):
+                    length = min(chunk_size, size - offset)
+                    name = "_metadata_parts/" + relative.replace("/", "__") + f".{i:05d}.part"
+                    block = source.read(length)
+                    shards.append({"file": name, "bytes": length, "sha256": hashlib.sha256(block).hexdigest()})
+                    result.append((path, name, offset, length))
+            assembled_files.append({"file": relative, "bytes": size, "sha256": checksum(path), "parts": shards})
+        return result
+
+    batches, batch, size = [], [], 0
+    for group in (entries(metadata), entries(images)):
+        for entry in group:
+            estimated = entry[3] + 2048
             if batch and size + estimated > max_bytes:
                 batches.append(batch)
                 batch, size = [], 0
-            batch.append(path)
+            batch.append(entry)
             size += estimated
         if batch:
             batches.append(batch)
             batch, size = [], 0
     parts = []
     for index, files in enumerate(batches, 1):
-        name = f"turkish-ocr-100k-part-{index:02d}.zip"
+        name = f"{prefix}-part-{index:02d}.zip"
         target = output / name
         image_count = 0
         with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
-            for path in files:
-                archive.write(path, root.name + "/" + path.relative_to(root).as_posix())
-                image_count += path.suffix.lower() == ".jpg" and "images" in path.relative_to(root).parts
+            for path, relative, offset, length in files:
+                name_in_archive = root.name + "/" + relative
+                if offset == 0 and length == path.stat().st_size and not relative.startswith("_metadata_parts/"):
+                    archive.write(path, name_in_archive)
+                else:
+                    with archive.open(name_in_archive, "w", force_zip64=True) as destination, path.open("rb") as source:
+                        source.seek(offset)
+                        remaining = length
+                        while remaining:
+                            block = source.read(min(1024 * 1024, remaining))
+                            if not block:
+                                raise ValueError("Metadata changed during packaging")
+                            destination.write(block)
+                            remaining -= len(block)
+                image_count += relative.startswith("images/") and path.suffix.lower() == ".jpg"
         if target.stat().st_size > max_bytes:
             raise ValueError("ZIP exceeds requested size limit")
         with zipfile.ZipFile(target) as archive:
@@ -69,10 +90,12 @@ def package(root, output, max_bytes=90_000_000, base_url=""):
             part["url"] = base_url.rstrip("/") + "/" + name
         parts.append(part)
         print(f"Verified {name}: {part['bytes']:,} bytes, {image_count:,} images", flush=True)
-    manifest = {"schema_version": 1, "dataset_directory": root.name, "image_count": len(images),
+    manifest = {"schema_version": 2 if assembled_files else 1, "dataset_directory": root.name, "image_count": len(images),
                 "parts": parts, "total_download_bytes": sum(p["bytes"] for p in parts),
-                "instructions": "Download every part and extract all into the same directory. These are independent ZIP archives, not a split ZIP stream.",
+                "instructions": "Use download_dataset.py to download/extract every independent ZIP and reassemble any sharded metadata with checksum verification.",
                 "license": "CC BY-SA 4.0; see attribution and font notices inside the dataset."}
+    if assembled_files:
+        manifest["assembled_files"] = assembled_files
     (output / "download-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     (output / "SHA256SUMS").write_text("".join(p["sha256"] + "  " + p["file"] + "\n" for p in parts), encoding="utf-8")
     shutil.copy2(Path(__file__).with_name("download_tr_dataset.py"), output / "download_dataset.py")
@@ -85,8 +108,9 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--max-bytes", type=int, default=90_000_000)
     parser.add_argument("--base-url", default="")
+    parser.add_argument("--prefix", default="turkish-ocr-100k")
     args = parser.parse_args()
-    package(args.dataset, args.output, args.max_bytes, args.base_url)
+    package(args.dataset, args.output, args.max_bytes, args.base_url, args.prefix)
 
 
 if __name__ == "__main__":

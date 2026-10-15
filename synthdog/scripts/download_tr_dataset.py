@@ -14,7 +14,7 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-DEFAULT_MANIFEST = "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/download-manifest.json"
+DEFAULT_MANIFEST = "https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-200k-v4/download-manifest.json"
 
 
 def checksum(path):
@@ -66,6 +66,43 @@ def extract_part(archive, destination):
         bundle.extractall(root)
 
 
+def assemble_metadata(dataset, manifest):
+    root = dataset.resolve()
+    def safe_path(name):
+        relative = PurePosixPath(name)
+        if relative.is_absolute() or ".." in relative.parts or "\\" in name:
+            raise ValueError("Unsafe metadata assembly path")
+        result = (root / name).resolve()
+        if root not in result.parents:
+            raise ValueError("Metadata assembly escapes dataset")
+        return result
+    for record in manifest.get("assembled_files", []):
+        target = safe_path(record["file"])
+        if record["file"].startswith("_metadata_parts/") or any(not part["file"].startswith("_metadata_parts/") for part in record["parts"]):
+            raise ValueError("Metadata shards must use their reserved directory")
+        shards = [safe_path(part["file"]) for part in record["parts"]]
+        if len(shards) != len(set(shards)):
+            raise ValueError("Duplicate metadata shard")
+        if target.exists() and target.stat().st_size == record["bytes"] and checksum(target) == record["sha256"]:
+            for shard in shards:
+                shard.unlink(missing_ok=True)
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temporary = target.with_name(target.name + ".assembling")
+        with temporary.open("wb") as destination:
+            for part, shard in zip(record["parts"], shards):
+                if shard.stat().st_size != part["bytes"] or checksum(shard) != part["sha256"]:
+                    raise ValueError("Metadata shard failed verification: " + part["file"])
+                with shard.open("rb") as source:
+                    shutil.copyfileobj(source, destination, 1024 * 1024)
+        if temporary.stat().st_size != record["bytes"] or checksum(temporary) != record["sha256"]:
+            raise ValueError("Assembled metadata failed verification: " + record["file"])
+        temporary.replace(target)
+        for shard in shards:
+            shard.unlink()
+        print("Reassembled and verified " + record["file"], flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", default=DEFAULT_MANIFEST)
@@ -94,6 +131,7 @@ def main():
         for part in parts:
             extract_part(part, args.output)
         dataset = args.output / manifest["dataset_directory"]
+        assemble_metadata(dataset, manifest)
         image_count = sum(1 for _ in (dataset / "images").glob("*/*.jpg"))
         with (dataset / "labels.txt").open(encoding="utf-8") as handle:
             label_count = sum(1 for _ in handle)

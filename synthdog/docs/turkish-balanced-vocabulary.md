@@ -19,7 +19,8 @@ appear only in held-out labels, as recorded in the vocabulary report.
 Download and verify all parts from `synthdog/`:
 
 ```bash
-python scripts/download_tr_dataset.py --output turkish-ocr-v3
+python scripts/download_tr_dataset.py --output turkish-ocr-v3 \
+  --manifest https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-100k-v3/download-manifest.json
 ```
 
 The result is `turkish-ocr-v3/turkish-recognition-100k-v3/`. The release also offers
