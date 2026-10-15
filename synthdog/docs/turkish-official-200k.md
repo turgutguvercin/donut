@@ -77,6 +77,29 @@ kopyalanmaz. Metinler özgün şablonlardan üretilir; adlar ve numaralar sentet
 e-posta/URL alanlarında ayrılmış example.org alan adı kullanılır. Belge biçimi
 referansı, gerçek tarama dağılımının ölçüldüğü anlamına gelmez.
 
+## Tamamlanan üretimin sonuçları
+
+Bulutta üretilen v4 seti 200.000 görüntüdür. Otomatik kalite filtresinin sonucu:
+
+| Ayrım | Tam liste | Önerilen | Zor örnekler |
+|---|---:|---:|---:|
+| Eğitim | 180.000 | 151.402 | 28.598 |
+| Doğrulama | 10.000 | 8.391 | 1.609 |
+| Test | 10.000 | 8.410 | 1.590 |
+
+89 test; 200.000 görüntü, UTF-8 etiket ve gerçek Paddle ön işleme/kodlama
+kontrolü geçti. Seçilen 569 örnek aynı görüntü özeti ve metadata ile yeniden
+üretildi. Tam v5 ağının ölçülen CTC kapasitesine göre 11.092 örneğin genişlik
+kovası büyütüldü. Görüntü tekrarları ve kesilen etiket sayısı sıfırdır.
+
+Paket 59 parçadan oluşur; toplam indirme 2.917.959.021 bayttır (yaklaşık 2,92 GB).
+Yayımlanan bütün parçalar tekrar indirilip SHA-256/CRC, 200.000 görüntü özeti
+ve metadata birleşim özeti kontrol edildi.
+[Doğrulama raporu](../reports/turkish-200k-v4-validation.json) sonuçları kaydeder.
+Doğrudan açılabilen
+[100 örneklik ZIP](https://raw.githubusercontent.com/turgutguvercin/donut/refs/tags/turkish-ocr-200k-v4/sample-100.zip)
+yaklaşık 1,79 MB'dır ve yalnızca eğitim ayrımından seçilmiştir.
+
 ## İndirme
 
 [200k v4 sürümü](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-200k-v4)
