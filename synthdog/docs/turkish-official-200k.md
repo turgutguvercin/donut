@@ -5,6 +5,10 @@ resmî belge tarzı **sentetik satır kesiti** ekler. Toplam ayrım 180.000 eği
 10.000 doğrulama ve 10.000 test görüntüsüdür. Tam sayfa tespit verisi değildir.
 Elle doğrulanmış gerçek belge kesitleri bu sürüme dahil değildir.
 
+Güncel tanıma hedefi **PP-OCRv6_medium_rec** için
+[V6 ek paketi ve eğitim kılavuzunu](turkish-ppocrv6-medium.md) kullanın.
+Mevcut 200k görüntü ve kategoriler korunur; aşağıdaki V5 ayarları da kullanılabilir.
+
 ## Metin ve görsel dağılımı
 
 Yeni bölümde aşağıdaki on sınıfın her birine 10.000 görüntü ayrılır:

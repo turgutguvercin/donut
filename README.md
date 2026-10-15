@@ -252,8 +252,12 @@ The [200,000-image Turkish dataset v4](https://github.com/turgutguvercin/donut/r
 adds 100,000 original official-style recognition crops: headers, long lines,
 footer contacts, dates/references, amounts, verification fields and 13 confusable
 groups. It includes physical small-text degradation, quality-filtered training
-lists, and PP-OCRv5 server settings checked against actual CTC output lengths.
-See the [200k setup/download guide](synthdog/docs/turkish-official-200k.md).
+lists, and preserved PP-OCRv5 server settings. The
+[PP-OCRv6 medium adapter](synthdog/docs/turkish-ppocrv6-medium.md) adds a Turkish
+dictionary remap for pretrained weights, complete width-bucket training and
+a fix for upstream training's fixed 40-step pooling. It reuses all 200k images.
+See the [200k setup/download guide](synthdog/docs/turkish-official-200k.md) and
+[V6 training/download commands](synthdog/docs/turkish-ppocrv6-medium.md).
 
 The preserved [100,000-image Turkish dataset v3](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v3)
 uses 400 Wikipedia articles across 20 balanced topics and contains 52,387 distinct
