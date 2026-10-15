@@ -1,0 +1,158 @@
+{
+  "schema_version": 4,
+  "height": 48,
+  "max_width": 4096,
+  "max_text_length": 256,
+  "width_buckets": [
+    320,
+    640,
+    960,
+    1280,
+    1920,
+    2560,
+    4096
+  ],
+  "splits": {
+    "train": 90,
+    "val": 5,
+    "test": 5
+  },
+  "clean_control_percent": 10,
+  "severe_fraction_of_clipping": 0,
+  "axes": {
+    "content_type": {
+      "ascii_word": 1,
+      "turkish_word": 1,
+      "short_line": 1,
+      "medium_line": 1,
+      "long_sentence": 1,
+      "extra_long_sentence": 1,
+      "confusables": 1,
+      "date": 1,
+      "price": 1,
+      "synthetic_id": 1
+    },
+    "role": {
+      "small": 4,
+      "body": 4,
+      "heading": 2
+    },
+    "underline": {
+      "plain": 4,
+      "underlined": 1
+    },
+    "curve": {
+      "straight": 16,
+      "arch": 1,
+      "bowl": 1,
+      "wave": 2
+    },
+    "geometry": {
+      "none": 12,
+      "skew": 4,
+      "perspective_left_mild": 1,
+      "perspective_right_mild": 1,
+      "perspective_left_strong": 1,
+      "perspective_right_strong": 1
+    },
+    "background": {
+      "white": 12,
+      "photocopy": 4,
+      "aged_paper": 2,
+      "uneven_light": 2
+    },
+    "lighting_effect": {
+      "none": 8,
+      "gradient": 1,
+      "soft_shadow": 1,
+      "hard_shadow": 1,
+      "partial_shadow": 1
+    },
+    "contrast": {
+      "normal": 8,
+      "low_contrast": 1,
+      "faint_print": 1
+    },
+    "degradation": {
+      "clean": 80,
+      "defocus": 6,
+      "motion_blur": 4,
+      "low_resolution": 4,
+      "noisy_scan": 3,
+      "strong_defocus": 1,
+      "strong_motion": 1,
+      "defocus_motion": 1
+    },
+    "crop_error": {
+      "none": 30,
+      "neighbor_above": 1,
+      "neighbor_below": 1,
+      "neighbors_both": 1,
+      "vertical_shift": 1,
+      "tight_top": 1,
+      "tight_bottom": 1,
+      "tight_both": 1,
+      "tight_left": 1,
+      "tight_right": 1,
+      "tight_sides": 1
+    },
+    "spacing": {
+      "normal": 12,
+      "tight": 1,
+      "wide": 1,
+      "irregular_word_gaps": 1,
+      "touching": 1
+    },
+    "printing": {
+      "none": 16,
+      "broken_strokes": 1,
+      "missing_ink": 1,
+      "ink_bleed": 1,
+      "dot_matrix": 1
+    },
+    "occlusion": {
+      "none": 16,
+      "stamp": 1,
+      "signature": 1,
+      "fold": 1,
+      "strikethrough": 1
+    },
+    "mixed_typography": {
+      "uniform": 10,
+      "mixed_fonts": 1,
+      "mixed_styles": 6,
+      "mixed_sizes": 1,
+      "superscript": 1,
+      "subscript": 1
+    },
+    "exposure": {
+      "normal": 8,
+      "low_light": 1,
+      "underexposed": 1,
+      "bright": 1,
+      "overexposed": 1
+    },
+    "scan_profile": {
+      "none": 14,
+      "small_clear": 1,
+      "small_scan": 2,
+      "small_jpeg": 2,
+      "photocopy_scan": 1
+    }
+  },
+  "confusable_groups": {
+    "turkish_i": "iıİI",
+    "c_cedilla": "cçCÇ",
+    "s_cedilla": "sşSŞ",
+    "g_breve": "gğGĞ",
+    "u_umlaut": "uüUÜ",
+    "o_umlaut": "oöOÖ",
+    "letter_O_digit_0": "O0",
+    "letter_l_digit_1": "l1"
+  },
+  "source_sampling": "original_official_templates_v1",
+  "font_family_weights": {
+    "Times New Roman": 6,
+    "Arial": 6
+  }
+}
