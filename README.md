@@ -240,3 +240,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
+
+### Turkish synthetic documents
+
+SynthDoG supports Turkish through `synthdog/config_tr.yaml`, using the existing
+SIL OFL Noto fonts. See [Turkish setup and generation](synthdog/README.md#turkish)
+for the reproducible Wikipedia corpus preparation, dependency installation,
+20-document generation, and UTF-8 OCR validation commands.
+
+For PaddleOCR recognition, the [100,000-image Turkish dataset v3](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v3)
+uses 400 Wikipedia articles across 20 balanced topics and contains 52,387 distinct
+readable word forms. It retains 20 font families, confusable-character coverage,
+detector crop errors, camera perspective, exposure/shadows and all earlier visual quotas.
+The 90k/5k/5k splits use separate source articles. Images are 48 pixels high with
+proportional widths up to 4,096. See the [balanced vocabulary guide](synthdog/docs/turkish-balanced-vocabulary.md)
+for generation, PaddleOCR settings, source/category audits and verified downloads.

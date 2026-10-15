@@ -61,3 +61,289 @@ synthtiger -o {dataset_path} -c {num_of_data} -w {num_of_workers} -v template.py
 # korean
 synthtiger -o {dataset_path} -c {num_of_data} -w {num_of_workers} -v template.py SynthDoG config_ko.yaml
 ```
+
+## Turkish
+
+Run from `synthdog/`. Python 3.11 is recommended. SynthTiger 1.2.1
+requires NumPy 1.x and Pillow 9.5; newer Pillow removed its font sizing API.
+On Linux, building Pillow from source also requires a compiler and JPEG/zlib
+headers (for example `build-essential libjpeg-dev zlib1g-dev`).
+
+```bash
+python3.11 -m venv ../.venv-synthdog
+. ../.venv-synthdog/bin/activate
+pip install -r requirements-tr.txt
+python scripts/prepare_tr_corpus.py
+synthtiger -o outputs/SynthDoG_tr -c 20 -w 2 -s 42 -v template.py SynthDoG config_tr.yaml
+python scripts/validate_tr.py outputs/SynthDoG_tr --count 20
+python -m pytest tests -q
+```
+
+Use a fresh output directory for each generation run: metadata is appended.
+The output contains JPEG documents and `metadata.jsonl` in the existing
+train/validation/test splits. Each row identifies its image and stores OCR text
+in `ground_truth` → `gt_parse` → `text_sequence`; both JSON layers use UTF-8.
+The validation command checks image/label correspondence, JSON decoding, font
+coverage and actual SynthTiger rendering of `çğışöüÇĞİŞÖÜıI`, and reports sample coverage.
+Sample labels must contain distinctive Turkish characters. Rare uppercase letters
+may be absent from a small random sample; every glyph is rendered separately
+during font validation regardless of its frequency in Wikipedia text.
+
+The corpus script downloads paragraphs from eight Turkish Wikipedia articles
+through `tr.wikipedia.org` (HTTPS access required). It removes reference markers,
+normalizes text to NFC, and writes `resources/corpus/trwiki.txt` with a
+`trwiki.sources.json` manifest containing exact revision URLs and SHA-256 hashes.
+Keep that manifest to reproduce the same corpus:
+
+```bash
+python scripts/prepare_tr_corpus.py --manifest resources/corpus/trwiki.sources.json
+# Or select a larger collection on the first download:
+python scripts/prepare_tr_corpus.py --titles Türkiye Türkçe İstanbul Ankara İzmir Bilim Müzik Edebiyat
+```
+
+Wikipedia text is CC BY-SA 4.0, attributed to Turkish Wikipedia contributors.
+Revision URLs link to the articles and their contributor histories. Retain the
+manifest and license information with redistributed text or text-bearing samples;
+comply with attribution and share-alike requirements. The script does not commit
+third-party text. Downloaded Turkish corpora and generated outputs are ignored.
+
+`config_tr.yaml` reuses the existing Noto Sans and Noto Serif fonts in
+`resources/font/en`; both support Turkish lowercase and uppercase glyphs.
+They are licensed under SIL OFL 1.1, with copyright and license in `../NOTICE`.
+No new font binaries are needed. English, Chinese, Japanese, and Korean
+configurations remain available with their original resources.
+
+### PaddleOCR recognition crops
+
+The [full 100,000-image v3 dataset](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v3)
+expands to 400 Turkish Wikipedia articles across 20 topics, with **52,387 distinct
+readable word forms**. Natural text is balanced at 3,000 images per topic and
+150 per article, with 360/20/20 separate training/validation/test articles.
+All camera angles, low light, exposure/shadows, fonts, confusable characters,
+printing, occlusion, spacing, blur, curves and detector-crop categories remain.
+See the [balanced vocabulary guide](docs/turkish-balanced-vocabulary.md) for
+downloads, corpus replay, generation commands, audits and PaddleOCR settings.
+The [camera guide](docs/turkish-camera-lighting.md) and
+[base recipe guide](docs/turkish-recognition-100k.md) retain earlier versions.
+The document configurations and smaller recognition generator remain available.
+
+For recognition training, generate single-line images with UTF-8 transcriptions.
+The generator uses five system font families (DejaVu Sans, Serif and Sans Mono;
+Liberation Sans and Serif) with real regular, bold, italic/oblique and bold italic
+files. On Debian/Ubuntu, these are provided by `fonts-dejavu-core`,
+`fonts-dejavu-extra` and `fonts-liberation`; install those packages if missing.
+No new font binaries are committed. DejaVu uses the Bitstream Vera license
+(DejaVu changes are public domain); Liberation uses SIL OFL 1.1. System copyright
+notices are copied into generated output when available.
+
+From `synthdog/`, with the Turkish environment activated and corpus prepared:
+
+```bash
+python scripts/generate_tr_recognition.py --output outputs/PaddleOCR_tr_recognition --count 20 --seed 42
+# Scale up using a fresh directory:
+python scripts/generate_tr_recognition.py --output outputs/PaddleOCR_tr_recognition_10k --count 10000 --seed 42
+```
+
+A 20-image batch covers all 20 font variants, ten procedural backgrounds
+(plain, textured/aged, colored forms, receipt, ruled/grid paper, uneven lighting,
+photocopy and dark signage), and five difficulty types (clean, defocus, motion
+blur, downsampled and noisy). Text size, rotation and JPEG quality also vary.
+Default crops retain whole words and accents; the generator checks font coverage for
+the selected text. Backgrounds are generated locally without third-party images.
+
+Typography also includes large uppercase headings (48–64px source fonts),
+medium body text (26–38px) and small text (18–22px). Half of a balanced batch has
+underlines, drawn below the glyph bounds so Turkish descenders remain intact.
+Heading labels use Turkish uppercase rules: `i` → `İ` and `ı` → `I`. Underline
+strokes are decoration and are omitted from the transcription. Font sizes vary
+relative to the crop even though every output image is normalized to height 48.
+Profiles rotate across font families to avoid tying one family to one size or case.
+
+Curved baselines include upward arches, downward bowls and S-shaped waves.
+The complete text patch, including underlines, is warped column by column on
+an expanded canvas so character order, accents and descenders remain intact.
+The default `--curve-mode mixed` gives equal representation to straight, arch,
+bowl and wave lines (75 curved samples in a 100-image batch). Use
+`--curve-mode straight` for entirely straight lines.
+
+For a batch with stronger and more frequent blur:
+
+```bash
+python scripts/generate_tr_recognition.py --font-manifest /path/to/fonts.json --output outputs/PaddleOCR_tr_curved_100 --count 100 --seed 42 --curve-mode mixed --blur-profile strong
+```
+
+`--blur-profile strong` allocates 60% of a balanced batch to stronger defocus,
+directional motion, or combined defocus/motion blur; the remaining samples use
+standard defocus, low resolution, noise or clean rendering. Blur strength adapts
+to the rendered text height so tiny glyphs do not receive the same blur radius
+as headings. The default `--blur-profile standard` keeps the original five
+degradation types. Curve and blur assignments are shuffled independently of
+font and typography profiles. Image/label checks validate the generated dataset;
+OCR accuracy still needs evaluation on real documents.
+
+For 10,000 crops spanning capture conditions and document fields as well as
+the existing fonts, typography, backgrounds and curves:
+
+```bash
+python scripts/generate_tr_recognition.py \
+  --font-manifest /path/to/fonts.json \
+  --output outputs/PaddleOCR_tr_categories_10k --count 10000 --seed 42 \
+  --curve-mode mixed --blur-profile balanced \
+  --capture-profile mixed --content-profile mixed
+```
+
+Omit `--font-manifest` to use the five default font families. The new profiles
+are opt-in; existing document language configurations and default recognition
+content/capture settings are unchanged.
+
+* `--capture-profile mixed`: 50% have no additional capture geometry, 25% have
+  skew and 25% perspective. Curvature is applied independently. Perspective
+  transforms the entire glyph/underline patch onto a padded canvas. Skew is
+  bounded for long lines to keep characters visible after height normalization.
+  Small text uses gentler perspective and less padding to preserve detail.
+  Contrast is 60% normal, 30% low contrast and 10% faint printing, applied through
+  ink opacity against the actual background (including dark backgrounds).
+* `--content-profile mixed`: 60% Wikipedia text, 15% dates, 15% prices and 10%
+  invented document/order/product IDs. Wikipedia selections are balanced across
+  single words (3–16 characters), short lines (15–30), medium lines (31–55) and
+  long lines (56–90). Dates include valid numeric and Turkish month-name formats;
+  prices use Turkish decimal commas and thousands separators, with `TL` or `₺`
+  when supported by the font. IDs are synthetic document codes, not personal
+  identity numbers. Turkish casing and final font coverage checks apply to all
+  content. Typography is shuffled independently of font style in this profile.
+* `--blur-profile balanced`: 30% clean, 20% standard defocus, 10% motion blur,
+  10% low resolution, 10% noise, 10% strong defocus, 5% strong motion and 5%
+  combined defocus/motion. With mixed capture, faint printing uses clean rendering
+  and low-contrast text avoids strong blur. Assignments are swapped to preserve
+  the preset totals. The `standard` and `strong` presets remain available.
+
+These percentages are exact for the 10,000-image command. Smaller batches use
+truncated balanced schedules. `categories.csv` contains one row per image with
+the exact transcription, character/word counts and category labels for font,
+style, size, role, case, decoration, baseline, capture geometry, background,
+lighting, contrast, blur/severity, degradation, content and length.
+`category-counts.json` summarizes the actual coverage. Text-length categories
+describe the final label: one token, or a line of up to 30, 31–55, or 56–90
+characters. The long-sentence profile adds 91–160 and 161–240 character categories;
+structured fields may belong to any applicable length category.
+Each image also has its categories in `metadata.json`, alongside the ink
+opacity, rotation and perspective mapping parameters. All three category
+exports are checked against each other and the labels. Progress is printed
+every 250 images; use `--progress-every 0` to disable it.
+
+To simulate imperfect text-detector crops, add `--crop-profile mixed`:
+
+```bash
+python scripts/generate_tr_recognition.py \
+  --font-manifest /path/to/fonts.json \
+  --output outputs/PaddleOCR_tr_detector_crops_100 --count 100 --seed 123 \
+  --curve-mode mixed --blur-profile balanced \
+  --capture-profile mixed --content-profile mixed --crop-profile mixed
+```
+
+The crop schedule is 60% intact, 5% neighboring text above, 5% below, 10% on
+both sides, 5% tight at the top, 5% tight at the bottom, 5% tight at both edges,
+and 5% vertically shifted (a tight edge opposite a neighboring fragment).
+These totals are exact for multiples of 20. Neighboring lines are rendered in
+the same scene before rotation and cropping; the wider crop makes the target
+text smaller after height normalization, as can happen with detector outputs.
+With balanced blur and mixed capture, crop errors are assigned to normal-contrast
+samples without strong blur, while preserving the other profile totals.
+
+**The transcription always refers only to the target line.** Neighboring text
+appears only in `metadata.json` under `neighbor_lines`, with its side and measured
+visible ink fraction. It must not be appended to PaddleOCR's label. Crop metadata
+also records the scene dimensions, crop rectangle, target bounds, top/bottom
+trimming and retained target ink. Categories include `crop_error`, `clipping`
+(actual applied cuts) and `neighbor_context`. Tight profiles may remove padding
+without clipping ink when a requested trim would erase a small mark.
+
+The default `--clipping-severity mild` retains at least 97% of target glyph ink and half of every
+connected component, including detached dots/accents; underline strokes are
+excluded from these measurements. Measurements use an alpha threshold of 64
+**before resizing, blur and JPEG encoding**, so they do not guarantee that every
+final glyph remains legible. In a real pipeline, add
+vertical padding around detector boxes before cropping/rectification and check
+recognition on actual detector-produced crops. `--crop-profile none`
+is the default and preserves the previous rendering behavior.
+
+For tighter crops that can **completely remove dots, accents or cedillas**, use
+`--crop-profile mixed --clipping-severity severe`. This upgrades the tight and
+vertically shifted crops (20% of a balanced batch). Top cuts request 22–32% of
+the native text height and bottom cuts 20–30%; cuts are reduced only as needed
+to retain at least 70% of total glyph ink. Detached marks may disappear entirely.
+Use `--clipping-severity mixed` to apply severe clipping to half of those crops,
+giving 10% severe examples in a balanced batch. Other crop categories keep their
+existing behavior and proportions.
+
+The original Turkish transcription is retained even when a letter becomes
+ambiguous, such as `ü` resembling `u` or `ç` resembling `c`. These samples have
+`potentially_ambiguous: true` and `clipping_severity: severe` in metadata.
+`removed_components` and `partial_components` count disconnected glyph shapes
+lost or cut at the measurement stage; they are not a count of identified accents
+or letters. Category exports include severity and component loss. Use these
+flags to control the proportion of difficult examples or build a crop-failure
+evaluation set; missing information may make exact recognition impossible.
+
+For **longer complete sentences**, use `--length-profile long`. Wikipedia text
+is balanced between 91–160 and 161–240 characters. Sentence selection uses
+punctuation boundaries with common abbreviation guards, retains the ending
+punctuation and checks the final font/case coverage. Dates, prices and IDs keep
+their usual formats with `--content-profile mixed`. To make every sample a long
+sentence, select `--content-profile wikipedia`. The corpus must contain suitable
+sentences in both length ranges; insufficient corpora produce a clear error.
+
+```bash
+python scripts/generate_tr_recognition.py \
+  --font-manifest /path/to/fonts.json \
+  --output outputs/PaddleOCR_tr_severe_long_100 --count 100 --seed 123 \
+  --curve-mode mixed --blur-profile balanced --capture-profile mixed \
+  --content-profile mixed --length-profile long \
+  --crop-profile mixed --clipping-severity severe
+```
+
+Long sentences retain their full aspect ratio and width at height 48; rotation
+is bounded to avoid excessive shrinkage. Configure the recognition pipeline's
+maximum label length and image width for these samples, using width buckets or
+dynamic width as appropriate. Resizing a 200-character line to a narrow fixed
+width can erase detail. Labels must not be truncated to fit the model.
+
+`labels.txt` contains `images/line_00000.jpg<TAB>exact transcription`, as required
+by PaddleOCR recognition datasets. Set `data_dir` to the output directory,
+`label_file_list` to `labels.txt`, and `use_space_char: true`. Crops are 48 pixels
+high with variable width; use suitable recognition resizing. `turkish_dict.txt`
+covers the sample labels plus all Turkish letters. For a larger training corpus,
+use one stable, complete character dictionary compatible with the recognizer's
+output head and pretrained weights. No model training is performed by this command.
+
+`metadata.json` records font and image hashes, style, text role and case,
+underline geometry, source font size, curve type/amplitude, capture geometry,
+contrast, content category, text length/profile, detector crop errors/severity,
+component loss, ambiguity flags, background, degradation,
+dimensions and the seed. Small batches have one contact sheet; larger batches
+preview up to 100 samples in numbered 20-image contact sheets.
+Every image/label pair is validated before completion. A fixed seed and identical
+corpus, fonts and dependencies reproduce the same samples. Use a fresh output
+directory; existing files are never overwritten. Retain Wikipedia attribution
+and the accompanying revision manifest when sharing the text-bearing samples.
+
+To use Times New Roman, Arial, Georgia, Verdana or other additional fonts, provide
+a JSON catalog of licensed local font files. Family and style names are read
+from each font itself; fonts with missing Turkish glyphs or incorrect checksums
+are rejected. For a custom catalog, families are sampled equally, even if some
+have fewer style variants.
+
+```json
+{"fonts": [{"path": "/path/to/times.ttf", "license": "Microsoft Core Fonts EULA",
+            "license_file": "/path/to/EULA.txt", "sha256": "actual_font_sha256"}]}
+```
+
+```bash
+python scripts/generate_tr_recognition.py --font-manifest /path/to/fonts.json --output outputs/PaddleOCR_tr_100 --count 100 --seed 42
+```
+
+Paths can also be relative to the catalog. Use the SHA-256 of each actual font;
+omit that field only when verification against a pre-existing catalog is not
+needed. License notices are required and copied into the output; font binaries
+are never copied. Microsoft Core Fonts have a proprietary EULA and must be
+obtained through an authorized source. They are not supplied by this repository.

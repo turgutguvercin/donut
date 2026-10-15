@@ -137,3 +137,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Downloaded Turkish Wikipedia text and local generation output
+synthdog/resources/corpus/trwiki.txt
+synthdog/resources/corpus/trwiki.sources.json
+synthdog/outputs/

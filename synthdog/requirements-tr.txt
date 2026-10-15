@@ -1,0 +1,8 @@
+# imgaug (used by SynthTiger) requires NumPy 1.x.
+synthtiger==1.2.1
+numpy==1.26.4
+fonttools==4.66.1
+pytest==9.1.1
+# SynthTiger 1.2.1 uses FreeTypeFont.getsize, removed in Pillow 10.
+Pillow==9.5.0
+scikit-image==0.22.0
