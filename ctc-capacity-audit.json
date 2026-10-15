@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "samples": 200000,
+  "ctc_width_stride": 8,
+  "image_bytes_changed": 0,
+  "labels_changed": 0,
+  "split_memberships_changed": 0,
+  "bucket_changes": {
+    "960->1920": 931,
+    "320->640": 3885,
+    "1280->1920": 1477,
+    "960->1280": 874,
+    "640->960": 2948,
+    "640->1280": 248,
+    "1920->2560": 600,
+    "1280->2560": 129
+  },
+  "samples_moved_to_wider_bucket": 11092,
+  "final_bucket_counts": {
+    "2560": 8028,
+    "320": 63781,
+    "1280": 17369,
+    "1920": 17126,
+    "640": 50993,
+    "960": 34657,
+    "4096": 8046
+  },
+  "maximum_label_length": 252,
+  "nrtr_actual_character_capacity": 254,
+  "maximum_ctc_steps_required_including_repeats": 261,
+  "measured_ctc_steps_by_width": {
+    "320": 40,
+    "640": 80,
+    "960": 120,
+    "1280": 160,
+    "1920": 240,
+    "2560": 320,
+    "4096": 512
+  },
+  "input_metadata_sha256": "67ef0f3daa90321d900c124ba9650df02fc6a18ee72a1010791dba141a7c96cd",
+  "result_metadata_sha256": "80b3d413de0ea7c7e473a974b376f0371c46b715e5d27fa391886e5592f086fd",
+  "scope": "Every label checked against real full-model CTC output lengths and NRTR capacity; no model accuracy evaluated."
+}

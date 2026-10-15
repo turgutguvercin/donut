@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "official_images": 100000,
+  "quality_flags_checked": 200000,
+  "official_complete_component_loss": 0,
+  "neighbor_context_split_checked": true,
+  "recommended_and_challenge_lists_partition_splits": true
+}

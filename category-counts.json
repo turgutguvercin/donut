@@ -1,0 +1,216 @@
+{
+  "content_type": {
+    "extra_long_sentence": 10000,
+    "date": 10000,
+    "long_sentence": 10000,
+    "short_line": 10000,
+    "ascii_word": 10000,
+    "price": 10000,
+    "synthetic_id": 10000,
+    "medium_line": 10000,
+    "turkish_word": 10000,
+    "confusables": 10000,
+    "official_verification": 10000,
+    "official_footer_contact": 10000,
+    "official_confusables_codes": 10000,
+    "official_body_short": 10000,
+    "official_heading": 10000,
+    "official_date_reference": 10000,
+    "official_subject": 10000,
+    "official_amount": 10000,
+    "official_body_long": 10000,
+    "official_confusables_words": 10000
+  },
+  "role": {
+    "body": 73334,
+    "small": 73334,
+    "heading": 53332
+  },
+  "underline": {
+    "plain": 130000,
+    "underlined": 70000
+  },
+  "curve": {
+    "straight": 105000,
+    "bowl": 30000,
+    "wave": 35000,
+    "arch": 30000
+  },
+  "geometry": {
+    "none": 100000,
+    "perspective_right_mild": 15000,
+    "perspective_left_strong": 15000,
+    "skew": 40000,
+    "perspective_right_strong": 15000,
+    "perspective_left_mild": 15000
+  },
+  "background": {
+    "white": 70000,
+    "ruled_paper": 10000,
+    "dark_sign": 10000,
+    "pink_form": 10000,
+    "blue_form": 10000,
+    "uneven_light": 20000,
+    "photocopy": 30000,
+    "aged_paper": 20000,
+    "graph_paper": 10000,
+    "receipt": 10000
+  },
+  "lighting_effect": {
+    "none": 116666,
+    "partial_shadow": 20832,
+    "gradient": 20834,
+    "soft_shadow": 20834,
+    "hard_shadow": 20834
+  },
+  "contrast": {
+    "normal": 140000,
+    "low_contrast": 40000,
+    "faint_print": 20000
+  },
+  "degradation": {
+    "clean": 110000,
+    "motion_blur": 14000,
+    "defocus": 26000,
+    "defocus_motion": 6000,
+    "low_resolution": 14000,
+    "strong_defocus": 11000,
+    "strong_motion": 6000,
+    "noisy_scan": 13000
+  },
+  "crop_error": {
+    "none": 125000,
+    "neighbor_below": 7500,
+    "neighbors_both": 7500,
+    "tight_top": 7500,
+    "vertical_shift": 7500,
+    "neighbor_above": 7500,
+    "tight_left": 7500,
+    "tight_right": 7500,
+    "tight_sides": 7500,
+    "tight_bottom": 7500,
+    "tight_both": 7500
+  },
+  "spacing": {
+    "normal": 125000,
+    "touching": 18749,
+    "irregular_word_gaps": 18749,
+    "wide": 18751,
+    "tight": 18751
+  },
+  "printing": {
+    "none": 130000,
+    "missing_ink": 17500,
+    "ink_bleed": 17500,
+    "broken_strokes": 17500,
+    "dot_matrix": 17500
+  },
+  "occlusion": {
+    "none": 130000,
+    "fold": 17500,
+    "stamp": 17500,
+    "strikethrough": 17500,
+    "signature": 17500
+  },
+  "mixed_typography": {
+    "uniform": 100000,
+    "mixed_fonts": 25000,
+    "mixed_sizes": 15000,
+    "subscript": 10000,
+    "superscript": 10000,
+    "mixed_styles": 40000
+  },
+  "exposure": {
+    "normal": 116666,
+    "underexposed": 20834,
+    "bright": 20834,
+    "low_light": 20834,
+    "overexposed": 20832
+  },
+  "scan_profile": {
+    "legacy": 100000,
+    "none": 70000,
+    "small_jpeg": 10000,
+    "small_scan": 10000,
+    "small_clear": 5000,
+    "photocopy_scan": 5000
+  },
+  "official_kind": {
+    "none": 100000,
+    "official_verification": 10000,
+    "official_footer_contact": 10000,
+    "official_confusables_codes": 10000,
+    "official_body_short": 10000,
+    "official_heading": 10000,
+    "official_date_reference": 10000,
+    "official_subject": 10000,
+    "official_amount": 10000,
+    "official_body_long": 10000,
+    "official_confusables_words": 10000
+  },
+  "targeted_group": {
+    "none": 180000,
+    "B_8": 1542,
+    "g_breve": 1536,
+    "S_5": 1542,
+    "u_umlaut": 1536,
+    "s_cedilla": 1536,
+    "cl_d": 1540,
+    "l_1_I_dotted_dotless": 1542,
+    "O_0": 1542,
+    "c_cedilla": 1536,
+    "province_Il": 1536,
+    "rn_m": 1540,
+    "o_umlaut": 1536,
+    "year_2021": 1536
+  },
+  "font_family": {
+    "Comic Sans MS": 8334,
+    "Georgia": 8334,
+    "DejaVu Serif": 8332,
+    "URW Bookman": 8332,
+    "DejaVu Sans": 8334,
+    "Trebuchet MS": 8334,
+    "URW Gothic": 8332,
+    "Times New Roman": 25000,
+    "Noto Sans": 8334,
+    "Verdana": 8334,
+    "P052": 8332,
+    "Impact": 8334,
+    "Noto Serif": 8334,
+    "Courier New": 8334,
+    "Open Sans": 8334,
+    "Z003": 8332,
+    "Andale Mono": 8334,
+    "DejaVu Sans Mono": 8332,
+    "Arial": 25000,
+    "Arial Black": 8334
+  },
+  "font_style": {
+    "regular": 72922,
+    "bold": 47920,
+    "italic": 43745,
+    "bold_italic": 35413
+  },
+  "text_case": {
+    "original": 84910,
+    "uppercase": 85090,
+    "mixed": 30000
+  },
+  "confusable_group": {
+    "none": 190000,
+    "u_umlaut": 1250,
+    "c_cedilla": 1250,
+    "s_cedilla": 1250,
+    "letter_l_digit_1": 1250,
+    "turkish_i": 1250,
+    "letter_O_digit_0": 1250,
+    "o_umlaut": 1250,
+    "g_breve": 1250
+  },
+  "clipping_severity": {
+    "none": 147500,
+    "severe": 7000,
+    "mild": 45500
+  }
+}

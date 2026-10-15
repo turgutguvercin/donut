@@ -1,0 +1,209 @@
+{
+  "count": 100000,
+  "synthetic_only": true,
+  "kinds": {
+    "official_verification": 10000,
+    "official_footer_contact": 10000,
+    "official_confusables_codes": 10000,
+    "official_body_short": 10000,
+    "official_heading": 10000,
+    "official_date_reference": 10000,
+    "official_subject": 10000,
+    "official_amount": 10000,
+    "official_body_long": 10000,
+    "official_confusables_words": 10000
+  },
+  "fonts": {
+    "Noto Sans": 3334,
+    "DejaVu Serif": 3332,
+    "Arial Black": 3334,
+    "DejaVu Sans Mono": 3332,
+    "Arial": 20000,
+    "Times New Roman": 20000,
+    "DejaVu Sans": 3334,
+    "Georgia": 3334,
+    "Noto Serif": 3334,
+    "Verdana": 3334,
+    "Open Sans": 3334,
+    "Andale Mono": 3334,
+    "Trebuchet MS": 3334,
+    "Impact": 3334,
+    "P052": 3332,
+    "Courier New": 3334,
+    "URW Bookman": 3332,
+    "Comic Sans MS": 3334,
+    "URW Gothic": 3332,
+    "Z003": 3332
+  },
+  "font_styles": {
+    "Noto Sans": {
+      "regular": 1667,
+      "bold": 1667
+    },
+    "DejaVu Serif": {
+      "regular": 833,
+      "bold": 833,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Arial Black": {
+      "regular": 3334
+    },
+    "DejaVu Sans Mono": {
+      "regular": 833,
+      "bold": 833,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Arial": {
+      "regular": 5000,
+      "bold": 5000,
+      "italic": 5000,
+      "bold_italic": 5000
+    },
+    "Times New Roman": {
+      "regular": 5000,
+      "bold": 5000,
+      "italic": 5000,
+      "bold_italic": 5000
+    },
+    "DejaVu Sans": {
+      "regular": 834,
+      "bold": 834,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Georgia": {
+      "regular": 834,
+      "bold": 834,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Noto Serif": {
+      "regular": 1667,
+      "bold": 1667
+    },
+    "Verdana": {
+      "regular": 834,
+      "bold": 834,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Open Sans": {
+      "regular": 834,
+      "bold": 834,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Andale Mono": {
+      "regular": 3334
+    },
+    "Trebuchet MS": {
+      "regular": 834,
+      "bold": 834,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Impact": {
+      "regular": 3334
+    },
+    "P052": {
+      "regular": 833,
+      "bold": 833,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Courier New": {
+      "regular": 834,
+      "bold": 834,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "URW Bookman": {
+      "regular": 833,
+      "bold": 833,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Comic Sans MS": {
+      "regular": 1667,
+      "bold": 1667
+    },
+    "URW Gothic": {
+      "regular": 833,
+      "bold": 833,
+      "italic": 833,
+      "bold_italic": 833
+    },
+    "Z003": {
+      "italic": 3332
+    }
+  },
+  "scan_profiles": {
+    "none": 70000,
+    "small_jpeg": 10000,
+    "small_scan": 10000,
+    "small_clear": 5000,
+    "photocopy_scan": 5000
+  },
+  "targeted_groups": {
+    "none": 80000,
+    "B_8": 1542,
+    "g_breve": 1536,
+    "S_5": 1542,
+    "u_umlaut": 1536,
+    "s_cedilla": 1536,
+    "cl_d": 1540,
+    "l_1_I_dotted_dotless": 1542,
+    "O_0": 1542,
+    "c_cedilla": 1536,
+    "province_Il": 1536,
+    "rn_m": 1540,
+    "o_umlaut": 1536,
+    "year_2021": 1536
+  },
+  "long_lines_over_150_characters": 10000,
+  "capture_ink_heights": {
+    "none": 70000,
+    "17": 2373,
+    "12": 2338,
+    "15": 2607,
+    "16": 2475,
+    "18": 2033,
+    "20": 1541,
+    "19": 1801,
+    "14": 2561,
+    "10": 1023,
+    "22": 1135,
+    "11": 1687,
+    "24": 820,
+    "21": 1369,
+    "23": 973,
+    "13": 2460,
+    "25": 728,
+    "28": 310,
+    "33": 40,
+    "29": 168,
+    "31": 87,
+    "9": 195,
+    "26": 540,
+    "27": 459,
+    "30": 126,
+    "39": 6,
+    "37": 11,
+    "32": 45,
+    "35": 24,
+    "36": 14,
+    "8": 23,
+    "38": 11,
+    "34": 16,
+    "40": 1
+  },
+  "complete_component_loss": 0,
+  "real_document_training_crops": 0,
+  "limitations": [
+    "Official references guide typography and field structure; their pages/text are not training samples.",
+    "Quality flags are measurable conservative filters, not human readability certification.",
+    "Generated template families recur across splits; real-document validation is still needed."
+  ]
+}

@@ -1,0 +1,9 @@
+Generated recognition images and target transcriptions: Creative Commons Attribution-ShareAlike 4.0 International.
+License: https://creativecommons.org/licenses/by-sa/4.0/
+Attribution: Turkish Wikipedia contributors; exact article revision URLs and corpus resource hashes are in trwiki.sources.json.
+This work selects Turkish text and creates synthetic document/recognition crops with typography, procedural backgrounds, geometry, cropping, printing, occlusion, lighting, blur, scaling and compression.
+Authored dates/prices/document identifiers/confusable exercises are synthetic. Keep this attribution and the revision manifest when redistributing.
+Reproduction source code: MIT (reproduce/LICENSE-MIT.txt). PaddleOCR-derived configuration files: Apache-2.0 (paddle-v5/LICENSE-PaddleOCR.txt).
+Font software is not distributed. Font provenance and their respective notices are in font-manifest.json, font-provenance.json and licenses/.
+
+V4 preserves the Wikipedia-derived v3 portion and adds original authored official-style text under the same dataset license. Government sources inform field/typography conventions only; their PDF pages/text are not redistributed as training data. Generated contact details and document identifiers are synthetic.

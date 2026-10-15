@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "samples": 569,
+  "metadata_and_image_hashes_identical": true,
+  "base_images_labels_and_splits_preserved": 100000,
+  "base_metadata_changes_only_v5_buckets_and_added_annotations": true,
+  "base_wikipedia_articles": 400,
+  "base_wikipedia_topics": 20,
+  "primary_font_files": 62,
+  "official_classes_each": 10000,
+  "official_confusable_code_member_spans_checked": 10000,
+  "all_official_marginal_quotas_match": true,
+  "punctuation_counts_new": {
+    " ": 860982,
+    ",": 41975,
+    ".": 194131,
+    ":": 104157,
+    "-": 127598,
+    "(": 25759,
+    ")": 28280,
+    "/": 78269,
+    ";": 18226,
+    "@": 6721
+  },
+  "coverage_keys": 439,
+  "complete_component_loss_new": 0,
+  "real_document_training_crops": 0
+}
