@@ -115,6 +115,14 @@ configurations remain available with their original resources.
 
 ### PaddleOCR recognition crops
 
+The [200,000-image v4 release](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-200k-v4)
+preserves v3 and adds 100,000 official-style synthetic crops with long lines,
+footer fields, all available font styles, 13 confusable groups and measured
+small-text capture degradation. It provides quality-filtered lists and
+PP-OCRv5_server_rec settings with actual stride-eight CTC capacity checks.
+See [Turkish 200k generation, download and Paddle setup](docs/turkish-official-200k.md).
+The published downloader verifies ZIP parts and reassembles large metadata.
+
 The [full 100,000-image v3 dataset](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v3)
 expands to 400 Turkish Wikipedia articles across 20 topics, with **52,387 distinct
 readable word forms**. Natural text is balanced at 3,000 images per topic and

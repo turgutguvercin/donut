@@ -248,7 +248,14 @@ SIL OFL Noto fonts. See [Turkish setup and generation](synthdog/README.md#turkis
 for the reproducible Wikipedia corpus preparation, dependency installation,
 20-document generation, and UTF-8 OCR validation commands.
 
-For PaddleOCR recognition, the [100,000-image Turkish dataset v3](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v3)
+The [200,000-image Turkish dataset v4](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-200k-v4)
+adds 100,000 original official-style recognition crops: headers, long lines,
+footer contacts, dates/references, amounts, verification fields and 13 confusable
+groups. It includes physical small-text degradation, quality-filtered training
+lists, and PP-OCRv5 server settings checked against actual CTC output lengths.
+See the [200k setup/download guide](synthdog/docs/turkish-official-200k.md).
+
+The preserved [100,000-image Turkish dataset v3](https://github.com/turgutguvercin/donut/releases/tag/turkish-ocr-100k-v3)
 uses 400 Wikipedia articles across 20 balanced topics and contains 52,387 distinct
 readable word forms. It retains 20 font families, confusable-character coverage,
 detector crop errors, camera perspective, exposure/shadows and all earlier visual quotas.

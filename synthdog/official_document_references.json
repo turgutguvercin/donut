@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "references": [
+    {
+      "title": "Resmî Yazışmalarda Uygulanacak Usul ve Esaslar Hakkında Yönetmelik",
+      "url": "https://www.mevzuat.gov.tr/MevzuatMetin/21.5.2646.pdf",
+      "retrieved_utc_date": "2026-10-15",
+      "sha256": "a2fbed0ab115c90c0a8f34ebc39fa7ea12cf31bdbaf76179a9db37c1cb4126d8",
+      "bytes": 300990,
+      "pages": 18,
+      "visually_inspected_pages": [
+        3
+      ],
+      "text_sections_inspected": [
+        7,
+        10,
+        11,
+        12,
+        16,
+        17,
+        23,
+        24
+      ],
+      "observations": {
+        "7": "Times New Roman 12pt or Arial 11pt; body may be 9pt, contact details 8pt. Point sizes guide roles, not fixed pixel heights.",
+        "10": "T.C., uppercase administration name and title-case unit name.",
+        "11": "Sayı uses E/Z/O prefix, organization/file/record identifiers separated by hyphens.",
+        "12": "Dates use DD.MM.YYYY or a written month.",
+        "16": "Word spacing, punctuation, paragraphs and decimal/thousands separators.",
+        "17": "Delegated signature titles include Vali a.",
+        "23": "Electronic signature statement and document verification fields.",
+        "24": "Footer address, phone, fax, email, KEP, web and contact role."
+      },
+      "use": "Field and typography reference only. PDF pages and source text are not included as training examples or redistributed. New labels are original generated templates; contact domains are reserved example.org."
+    }
+  ]
+}

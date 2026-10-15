@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import expand_tr_official as official
 import official_tr_text as text
 import prepare_paddle_tr_v5 as paddle
+from finalize_tr_v5_buckets import choose_bucket
 
 
 @pytest.fixture(scope="module")
@@ -112,3 +113,12 @@ def test_v5_configs_replace_short_limits_and_use_explicit_filtered_lists():
     assert all_samples["Train"]["dataset"]["label_file_list"] == ["./data/train.txt"]
     subset = paddle.training_config(template, "./data", 640, bucket_only=True)
     assert subset["Train"]["dataset"]["label_file_list"] == ["./data/train-recommended-w640.txt"]
+
+
+def test_v5_capacity_uses_measured_stride_eight_and_repeat_blanks():
+    widths = [320, 640, 960, 1280, 1920, 2560, 4096]
+    assert choose_bucket(300, "a" * 100, widths) == 1920
+    assert choose_bucket(300, "a" * 254, widths) == 4096
+    assert choose_bucket(300, "abcçğışöü" * 10, widths) == 960
+    with pytest.raises(ValueError, match="No bucket"):
+        choose_bucket(300, "a" * 300, widths)

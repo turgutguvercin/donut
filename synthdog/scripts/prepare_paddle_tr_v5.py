@@ -98,6 +98,9 @@ It is not model training, an OCR accuracy test, or evidence that the model will 
 
 
 def check(root, references):
+    capacity = json.loads((root / "ctc-capacity-audit.json").read_text())
+    if not capacity["passed"] or capacity["ctc_width_stride"] != 8:
+        raise ValueError("Finalize buckets against the measured v5 stride-eight capacity first")
     # Reuse the existing complete decode/resize/CTC audit with pinned v5 source.
     previous = shared.COMMIT, shared.REFERENCES
     shared.COMMIT, shared.REFERENCES = COMMIT, REFERENCES
@@ -133,7 +136,8 @@ def check(root, references):
         count += 1
     report.update(model_configuration="PP-OCRv5_server_rec", nrtr_actual_character_capacity=max_length - 2,
                   nrtr_start_end_and_roundtrip_samples=count, nrtr_default_25_accepts_23_rejects_24=True,
-                  vocabulary_dependent_pretrained_weights_require_adaptation=True)
+                  vocabulary_dependent_pretrained_weights_require_adaptation=True,
+                  ctc_width_stride=8, all_samples_checked_against_real_ctc_capacity=capacity["samples"])
     (root / "paddle-preprocessing-audit.json").write_text(json.dumps(report, indent=2) + "\n")
     return report
 
